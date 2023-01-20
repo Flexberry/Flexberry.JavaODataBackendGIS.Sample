@@ -1,0 +1,1 @@
+# Flexberry.JavaOdataBackendGIS.Sample
