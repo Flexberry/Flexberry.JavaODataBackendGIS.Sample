@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.1"
+	xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistencehttp://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+    <persistence-unit name="Olingo4PG">
+        <class>Flexberry.GIS.model.ParameterMetadata</class>
+        <class>Flexberry.GIS.model.LinkParameter</class>
+        <class>Flexberry.GIS.model.BackgroundLayer</class>
+        <class>Flexberry.GIS.model.DataLinkParameter</class>
+        <class>Flexberry.GIS.model.LayerLink</class>
+        <class>Flexberry.GIS.model.CswConnection</class>
+        <class>Flexberry.GIS.model.LayerMetadata</class>
+        <class>Flexberry.GIS.model.DataLink</class>
+        <class>Flexberry.GIS.model.LinkMetadata</class>
+        <class>Flexberry.GIS.model.MapObjectSetting</class>
+        <class>Flexberry.GIS.model.Map</class>
+        <class>Flexberry.GIS.model.MapLayer</class>
+        <class>Flexberry.GIS.model.FlexberryAdvLimit</class>
+        <class>Flexberry.GIS.model.NewPlatformFlexberryFlexberryUserSetting</class>
+        <class>Flexberry.GIS.model.NewPlatformFlexberryServicesLock</class>
+        <class>Flexberry.GIS.model.IISCaseberryLoggingObjectsApplicationLog</class>
+
+    </persistence-unit>
+</persistence>
