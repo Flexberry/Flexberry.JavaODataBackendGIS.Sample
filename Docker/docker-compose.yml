@@ -1,0 +1,15 @@
+version: '3'
+services:
+    java-odata-sample-db:
+        image: javaodatagissample/postgres
+        volumes:
+        - GISDB:/var/lib/pgsql/data/
+        ports:
+        - 5432:5432
+        networks:
+        - gis-java-odata-sample
+
+volumes:
+  GISDB:
+networks:
+  gis-java-odata-sample:
