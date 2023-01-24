@@ -1,0 +1,318 @@
+﻿CREATE TABLE ParameterMetadata (
+ primaryKey UUID NOT NULL,
+ CreateTime TIMESTAMP(3) NULL,
+ Creator VARCHAR(255) NULL,
+ Editor VARCHAR(255) NULL,
+ EditTime TIMESTAMP(3) NULL,
+ Expression VARCHAR(255) NULL,
+ LayerField VARCHAR(255) NULL,
+ LinkField BOOLEAN NULL,
+ ObjectField VARCHAR(255) NULL,
+ QueryKey VARCHAR(255) NULL,
+ LayerLink UUID NOT NULL,
+ PRIMARY KEY (primaryKey));
+
+
+CREATE TABLE LinkParameter (
+ primaryKey UUID NOT NULL,
+ Expression VARCHAR(255) NULL,
+ LayerField VARCHAR(255) NULL,
+ LinkField BOOLEAN NULL,
+ ObjectField VARCHAR(255) NULL,
+ QueryKey VARCHAR(255) NULL,
+ LayerLink UUID NOT NULL,
+ PRIMARY KEY (primaryKey));
+
+
+CREATE TABLE BackgroundLayer (
+ primaryKey UUID NOT NULL,
+ BoundingBox GEOGRAPHY NULL,
+ CoordinateReferenceSystem VARCHAR(255) NULL,
+ CreateTime TIMESTAMP(3) NULL,
+ Creator VARCHAR(255) NULL,
+ Description TEXT NULL,
+ Editor VARCHAR(255) NULL,
+ EditTime TIMESTAMP(3) NULL,
+ Index INT NULL,
+ KeyWords TEXT NULL,
+ Name VARCHAR(255) NULL,
+ Owner VARCHAR(255) NULL,
+ Public BOOLEAN NULL,
+ Scale INT NULL,
+ Settings TEXT NULL,
+ Type VARCHAR(255) NULL,
+ Visibility BOOLEAN NULL,
+ PRIMARY KEY (primaryKey));
+
+
+CREATE TABLE DataLinkParameter (
+ primaryKey UUID NOT NULL,
+ Expression VARCHAR(255) NULL,
+ LayerField VARCHAR(255) NULL,
+ LinkField BOOLEAN NULL,
+ ObjectField VARCHAR(255) NULL,
+ Link UUID NOT NULL,
+ PRIMARY KEY (primaryKey));
+
+
+CREATE TABLE LayerLink (
+ primaryKey UUID NOT NULL,
+ AllowShow BOOLEAN NULL,
+ MapObjectSetting UUID NOT NULL,
+ Layer UUID NOT NULL,
+ PRIMARY KEY (primaryKey));
+
+
+CREATE TABLE CswConnection (
+ primaryKey UUID NOT NULL,
+ CreateTime TIMESTAMP(3) NULL,
+ Creator VARCHAR(255) NULL,
+ Editor VARCHAR(255) NULL,
+ EditTime TIMESTAMP(3) NULL,
+ Name VARCHAR(255) NOT NULL,
+ Url VARCHAR(255) NOT NULL,
+ PRIMARY KEY (primaryKey));
+
+
+CREATE TABLE LayerMetadata (
+ primaryKey UUID NOT NULL,
+ AdditionalData TEXT NULL,
+ BoundingBox GEOGRAPHY NULL,
+ CoordinateReferenceSystem VARCHAR(255) NULL,
+ CreateTime TIMESTAMP(3) NULL,
+ Creator VARCHAR(255) NULL,
+ Description TEXT NULL,
+ Editor VARCHAR(255) NULL,
+ EditTime TIMESTAMP(3) NULL,
+ KeyWords TEXT NULL,
+ Name VARCHAR(255) NOT NULL,
+ Scale INT NULL,
+ Settings TEXT NULL,
+ Type VARCHAR(255) NOT NULL,
+ PRIMARY KEY (primaryKey));
+
+
+CREATE TABLE DataLink (
+ primaryKey UUID NOT NULL,
+ ClearWithoutLink BOOLEAN NULL,
+ CreateObject BOOLEAN NULL,
+ LayerTable VARCHAR(255) NOT NULL,
+ MapObjectSetting UUID NOT NULL,
+ PRIMARY KEY (primaryKey));
+
+
+CREATE TABLE LinkMetadata (
+ primaryKey UUID NOT NULL,
+ AllowShow BOOLEAN NULL,
+ CreateTime TIMESTAMP(3) NULL,
+ Creator VARCHAR(255) NULL,
+ Editor VARCHAR(255) NULL,
+ EditTime TIMESTAMP(3) NULL,
+ MapObjectSetting UUID NOT NULL,
+ Layer UUID NOT NULL,
+ PRIMARY KEY (primaryKey));
+
+
+CREATE TABLE MapObjectSetting (
+ primaryKey UUID NOT NULL,
+ EditForm VARCHAR(255) NULL,
+ ListForm VARCHAR(255) NULL,
+ MultEditForm VARCHAR(255) NULL,
+ Title VARCHAR(255) NULL,
+ TypeName VARCHAR(255) NULL,
+ DefaultMap UUID NULL,
+ PRIMARY KEY (primaryKey));
+
+
+CREATE TABLE Map (
+ primaryKey UUID NOT NULL,
+ BoundingBox GEOGRAPHY NULL,
+ CoordinateReferenceSystem VARCHAR(255) NULL,
+ CreateTime TIMESTAMP(3) NULL,
+ Creator VARCHAR(255) NULL,
+ Description TEXT NULL,
+ Editor VARCHAR(255) NULL,
+ EditTime TIMESTAMP(3) NULL,
+ EditTimeMapLayers TIMESTAMP(3) NULL,
+ KeyWords TEXT NULL,
+ Lat DOUBLE PRECISION NULL,
+ Lng DOUBLE PRECISION NULL,
+ Name VARCHAR(255) NOT NULL,
+ Owner VARCHAR(255) NULL,
+ Picture VARCHAR(255) NULL,
+ Public BOOLEAN NOT NULL,
+ Scale INT NULL,
+ Zoom DOUBLE PRECISION NULL,
+ PRIMARY KEY (primaryKey));
+
+
+CREATE TABLE MapLayer (
+ primaryKey UUID NOT NULL,
+ BoundingBox GEOGRAPHY NULL,
+ CoordinateReferenceSystem VARCHAR(255) NULL,
+ CreateTime TIMESTAMP(3) NULL,
+ Creator VARCHAR(255) NULL,
+ Description TEXT NULL,
+ Editor VARCHAR(255) NULL,
+ EditTime TIMESTAMP(3) NULL,
+ Index INT NULL,
+ KeyWords TEXT NULL,
+ Name VARCHAR(255) NULL,
+ Owner VARCHAR(255) NULL,
+ Public BOOLEAN NULL,
+ Scale INT NULL,
+ SecurityKey VARCHAR(255) NULL,
+ Settings TEXT NULL,
+ Type VARCHAR(255) NOT NULL,
+ Visibility BOOLEAN NULL,
+ Parent UUID NULL,
+ Map UUID NOT NULL,
+ PRIMARY KEY (primaryKey));
+
+
+CREATE TABLE STORMNETLOCKDATA (
+ LockKey VARCHAR(300) NOT NULL,
+ UserName VARCHAR(300) NOT NULL,
+ LockDate TIMESTAMP(3) NULL,
+ PRIMARY KEY (LockKey));
+
+
+CREATE TABLE STORMSETTINGS (
+ primaryKey UUID NOT NULL,
+ Module VARCHAR(1000) NULL,
+ Name VARCHAR(255) NULL,
+ Value TEXT NULL,
+ "User" VARCHAR(255) NULL,
+ PRIMARY KEY (primaryKey));
+
+
+CREATE TABLE STORMAdvLimit (
+ primaryKey UUID NOT NULL,
+ "User" VARCHAR(255) NULL,
+ Published BOOLEAN NULL,
+ Module VARCHAR(255) NULL,
+ Name VARCHAR(255) NULL,
+ Value TEXT NULL,
+ HotKeyData INT NULL,
+ PRIMARY KEY (primaryKey));
+
+
+CREATE TABLE STORMFILTERSETTING (
+ primaryKey UUID NOT NULL,
+ Name VARCHAR(255) NOT NULL,
+ DataObjectView VARCHAR(255) NOT NULL,
+ PRIMARY KEY (primaryKey));
+
+
+CREATE TABLE STORMWEBSEARCH (
+ primaryKey UUID NOT NULL,
+ Name VARCHAR(255) NOT NULL,
+ "Order" INT NOT NULL,
+ PresentView VARCHAR(255) NOT NULL,
+ DetailedView VARCHAR(255) NOT NULL,
+ FilterSetting_m0 UUID NOT NULL,
+ PRIMARY KEY (primaryKey));
+
+
+CREATE TABLE STORMFILTERDETAIL (
+ primaryKey UUID NOT NULL,
+ Caption VARCHAR(255) NOT NULL,
+ DataObjectView VARCHAR(255) NOT NULL,
+ ConnectMasterProp VARCHAR(255) NOT NULL,
+ OwnerConnectProp VARCHAR(255) NULL,
+ FilterSetting_m0 UUID NOT NULL,
+ PRIMARY KEY (primaryKey));
+
+
+CREATE TABLE STORMFILTERLOOKUP (
+ primaryKey UUID NOT NULL,
+ DataObjectType VARCHAR(255) NOT NULL,
+ Container VARCHAR(255) NULL,
+ ContainerTag VARCHAR(255) NULL,
+ FieldsToView VARCHAR(255) NULL,
+ FilterSetting_m0 UUID NOT NULL,
+ PRIMARY KEY (primaryKey));
+
+
+CREATE TABLE UserSetting (
+ primaryKey UUID NOT NULL,
+ AppName VARCHAR(256) NULL,
+ UserName VARCHAR(512) NULL,
+ UserGuid UUID NULL,
+ ModuleName VARCHAR(1024) NULL,
+ ModuleGuid UUID NULL,
+ SettName VARCHAR(256) NULL,
+ SettGuid UUID NULL,
+ SettLastAccessTime TIMESTAMP(3) NULL,
+ StrVal VARCHAR(256) NULL,
+ TxtVal TEXT NULL,
+ IntVal INT NULL,
+ BoolVal BOOLEAN NULL,
+ GuidVal UUID NULL,
+ DecimalVal DECIMAL(20,10) NULL,
+ DateTimeVal TIMESTAMP(3) NULL,
+ PRIMARY KEY (primaryKey));
+
+
+CREATE TABLE ApplicationLog (
+ primaryKey UUID NOT NULL,
+ Category VARCHAR(64) NULL,
+ EventId INT NULL,
+ Priority INT NULL,
+ Severity VARCHAR(32) NULL,
+ Title VARCHAR(256) NULL,
+ Timestamp TIMESTAMP(3) NULL,
+ MachineName VARCHAR(32) NULL,
+ AppDomainName VARCHAR(512) NULL,
+ ProcessId VARCHAR(256) NULL,
+ ProcessName VARCHAR(512) NULL,
+ ThreadName VARCHAR(512) NULL,
+ Win32ThreadId VARCHAR(128) NULL,
+ Message VARCHAR(2500) NULL,
+ FormattedMessage TEXT NULL,
+ PRIMARY KEY (primaryKey));
+
+
+ ALTER TABLE ParameterMetadata ADD CONSTRAINT FKb3a09c3437832cc764b178e8ab5796b853368ae6 FOREIGN KEY (LayerLink) REFERENCES LinkMetadata; 
+CREATE INDEX Indexb3a09c3437832cc764b178e8ab5796b853368ae6 on ParameterMetadata (LayerLink); 
+
+ ALTER TABLE LinkParameter ADD CONSTRAINT FKf51925bc9716f83fa0713d71fcd2042bcae13e07 FOREIGN KEY (LayerLink) REFERENCES LayerLink; 
+CREATE INDEX Indexf51925bc9716f83fa0713d71fcd2042bcae13e07 on LinkParameter (LayerLink); 
+CREATE INDEX Index5c3f86a833db9a84896a16abbdd23439a5e5afa7 on BackgroundLayer USING gist (BoundingBox); 
+
+ ALTER TABLE DataLinkParameter ADD CONSTRAINT FK0f37c8f45fd0a1ef3b986fde809f14f124c28640 FOREIGN KEY (Link) REFERENCES DataLink; 
+CREATE INDEX Index0f37c8f45fd0a1ef3b986fde809f14f124c28640 on DataLinkParameter (Link); 
+
+ ALTER TABLE LayerLink ADD CONSTRAINT FK992b5ea502bdce8274df99fd054b9808604969b1 FOREIGN KEY (MapObjectSetting) REFERENCES MapObjectSetting; 
+CREATE INDEX Index992b5ea502bdce8274df99fd054b9808604969b1 on LayerLink (MapObjectSetting); 
+
+ ALTER TABLE LayerLink ADD CONSTRAINT FK1e47943c8249f0e22f1bc5209ecee5eca258c534 FOREIGN KEY (Layer) REFERENCES MapLayer; 
+CREATE INDEX Index1e47943c8249f0e22f1bc5209ecee5eca258c534 on LayerLink (Layer); 
+CREATE INDEX Index139a6ed635f6c89b639639650a90caa29bdaad14 on LayerMetadata USING gist (BoundingBox); 
+
+ ALTER TABLE DataLink ADD CONSTRAINT FK83e4d90024bf9edefda57dc0f89c43beda07cac6 FOREIGN KEY (MapObjectSetting) REFERENCES MapObjectSetting; 
+CREATE INDEX Index83e4d90024bf9edefda57dc0f89c43beda07cac6 on DataLink (MapObjectSetting); 
+
+ ALTER TABLE LinkMetadata ADD CONSTRAINT FK84a24e62b97a4969ee869cdc57a14147bf8d9fde FOREIGN KEY (MapObjectSetting) REFERENCES MapObjectSetting; 
+CREATE INDEX Index84a24e62b97a4969ee869cdc57a14147bf8d9fde on LinkMetadata (MapObjectSetting); 
+
+ ALTER TABLE LinkMetadata ADD CONSTRAINT FK919e017de2a8eb085d2c04e20fe4a9830112baa6 FOREIGN KEY (Layer) REFERENCES LayerMetadata; 
+CREATE INDEX Index919e017de2a8eb085d2c04e20fe4a9830112baa6 on LinkMetadata (Layer); 
+
+ ALTER TABLE MapObjectSetting ADD CONSTRAINT FK87b070a840c92b68a9d9255d1bc69c0d7de07785 FOREIGN KEY (DefaultMap) REFERENCES Map; 
+CREATE INDEX Index87b070a840c92b68a9d9255d1bc69c0d7de07785 on MapObjectSetting (DefaultMap); 
+CREATE INDEX Indexbe8efd4f01d789420e4e1d1a11d9c0f9ec49dd3a on Map USING gist (BoundingBox); 
+CREATE INDEX Index1f984bd4d9129a92248628bcf907f9fa0be3efa1 on MapLayer USING gist (BoundingBox); 
+
+ ALTER TABLE MapLayer ADD CONSTRAINT FK299305f8b7b9f3a52d9b5dc0a2243948b10aab62 FOREIGN KEY (Parent) REFERENCES MapLayer; 
+CREATE INDEX Index299305f8b7b9f3a52d9b5dc0a2243948b10aab62 on MapLayer (Parent); 
+
+ ALTER TABLE MapLayer ADD CONSTRAINT FKb6304fe6dac7e8e32f8578dadd4b1a3869f25335 FOREIGN KEY (Map) REFERENCES Map; 
+CREATE INDEX Indexb6304fe6dac7e8e32f8578dadd4b1a3869f25335 on MapLayer (Map); 
+
+ ALTER TABLE STORMWEBSEARCH ADD CONSTRAINT FKc4378e39870eb056aec84088683297a01d2a6200 FOREIGN KEY (FilterSetting_m0) REFERENCES STORMFILTERSETTING; 
+
+ ALTER TABLE STORMFILTERDETAIL ADD CONSTRAINT FK921d16269835017e2a0d0e29ad6fb175454a70d0 FOREIGN KEY (FilterSetting_m0) REFERENCES STORMFILTERSETTING; 
+
+ ALTER TABLE STORMFILTERLOOKUP ADD CONSTRAINT FKce38ef0db3f01a53acaa49fed8853fb941ad47ba FOREIGN KEY (FilterSetting_m0) REFERENCES STORMFILTERSETTING; 
+
