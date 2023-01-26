@@ -13,7 +13,7 @@ import java.util.List;
 /**
  * Entity implementation class for Entity: LinkMetadata
  */
-@Entity(name = "NewPlatformFlexberry.GISLinkMetadata")
+@Entity(name = "NewPlatformFlexberryGISLinkMetadata")
 @Table(schema = "public", name = "LinkMetadata")
 public class LinkMetadata {
 

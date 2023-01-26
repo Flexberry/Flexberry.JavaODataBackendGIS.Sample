@@ -12,7 +12,7 @@ import com.sap.olingo.jpa.metadata.core.edm.annotation.EdmIgnore;
 /**
  * Entity implementation class for Entity: MapObjectSetting
  */
-@Entity(name = "NewPlatformFlexberry.GISMapObjectSetting")
+@Entity(name = "NewPlatformFlexberryGISMapObjectSetting")
 @Table(schema = "public", name = "MapObjectSetting")
 public class MapObjectSetting {
 

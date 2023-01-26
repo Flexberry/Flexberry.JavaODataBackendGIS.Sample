@@ -12,7 +12,7 @@ import java.util.List;
 /**
  * Entity implementation class for Entity: Map
  */
-@Entity(name = "NewPlatformFlexberry.GISMap")
+@Entity(name = "NewPlatformFlexberryGISMap")
 @Table(schema = "public", name = "Map")
 public class Map {
 
