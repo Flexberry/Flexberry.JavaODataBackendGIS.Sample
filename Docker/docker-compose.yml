@@ -1,15 +1,26 @@
 version: '3'
 services:
-    java-odata-sample-db:
-        image: javaodatagissample/postgres
+    java-gis-odata-sample-db:
+        image: javagisodatasample/postgres
         volumes:
-        - GISDB:/var/lib/pgsql/data/
+            - GISDB:/var/lib/pgsql/data/
         ports:
-        - 5432:5432
+            - 5432:5432
         networks:
-        - gis-java-odata-sample
+            - java-gis-odata-sample-network
+        
+    java-gis-odata-sample-geoserver:
+        image: javagisodatasample/geoserver
+        ports:
+            - 1819:8080
+        environment:
+            GEOSERVER_LOG_LOCATION: /dev/null
+        depends_on:
+            - java-gis-odata-sample-db
+        networks:
+            - java-gis-odata-sample-network
 
 volumes:
   GISDB:
 networks:
-  gis-java-odata-sample:
+  java-gis-odata-sample-network:
