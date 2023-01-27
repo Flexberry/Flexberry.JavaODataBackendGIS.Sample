@@ -6,13 +6,13 @@
 
 	<!-- Register the HttpServlet implementation -->
 	<servlet>
-	  <servlet-name>Flexberry.GISServlet</servlet-name>
+	  <servlet-name>FlexberryGISServlet</servlet-name>
 	  <servlet-class>Flexberry.GIS.service.Servlet</servlet-class>
 	  <load-on-startup>1</load-on-startup>
 	</servlet>
 
 	<servlet-mapping>
-	  <servlet-name>Flexberry.GISServlet</servlet-name>
+	  <servlet-name>FlexberryGISServlet</servlet-name>
 	  <url-pattern>/odata/*</url-pattern>
 	</servlet-mapping>
 	

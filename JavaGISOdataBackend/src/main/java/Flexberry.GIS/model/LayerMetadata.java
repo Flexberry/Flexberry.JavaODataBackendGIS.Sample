@@ -12,7 +12,7 @@ import java.util.List;
 /**
  * Entity implementation class for Entity: LayerMetadata
  */
-@Entity(name = "NewPlatformFlexberry.GISLayerMetadata")
+@Entity(name = "NewPlatformFlexberryGISLayerMetadata")
 @Table(schema = "public", name = "LayerMetadata")
 public class LayerMetadata {
 

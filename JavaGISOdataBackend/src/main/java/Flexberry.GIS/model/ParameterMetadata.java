@@ -12,7 +12,7 @@ import com.sap.olingo.jpa.metadata.core.edm.annotation.EdmIgnore;
 /**
  * Entity implementation class for Entity: ParameterMetadata
  */
-@Entity(name = "NewPlatformFlexberry.GISParameterMetadata")
+@Entity(name = "NewPlatformFlexberryGISParameterMetadata")
 @Table(schema = "public", name = "ParameterMetadata")
 public class ParameterMetadata {
 

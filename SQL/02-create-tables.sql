@@ -24,53 +24,11 @@ CREATE TABLE LinkParameter (
  PRIMARY KEY (primaryKey));
 
 
-CREATE TABLE BackgroundLayer (
- primaryKey UUID NOT NULL,
- BoundingBox GEOGRAPHY NULL,
- CoordinateReferenceSystem VARCHAR(255) NULL,
- CreateTime TIMESTAMP(3) NULL,
- Creator VARCHAR(255) NULL,
- Description TEXT NULL,
- Editor VARCHAR(255) NULL,
- EditTime TIMESTAMP(3) NULL,
- Index INT NULL,
- KeyWords TEXT NULL,
- Name VARCHAR(255) NULL,
- Owner VARCHAR(255) NULL,
- Public BOOLEAN NULL,
- Scale INT NULL,
- Settings TEXT NULL,
- Type VARCHAR(255) NULL,
- Visibility BOOLEAN NULL,
- PRIMARY KEY (primaryKey));
-
-
-CREATE TABLE DataLinkParameter (
- primaryKey UUID NOT NULL,
- Expression VARCHAR(255) NULL,
- LayerField VARCHAR(255) NULL,
- LinkField BOOLEAN NULL,
- ObjectField VARCHAR(255) NULL,
- Link UUID NOT NULL,
- PRIMARY KEY (primaryKey));
-
-
 CREATE TABLE LayerLink (
  primaryKey UUID NOT NULL,
  AllowShow BOOLEAN NULL,
  MapObjectSetting UUID NOT NULL,
  Layer UUID NOT NULL,
- PRIMARY KEY (primaryKey));
-
-
-CREATE TABLE CswConnection (
- primaryKey UUID NOT NULL,
- CreateTime TIMESTAMP(3) NULL,
- Creator VARCHAR(255) NULL,
- Editor VARCHAR(255) NULL,
- EditTime TIMESTAMP(3) NULL,
- Name VARCHAR(255) NOT NULL,
- Url VARCHAR(255) NOT NULL,
  PRIMARY KEY (primaryKey));
 
 
@@ -85,19 +43,11 @@ CREATE TABLE LayerMetadata (
  Editor VARCHAR(255) NULL,
  EditTime TIMESTAMP(3) NULL,
  KeyWords TEXT NULL,
+ AnyText TEXT NULL,
  Name VARCHAR(255) NOT NULL,
  Scale INT NULL,
  Settings TEXT NULL,
  Type VARCHAR(255) NOT NULL,
- PRIMARY KEY (primaryKey));
-
-
-CREATE TABLE DataLink (
- primaryKey UUID NOT NULL,
- ClearWithoutLink BOOLEAN NULL,
- CreateObject BOOLEAN NULL,
- LayerTable VARCHAR(255) NOT NULL,
- MapObjectSetting UUID NOT NULL,
  PRIMARY KEY (primaryKey));
 
 
@@ -135,6 +85,7 @@ CREATE TABLE Map (
  EditTime TIMESTAMP(3) NULL,
  EditTimeMapLayers TIMESTAMP(3) NULL,
  KeyWords TEXT NULL,
+ AnyText TEXT NULL,
  Lat DOUBLE PRECISION NULL,
  Lng DOUBLE PRECISION NULL,
  Name VARCHAR(255) NOT NULL,
@@ -157,6 +108,7 @@ CREATE TABLE MapLayer (
  EditTime TIMESTAMP(3) NULL,
  Index INT NULL,
  KeyWords TEXT NULL,
+ AnyText TEXT NULL,
  Name VARCHAR(255) NULL,
  Owner VARCHAR(255) NULL,
  Public BOOLEAN NULL,
@@ -277,11 +229,7 @@ CREATE TABLE ApplicationLog (
 CREATE INDEX Indexb3a09c3437832cc764b178e8ab5796b853368ae6 on ParameterMetadata (LayerLink); 
 
  ALTER TABLE LinkParameter ADD CONSTRAINT FKf51925bc9716f83fa0713d71fcd2042bcae13e07 FOREIGN KEY (LayerLink) REFERENCES LayerLink; 
-CREATE INDEX Indexf51925bc9716f83fa0713d71fcd2042bcae13e07 on LinkParameter (LayerLink); 
-CREATE INDEX Index5c3f86a833db9a84896a16abbdd23439a5e5afa7 on BackgroundLayer USING gist (BoundingBox); 
-
- ALTER TABLE DataLinkParameter ADD CONSTRAINT FK0f37c8f45fd0a1ef3b986fde809f14f124c28640 FOREIGN KEY (Link) REFERENCES DataLink; 
-CREATE INDEX Index0f37c8f45fd0a1ef3b986fde809f14f124c28640 on DataLinkParameter (Link); 
+CREATE INDEX Indexf51925bc9716f83fa0713d71fcd2042bcae13e07 on LinkParameter (LayerLink);
 
  ALTER TABLE LayerLink ADD CONSTRAINT FK992b5ea502bdce8274df99fd054b9808604969b1 FOREIGN KEY (MapObjectSetting) REFERENCES MapObjectSetting; 
 CREATE INDEX Index992b5ea502bdce8274df99fd054b9808604969b1 on LayerLink (MapObjectSetting); 
@@ -289,9 +237,6 @@ CREATE INDEX Index992b5ea502bdce8274df99fd054b9808604969b1 on LayerLink (MapObje
  ALTER TABLE LayerLink ADD CONSTRAINT FK1e47943c8249f0e22f1bc5209ecee5eca258c534 FOREIGN KEY (Layer) REFERENCES MapLayer; 
 CREATE INDEX Index1e47943c8249f0e22f1bc5209ecee5eca258c534 on LayerLink (Layer); 
 CREATE INDEX Index139a6ed635f6c89b639639650a90caa29bdaad14 on LayerMetadata USING gist (BoundingBox); 
-
- ALTER TABLE DataLink ADD CONSTRAINT FK83e4d90024bf9edefda57dc0f89c43beda07cac6 FOREIGN KEY (MapObjectSetting) REFERENCES MapObjectSetting; 
-CREATE INDEX Index83e4d90024bf9edefda57dc0f89c43beda07cac6 on DataLink (MapObjectSetting); 
 
  ALTER TABLE LinkMetadata ADD CONSTRAINT FK84a24e62b97a4969ee869cdc57a14147bf8d9fde FOREIGN KEY (MapObjectSetting) REFERENCES MapObjectSetting; 
 CREATE INDEX Index84a24e62b97a4969ee869cdc57a14147bf8d9fde on LinkMetadata (MapObjectSetting); 

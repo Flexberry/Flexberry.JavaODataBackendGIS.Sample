@@ -1,5 +1,23 @@
 version: '3'
 services:
+    java-gis-odata-sample-app:
+        image: javagisodatasample/app
+        build: ../JavaGISOdataBackend/src/main/webapp
+        environment:
+            DB_ADDR: java-gis-odata-sample-db
+            DB_NAME: appdb
+            DB_USER: flexberryuser
+            DB_PASS: jhv
+            JPDA_ADDRESS: 8000
+            JPDA_TRANSPORT: dt_socket
+        entrypoint: /usr/local/tomcat/bin/catalina.sh jpda run
+        ports:
+        # Транслируем локальный порт 80 на порт tomcat. Чтобы приложение работало на дефолтном порту.
+            - "80:8080"
+            - "8000:8000"
+        networks:
+            - java-gis-odata-sample-network
+
     java-gis-odata-sample-db:
         image: javagisodatasample/postgres
         volumes:

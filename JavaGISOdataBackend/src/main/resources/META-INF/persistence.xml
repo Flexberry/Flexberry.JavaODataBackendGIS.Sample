@@ -5,12 +5,8 @@
     <persistence-unit name="Olingo4PG">
         <class>Flexberry.GIS.model.ParameterMetadata</class>
         <class>Flexberry.GIS.model.LinkParameter</class>
-        <class>Flexberry.GIS.model.BackgroundLayer</class>
-        <class>Flexberry.GIS.model.DataLinkParameter</class>
         <class>Flexberry.GIS.model.LayerLink</class>
-        <class>Flexberry.GIS.model.CswConnection</class>
         <class>Flexberry.GIS.model.LayerMetadata</class>
-        <class>Flexberry.GIS.model.DataLink</class>
         <class>Flexberry.GIS.model.LinkMetadata</class>
         <class>Flexberry.GIS.model.MapObjectSetting</class>
         <class>Flexberry.GIS.model.Map</class>

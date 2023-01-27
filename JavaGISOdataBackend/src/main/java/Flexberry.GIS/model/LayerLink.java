@@ -13,7 +13,7 @@ import java.util.List;
 /**
  * Entity implementation class for Entity: LayerLink
  */
-@Entity(name = "NewPlatformFlexberry.GISLayerLink")
+@Entity(name = "NewPlatformFlexberryGISLayerLink")
 @Table(schema = "public", name = "LayerLink")
 public class LayerLink {
 

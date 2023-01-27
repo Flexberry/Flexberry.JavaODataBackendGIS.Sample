@@ -12,7 +12,7 @@ import com.sap.olingo.jpa.metadata.core.edm.annotation.EdmIgnore;
 /**
  * Entity implementation class for Entity: LinkParameter
  */
-@Entity(name = "NewPlatformFlexberry.GISLinkParameter")
+@Entity(name = "NewPlatformFlexberryGISLinkParameter")
 @Table(schema = "public", name = "LinkParameter")
 public class LinkParameter {
 
