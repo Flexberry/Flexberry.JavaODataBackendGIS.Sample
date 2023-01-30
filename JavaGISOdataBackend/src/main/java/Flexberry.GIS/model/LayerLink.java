@@ -24,7 +24,7 @@ public class LayerLink {
     private UUID primarykey;
 
     @Column(name = "AllowShow")
-    private Boolean allowshow;
+    private Boolean allowShow;
 
     @EdmIgnore
     @Converter(converterClass = UUIDConverter.class, name = "MapObjectSetting")
@@ -34,7 +34,7 @@ public class LayerLink {
 
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     @JoinColumn(name = "MapObjectSetting", insertable = false, updatable = false)
-    private MapObjectSetting mapobjectsetting;
+    private MapObjectSetting mapObjectSetting;
 
     @EdmIgnore
     @Converter(converterClass = UUIDConverter.class, name = "Layer")
@@ -46,7 +46,7 @@ public class LayerLink {
     @JoinColumn(name = "Layer", insertable = false, updatable = false)
     private MapLayer layer;
 
-    @OneToMany(mappedBy = "layerlink", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
+    @OneToMany(mappedBy = "layerLink", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     private List<LinkParameter> linkparameters;
 
 
@@ -63,11 +63,11 @@ public class LayerLink {
     }
 
     public Boolean getAllowShow() {
-      return allowshow;
+      return allowShow;
     }
 
     public void setAllowShow(Boolean allowshow) {
-      this.allowshow = allowshow;
+      this.allowShow = allowshow;
     }
 
 

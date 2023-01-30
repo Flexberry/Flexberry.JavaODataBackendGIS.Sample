@@ -1,0 +1,163 @@
+@import './themes/default/globals/site.variables';
+@import './themes/default/elements/button.variables';
+@import './themes/default/elements/container.variables';
+@import './themes/default/modules/accordion.variables';
+@import './themes/default/modules/sidebar.variables';
+
+.ui.loading.form {
+  /**
+    Increased 'loading' form z-index to hide leaflet map placed on form.
+  */
+  &:before {
+    z-index: 1000000 !important;
+  }
+  /**
+    Increased 'loading' form spinner z-index to make it visible above leaflet map & form.
+  */
+  &:after {
+    z-index: 1000001 !important;
+  }
+}
+
+.ui.form {
+  /**
+    Prevent ui messages from being hided inside <form>.
+  */
+  .success.message,
+  .warning.message,
+  .error.message {
+    display: block !important;
+    /**
+      Hide hidden ui messages inside <form>.
+    */
+    &.hidden {
+      display: none !important;
+    }
+  }
+}
+
+/**
+    Fix disappearing checkboxes while scrolling
+*/
+
+.ui.checkbox {
+  .box:before,
+  label:before,
+  input:checked~.box:after,
+  input:checked~label:after {
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+  }
+}
+
+.scale-header > label {
+  font-size: 0.92857143em;
+  font-weight: bold;
+}
+
+.unselectable {
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.leaflet-tile-pane   { z-index: auto; }
+.leaflet-marker-pane { z-index: 2500; }
+.leaflet-popup-pane { z-index: 2000; }
+.leaflet-tooltip-pane { z-index: 2000; }
+.leaflet-overlay-pane { z-index: 2000; }
+.leaflet-zoomto-pane { z-index: 2000; }
+
+.hidden {
+  display: none !important;
+}
+
+.leaflet-marker-icon.label.point {
+  display: flex;
+
+  &.over {
+    align-items: end;
+  }
+
+  &.along {
+    align-items: center;
+  }
+
+  &.under {
+    align-items: start;
+  }
+
+  &.left {
+    justify-content: end;
+  }
+
+  &.right {
+    justify-content: start;
+  }
+
+  &.middle {
+    justify-content: center;
+  }
+}
+
+.d-flex {
+  display: flex;
+}
+
+.d-none {
+  display: none;
+}
+
+.h-42 {
+  height: 42px;
+}
+
+.w-80{
+  width: 80%;
+}
+
+.w-100{
+  width: 100%;
+}
+
+.justify-content-center {
+  justify-content: center;
+}
+
+.p-10{
+  padding: 10px;
+}
+
+.ml-auto{
+  margin-left: auto !important;
+}
+
+
+.ui.icon.button.help-button.help-button {
+  box-shadow: none !important;
+  margin: 0;
+  position: absolute;
+  margin-left: 0.5em;
+
+  &:hover {
+    box-shadow: none !important;
+    border: none;
+    background: transparent!important;
+  }
+}
+
+.flexberry-identify-panel {
+  .wrapper {
+    margin: 20px 0px;
+  }
+  .file-input {
+    width: 85% !important;
+    height: 32px;
+  }
+  .file-panel {
+    button {
+      padding: 4px 6px;
+    }
+  }
+}

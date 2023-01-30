@@ -1,0 +1,60 @@
+<label>{{title}}</label>
+{{!-- adding "selection" class to "multi-dropdown" forces element selection on opening, the scroll goes down then back. --}}
+{{#ui-dropdown
+  class=(concat "flexberry-dropdown multi-dropdown " class (if selection " selection" "") (if readonly " disabled" ""))
+  on=on
+  allowReselection=allowReselection
+  allowAdditions=allowAdditions
+  hideAdditions=hideAdditions
+  minCharacters=minCharacters
+  match=match
+  selectOnKeydown=selectOnKeydown
+  forceSelection=forceSelection
+  allowCategorySelection=allowCategorySelection
+  direction=direction
+  keepOnScreen=keepOnScreen
+  context=context
+  fullTextSearch=fullTextSearch
+  preserveHTML=preserveHTML
+  sortSelect=sortSelect
+  showOnFocus=showOnFocus
+  allowTab=allowTab
+  transition=transition
+  duration=duration
+  action='nothing'
+  message=message
+}}
+  <i class="dropdown icon"></i>
+  {{#if isClearAllVisible}}
+    <i class="icon-guideline-cross-r" onClick={{action 'clearAll'}}></i>
+  {{/if}}
+  <div class="text">{{t 'components.flexberry-layers-intersections-panel.chooseCaption'}}: {{countChoose}}</div>
+  <div class="menu">
+    {{#if state.length}}
+      {{yield}}
+      {{#if isSearchVisible}}
+        <div class="ui search input">
+          <input class="search-field" type="text" placeholder={{t "components.flexberry-layers-intersections-panel.search-placeholder"}}>
+        </div>
+      {{/if}}
+      {{#if isSelectAllVisible}}
+        <div class="item select-all">
+          {{flexberry-checkbox
+            label=selectAllText
+            onChange=(action "selectAll")
+          }}
+        </div>
+      {{/if}}
+      {{#each state as |item|}}
+        <div class="item" data-value="{{item.key}}">
+          {{flexberry-checkbox
+            label=item.value
+            value=item.isVisible
+          }}
+        </div>
+      {{/each}}
+    {{else}}
+      <div class="item ui text loader"></div>
+    {{/if}}
+  </div>
+{{/ui-dropdown}}

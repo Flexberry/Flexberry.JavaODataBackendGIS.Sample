@@ -1,0 +1,53 @@
+language: node_js
+node_js:
+  - "8"
+
+sudo: required
+
+cache:
+  yarn: true
+  directories:
+    - $HOME/.npm
+    - $HOME/.cache
+    - node_modules
+
+env:
+  - EMBER_TRY_SCENARIO=default
+
+matrix:
+  fast_finish: true
+
+dist: trusty
+
+addons:
+  chrome: stable
+
+before_install:
+  - sudo chown root /opt/google/chrome/chrome-sandbox
+  - sudo chmod 4755 /opt/google/chrome/chrome-sandbox
+  - google-chrome-stable --headless --disable-gpu --no-sandbox --remote-debugging-port=9222 http://localhost &
+  - yarn global add ember-cli@2.4.3
+  - yarn global add bower
+install:
+  - yarn install
+  - bower install
+
+script:
+  - ember try:one $EMBER_TRY_SCENARIO test
+
+after_success:
+  - test $EMBER_TRY_SCENARIO == "default"
+    && test $TRAVIS_PULL_REQUEST == "false"
+    && (test $TRAVIS_BRANCH == "master" || test $TRAVIS_BRANCH == "develop")
+    && ember build --gh-pages --brunch=$TRAVIS_BRANCH --postfix=-postgres
+    && bash scripts/deploy-to-gh-pages.sh -postgres
+    && ember build --gh-pages --brunch=$TRAVIS_BRANCH --environment=mssql-backend
+    && bash scripts/deploy-to-gh-pages.sh -mssql no-doc
+
+deploy:
+  provider: npm
+  email: mail@flexberry.net
+  api_key:
+    secure: MF2LN5M0CD7Lrog3OaUUAuG/F8ZvBSd1+4aR7zqDN5MVMGFdZW6ncXqfQfVkbTpnyNLQiZ/gvU4djr6+mGCoEypUnL/JO3wM/uo6PfFo6lRvjVEjZ8P+zZS8TcocU2ORmPd9QhnICU1C6AOt5PU5uiKm5XepZuy0LenjDASoFEEUA+Bbw4cI3Fnf6a+v0HBY5nRyWwSiU3yVT/cvhr2HhimBTUtK6hgA7RDivGv6dhL1QagnTyp1ywAgX3gPY/6bj/WatRbUVQkGEA7WgCTBDAD92stjPv4Zn9wxHWkIgYFDgLTLckQuR/Su1/9XCSmOJKRYMcM9velaSUS+Xe2is4lCrZfBcnge2hocuJhR0J7Db+9pn6jZbqadYadYgDSgHDOHNj6OGQwPJP4g5HI3o7ac8sCRUr6HBDOqDGPf3ksomhTRMqhHGY6UA8k751ui0r+slIm3ywijA+krR0NQhD3tO6dAkSAFLcip7WCtmWRYtGm/g7KEPKyhKnPBv+G0Jnm90dE7HKmhhxgSj2S8q/4TH0zakYsUWzApd2FmKxq1ijjtTy4FU7it/3QdB/uSZA9cEqarYHrtNS8iDMoeWbhijGwn5FjkTRYoBdhndDfL3YTrOTOECTDFOACbuIoTzdKW5dJ47hkk99/lgWqrAt3T8tsGW3SA3ABeINvKP9A=
+  on:
+    tags: true

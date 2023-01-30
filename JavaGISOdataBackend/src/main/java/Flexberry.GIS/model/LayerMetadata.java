@@ -29,10 +29,10 @@ public class LayerMetadata {
     private String description;
 
     @Column(name = "KeyWords")
-    private String keywords;
+    private String keyWords;
 
     @Column(name = "AnyText")
-    private String anytext;
+    private String anyText;
 
     @Column(name = "Type")
     private String type;
@@ -44,22 +44,22 @@ public class LayerMetadata {
     private Integer scale;
 
     @Column(name = "CoordinateReferenceSystem")
-    private String coordinatereferencesystem;
+    private String coordinateReferenceSystem;
 
     @Column(name = "BoundingBox")
-    private String boundingbox;
+    private String boundingBox;
 
     @Column(name = "AdditionalData")
     private String additionaldata;
 
     @Column(name = "CreateTime")
-    private String createtime;
+    private String createTime;
 
     @Column(name = "Creator")
     private String creator;
 
     @Column(name = "EditTime")
-    private String edittime;
+    private String editTime;
 
     @Column(name = "Editor")
     private String editor;
@@ -97,19 +97,19 @@ public class LayerMetadata {
     }
 
     public String getKeyWords() {
-      return keywords;
+      return keyWords;
     }
 
     public void setKeyWords(String keywords) {
-      this.keywords = keywords;
+      this.keyWords = keywords;
     }
 
     public String getAnyText() {
-      return anytext;
+      return anyText;
     }
 
     public void setAnyText(String anytext) {
-      this.anytext = anytext;
+      this.anyText = anytext;
     }
 
     public String getType() {
@@ -137,19 +137,19 @@ public class LayerMetadata {
     }
 
     public String getCoordinateReferenceSystem() {
-      return coordinatereferencesystem;
+      return coordinateReferenceSystem;
     }
 
     public void setCoordinateReferenceSystem(String coordinatereferencesystem) {
-      this.coordinatereferencesystem = coordinatereferencesystem;
+      this.coordinateReferenceSystem = coordinatereferencesystem;
     }
 
     public String getBoundingBox() {
-      return boundingbox;
+      return boundingBox;
     }
 
     public void setBoundingBox(String boundingbox) {
-      this.boundingbox = boundingbox;
+      this.boundingBox = boundingbox;
     }
 
     public String getAdditionalData() {
@@ -161,11 +161,11 @@ public class LayerMetadata {
     }
 
     public String getCreateTime() {
-      return createtime;
+      return createTime;
     }
 
     public void setCreateTime(String createtime) {
-      this.createtime = createtime;
+      this.createTime = createtime;
     }
 
     public String getCreator() {
@@ -177,11 +177,11 @@ public class LayerMetadata {
     }
 
     public String getEditTime() {
-      return edittime;
+      return editTime;
     }
 
     public void setEditTime(String edittime) {
-      this.edittime = edittime;
+      this.editTime = edittime;
     }
 
     public String getEditor() {

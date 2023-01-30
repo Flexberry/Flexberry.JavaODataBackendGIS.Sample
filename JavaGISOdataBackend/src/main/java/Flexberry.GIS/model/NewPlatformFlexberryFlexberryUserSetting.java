@@ -24,57 +24,57 @@ public class NewPlatformFlexberryFlexberryUserSetting {
     private UUID primarykey;
 
     @Column(name = "AppName", nullable = true)
-    private String AppName;
+    private String appName;
 	
 	@Column(name = "UserName", nullable = true)
-    private String UserName;
+    private String userName;
 	
 	@Converter(converterClass = UUIDConverter.class, name = "UserGuid")
     @Convert("UserGuid")
 	@Column(name = "UserGuid", length = 16, unique = true, nullable = true)
-    private UUID UserGuid;
+    private UUID userGuid;
 	
 	@Column(name = "ModuleName", nullable = true)
-    private String ModuleName;
+    private String moduleName;
 	
 	@Converter(converterClass = UUIDConverter.class, name = "ModuleGuid")
     @Convert("ModuleGuid")
 	@Column(name = "ModuleGuid", length = 16, unique = true, nullable = true)
-    private UUID ModuleGuid;
+    private UUID moduleGuid;
 	
 	@Column(name = "SettName", nullable = true)
-    private String SettName;
+    private String settName;
 	
 	@Converter(converterClass = UUIDConverter.class, name = "SettGuid")
     @Convert("SettGuid")
 	@Column(name = "SettGuid", length = 16, unique = true, nullable = true)
-    private UUID SettGuid;
+    private UUID settGuid;
 	
 	@Column(name = "SettLastAccessTime", nullable = true)
-    private Date SettLastAccessTime;
+    private Date settLastAccessTime;
 	
 	@Column(name = "StrVal", nullable = true)
-    private String StrVal;
+    private String strVal;
 	
 	@Column(name = "TxtVal", nullable = true)
-    private String TxtVal;
+    private String txtVal;
 	
 	@Column(name = "IntVal", nullable = true)
-    private Integer IntVal;
+    private Integer intVal;
 	
 	@Column(name = "BoolVal", nullable = true)
-    private Boolean BoolVal;
+    private Boolean boolVal;
 	
 	@Converter(converterClass = UUIDConverter.class, name = "GuidVal")
     @Convert("GuidVal")
 	@Column(name = "GuidVal", length = 16, unique = true, nullable = true)
-    private UUID GuidVal;
+    private UUID guidVal;
 	
 	@Column(name = "DecimalVal", nullable = true)
-    private Double DecimalVal;
+    private Double decimalVal;
 	
 	@Column(name = "DateTimeVal", nullable = true)
-    private Date DateTimeVal;
+    private Date dateTimeVal;
 
     public NewPlatformFlexberryFlexberryUserSetting() {
         super();
@@ -89,122 +89,122 @@ public class NewPlatformFlexberryFlexberryUserSetting {
     }
 
     public String getAppName() {
-        return AppName;
+        return appName;
     }
 
     public void setAppName(String appName) {
-        this.AppName = appName;
+        this.appName = appName;
     }
 	
 	public String getUserName() {
-        return UserName;
+        return userName;
     }
 
     public void setUserName(String userName) {
-        this.UserName = userName;
+        this.userName = userName;
     }
 	
 	public UUID getUserGuid() {
-        return UserGuid;
+        return userGuid;
     }
 
     public void setUserGuid(UUID userGuid) {
-        this.UserGuid = userGuid;
+        this.userGuid = userGuid;
     }
 	
 	public String getModuleName() {
-        return UserName;
+        return userName;
     }
 
     public void setModuleName(String moduleName) {
-        this.ModuleName = moduleName;
+        this.moduleName = moduleName;
     }
 	
 	public UUID getModuleGuid() {
-        return ModuleGuid;
+        return moduleGuid;
     }
 
     public void setModuleGuid(UUID moduleGuid) {
-        this.ModuleGuid = moduleGuid;
+        this.moduleGuid = moduleGuid;
     }
 	
 	public String getSettName() {
-        return SettName;
+        return settName;
     }
 
     public void setSettName(String settName) {
-        this.SettName = settName;
+        this.settName = settName;
     }
 	
 	public UUID getSettGuid() {
-        return SettGuid;
+        return settGuid;
     }
 
     public void setSettGuid(UUID settGuid) {
-        this.SettGuid = settGuid;
+        this.settGuid = settGuid;
     }
 	
 	public Date getSettLastAccessTime() {
-        return SettLastAccessTime;
+        return settLastAccessTime;
     }
 
     public void setSettLastAccessTime(Date settLastAccessTime) {
-        this.SettLastAccessTime = settLastAccessTime;
+        this.settLastAccessTime = settLastAccessTime;
     }
 	
 	public String getStrVal() {
-        return StrVal;
+        return strVal;
     }
 
     public void setStrVal(String strVal) {
-        this.StrVal = strVal;
+        this.strVal = strVal;
     }
 	
 	public String getTxtVal() {
-        return TxtVal;
+        return txtVal;
     }
 
     public void setTxtVal(String txtVal) {
-        this.TxtVal = txtVal;
+        this.txtVal = txtVal;
     }
 	
 	public Integer getIntVal() {
-        return IntVal;
+        return intVal;
     }
 
     public void setTxtVal(Integer intVal) {
-        this.IntVal = intVal;
+        this.intVal = intVal;
     }
 	
 	public Boolean getBoolVal() {
-        return BoolVal;
+        return boolVal;
     }
 
     public void setBoolVal(Boolean boolVal) {
-        this.BoolVal = boolVal;
+        this.boolVal = boolVal;
     }
 	
 	public UUID getGuidVal() {
-        return GuidVal;
+        return guidVal;
     }
 
     public void setGuidVal(UUID guidVal) {
-        this.GuidVal = guidVal;
+        this.guidVal = guidVal;
     }
 	
 	public Double getDecimalVal() {
-        return DecimalVal;
+        return decimalVal;
     }
 
     public void setDecimalVal(Double decimalVal) {
-        this.DecimalVal = decimalVal;
+        this.decimalVal = decimalVal;
     }
 	
 	public Date getDateTimeVal() {
-        return DateTimeVal;
+        return dateTimeVal;
     }
 
     public void setDateTimeVal(Date dateTimeVal) {
-        this.DateTimeVal = dateTimeVal;
+        this.dateTimeVal = dateTimeVal;
     }
 }

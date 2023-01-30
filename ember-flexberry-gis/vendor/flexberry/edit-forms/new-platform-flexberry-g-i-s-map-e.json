@@ -1,0 +1,54 @@
+﻿{
+  "propertyLookup": [
+    {
+      "master": null,
+      "displayAttributeName": null,
+      "required": false,
+      "relationName": "MapLayer.Parent",
+      "projection": "",
+      "detailModelName": null
+    },
+    {
+      "master": null,
+      "displayAttributeName": null,
+      "required": false,
+      "relationName": "MapLayer.Map",
+      "projection": "MapL",
+      "detailModelName": null
+    },
+    {
+      "master": null,
+      "displayAttributeName": null,
+      "required": false,
+      "relationName": "MapLayer.LayerLink.MapObjectSetting",
+      "projection": "",
+      "detailModelName": null
+    },
+    {
+      "master": null,
+      "displayAttributeName": null,
+      "required": false,
+      "relationName": "MapLayer.LayerLink.Layer",
+      "projection": "",
+      "detailModelName": null
+    },
+    {
+      "master": null,
+      "displayAttributeName": null,
+      "required": false,
+      "relationName": "MapLayer.LayerLink.Parameters.LayerLink",
+      "projection": "",
+      "detailModelName": null
+    }
+  ],
+  "caption": null,
+  "name": "NewPlatformFlexberryGISMapE",
+  "className": "MapE",
+  "attrs": [],
+  "projections": [
+    {
+      "modelName": "new-platform-flexberry-g-i-s-map",
+      "modelProjection": "MapE"
+    }
+  ]
+}

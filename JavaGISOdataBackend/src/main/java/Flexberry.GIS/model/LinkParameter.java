@@ -23,19 +23,19 @@ public class LinkParameter {
     private UUID primarykey;
 
     @Column(name = "ObjectField")
-    private String objectfield;
+    private String objectField;
 
     @Column(name = "LayerField")
-    private String layerfield;
+    private String layerField;
 
     @Column(name = "Expression")
     private String expression;
 
     @Column(name = "QueryKey")
-    private String querykey;
+    private String queryKey;
 
     @Column(name = "LinkField")
-    private Boolean linkfield;
+    private Boolean linkField;
 
     @EdmIgnore
     @Converter(converterClass = UUIDConverter.class, name = "LayerLink")
@@ -45,7 +45,7 @@ public class LinkParameter {
 
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     @JoinColumn(name = "LayerLink", insertable = false, updatable = false)
-    private LayerLink layerlink;
+    private LayerLink layerLink;
 
 
     public LinkParameter() {
@@ -61,19 +61,19 @@ public class LinkParameter {
     }
 
     public String getObjectField() {
-      return objectfield;
+      return objectField;
     }
 
     public void setObjectField(String objectfield) {
-      this.objectfield = objectfield;
+      this.objectField = objectfield;
     }
 
     public String getLayerField() {
-      return layerfield;
+      return layerField;
     }
 
     public void setLayerField(String layerfield) {
-      this.layerfield = layerfield;
+      this.layerField = layerfield;
     }
 
     public String getExpression() {
@@ -85,19 +85,19 @@ public class LinkParameter {
     }
 
     public String getQueryKey() {
-      return querykey;
+      return queryKey;
     }
 
     public void setQueryKey(String querykey) {
-      this.querykey = querykey;
+      this.queryKey = querykey;
     }
 
     public Boolean getLinkField() {
-      return linkfield;
+      return linkField;
     }
 
     public void setLinkField(Boolean linkfield) {
-      this.linkfield = linkfield;
+      this.linkField = linkfield;
     }
 
 
