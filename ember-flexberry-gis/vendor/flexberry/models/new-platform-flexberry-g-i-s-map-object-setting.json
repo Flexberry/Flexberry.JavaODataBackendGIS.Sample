@@ -1,0 +1,180 @@
+﻿{
+  "name": "NewPlatformFlexberryGISMapObjectSetting",
+  "modelName": "new-platform-flexberry-g-i-s-map-object-setting",
+  "className": "MapObjectSetting",
+  "parentModelName": null,
+  "parentClassName": null,
+  "attrs": [
+    {
+      "name": "typeName",
+      "type": "string",
+      "flexberryType": "string",
+      "notNull": false,
+      "defaultValue": "",
+      "stored": true
+    },
+    {
+      "name": "listForm",
+      "type": "string",
+      "flexberryType": "string",
+      "notNull": false,
+      "defaultValue": "",
+      "stored": true
+    },
+    {
+      "name": "editForm",
+      "type": "string",
+      "flexberryType": "string",
+      "notNull": false,
+      "defaultValue": "",
+      "stored": true
+    },
+    {
+      "name": "title",
+      "type": "string",
+      "flexberryType": "string",
+      "notNull": false,
+      "defaultValue": "",
+      "stored": true
+    }
+  ],
+  "belongsTo": [
+    {
+      "polymorphic": false,
+      "presence": false,
+      "name": "defaultMap",
+      "relatedTo": "new-platform-flexberry-g-i-s-map",
+      "inverse": null
+    }
+  ],
+  "hasMany": [],
+  "projections": [
+    {
+      "name": "MapObjectSetting",
+      "modelName": "new-platform-flexberry-g-i-s-map-object-setting",
+      "attrs": [
+        {
+          "name": "typeName",
+          "caption": "TypeName",
+          "hidden": true,
+          "index": 1
+        },
+        {
+          "name": "listForm",
+          "caption": "ListForm",
+          "hidden": true,
+          "index": 2
+        },
+        {
+          "name": "editForm",
+          "caption": "EditForm",
+          "hidden": true,
+          "index": 3
+        },
+        {
+          "name": "title",
+          "caption": "Title",
+          "hidden": true,
+          "index": 4
+        }
+      ],
+      "belongsTo": [
+        {
+          "lookupValue": null,
+          "lookupValueField": null,
+          "relationName": "DefaultMap",
+          "belongsTo": [],
+          "hidden": false,
+          "attrs": [],
+          "index": 0,
+          "caption": "",
+          "name": "defaultMap",
+          "relatedTo": "new-platform-flexberry-g-i-s-map",
+          "inverse": null
+        }
+      ],
+      "hasMany": []
+    },
+    {
+      "name": "MapObjectSettingE",
+      "modelName": "new-platform-flexberry-g-i-s-map-object-setting",
+      "attrs": [
+        {
+          "name": "typeName",
+          "caption": "Тип",
+          "hidden": false,
+          "index": 0
+        },
+        {
+          "name": "title",
+          "caption": "Отображаемое имя",
+          "hidden": false,
+          "index": 1
+        },
+        {
+          "name": "listForm",
+          "caption": "Списковая форма",
+          "hidden": false,
+          "index": 2
+        },
+        {
+          "name": "editForm",
+          "caption": "Форма редактирования",
+          "hidden": false,
+          "index": 3
+        }
+      ],
+      "belongsTo": [
+        {
+          "lookupValue": "Name",
+          "lookupValueField": "name",
+          "relationName": "DefaultMap",
+          "belongsTo": [],
+          "hidden": false,
+          "attrs": [
+            {
+              "name": "name",
+              "caption": "",
+              "hidden": true,
+              "index": 5
+            }
+          ],
+          "index": 4,
+          "caption": "Карта по умолчанию",
+          "name": "defaultMap",
+          "relatedTo": "new-platform-flexberry-g-i-s-map",
+          "inverse": null
+        }
+      ],
+      "hasMany": []
+    },
+    {
+      "name": "MapObjectSettingL",
+      "modelName": "new-platform-flexberry-g-i-s-map-object-setting",
+      "attrs": [
+        {
+          "name": "typeName",
+          "caption": "Тип",
+          "hidden": false,
+          "index": 0
+        },
+        {
+          "name": "listForm",
+          "caption": "Списковая форма",
+          "hidden": false,
+          "index": 1
+        },
+        {
+          "name": "editForm",
+          "caption": "Форма редактирования",
+          "hidden": false,
+          "index": 2
+        }
+      ],
+      "belongsTo": [],
+      "hasMany": []
+    }
+  ],
+  "stored": true,
+  "offline": true
+}

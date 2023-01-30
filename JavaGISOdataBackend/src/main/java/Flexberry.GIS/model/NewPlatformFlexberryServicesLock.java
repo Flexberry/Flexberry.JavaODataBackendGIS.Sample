@@ -19,39 +19,39 @@ public class NewPlatformFlexberryServicesLock {
 
     @Id
     @Column(name = "LockKey", unique = true, nullable = false)
-    private String LockKey;
+    private String lockKey;
 
     @Column(name = "UserName", nullable = false)
-    private String UserName;
+    private String userName;
 	
 	@Column(name = "LockDate", nullable = true)
-    private Date LockDate;
+    private Date lockDate;
 
     public NewPlatformFlexberryServicesLock() {
         super();
     }
 
 	public String getLockKey() {
-        return LockKey;
+        return lockKey;
     }
 
     public void setLockKey(String lockKey) {
-        this.LockKey = lockKey;
+        this.lockKey = lockKey;
     }
 
     public String getUserName() {
-        return UserName;
+        return userName;
     }
 
     public void setUserName(String userName) {
-        this.UserName = userName;
+        this.userName = userName;
     }
 	
 	public Date getLockDate() {
-        return LockDate;
+        return lockDate;
     }
 
     public void setLockDate(Date lockDate) {
-        this.LockDate = lockDate;
+        this.lockDate = lockDate;
     }
 }

@@ -1,0 +1,240 @@
+{{!--
+  See https://github.com/ciena-blueplanet/ember-block-slots#usage
+  {{yield}} is required here to make yield-slots available.
+--}}
+{{yield}}
+
+{{#flexberry-treenode
+  _hasContent=_hasContent
+  class=componentName
+  headerClick=(action "onHeaderClick")
+  beforeExpand=(action "onBeforeExpand")
+  beforeCollapse=(action "onBeforeCollapse")
+}}
+  {{#block-slot "header"}}
+    <div class="flexberry-treenode-header-block">
+      <div class="flexberry-treenode-caption-block">
+        {{#if (and compare.compareLayersEnabled (not ignoreCompareMode))}}
+          {{flexberry-ddau-checkbox
+            class=(concat flexberryClassNames.visibilityCheckbox " " flexberryClassNames.preventExpandCollapse " " layer.type)
+            value=comparedLayerEnable
+            change=(action "onChange")
+            readonly=(and (not isGroup) isLayerSelectedOnOtherSide)
+          }}
+        {{else}}
+          {{#if (not compare.compareLayersEnabled)}}
+            {{flexberry-ddau-checkbox
+              class=(concat flexberryClassNames.visibilityCheckbox " " flexberryClassNames.preventExpandCollapse " " layer.type)
+              value=layer.visibility
+              change=(action "onVisibilityCheckboxChange")
+            }}
+          {{/if}}
+        {{/if}}
+        {{flexberry-icon
+          class=(concat flexberryClassNames.typeIcon " " _typeIconClass)
+        }}
+        <div class={{flexberryClassNames.caption}}>
+          {{layer.name}}
+          {{#if (and histEnabled (eq layer.type "with-history"))}}
+           от {{flexberry-simpledatetime
+                _flatpickr=layer._flatpickr
+                value=layer.archTime
+                type="datetime"
+                max=maxDate
+                placeholder=""
+                change=(action "onLayerTimeChange")
+                closeOtherCalendar = (action "closeOtherCalendar")
+              }}
+          {{/if}}
+        </div>
+        {{#if (and (not compare.compareLayersEnabled) (not readonly))}}
+          <div class="flexberry-treenode-buttons-block hidden">
+            {{#if (and (not readonlyData) (not isGroup) _editOperationIsAvailable _addFeatureIsAvailableApi)}}
+              {{flexberry-button
+                class=(concat flexberryClassNames.attributesButton " floated " flexberryClassNames.preventExpandCollapse)
+                iconClass="icon-guideline-plus-r"
+                tooltip=(t "components.flexberry-maplayer.plus-button.tooltip")
+                click=(action "onFeatureCreateButtonClick")
+              }}
+            {{/if}}
+            {{#if _attributesOperationIsAvailable}}
+              {{flexberry-button
+                class=(concat flexberryClassNames.attributesButton " floated " flexberryClassNames.preventExpandCollapse)
+                iconClass="icon-guideline-table"
+                tooltip=(t "components.flexberry-maplayer.attributes-button.tooltip")
+                click=(action "onAttributesButtonClick" readonlyData)
+              }}
+            {{/if}}
+            {{#if (and (not readonly) (or _fitBoundsOperationIsAvailable (not readonlyModel) createNewLayerAccess))}}
+              <div class="allmore floated flexberry-button ui button icon {{flexberryClassNames.preventExpandCollapse}}">
+                {{flexberry-button
+                  class=(concat "more floated " flexberryClassNames.preventExpandCollapse)
+                  iconClass="icon-guideline-points"
+                  click=(action "onSubmenu")
+                }}
+                <div class="more submenu {{if isSubmenu '' 'hidden'}}">
+                  <div class="button-more-submenu">
+                  {{flexberry-button
+                    class=(concat "more submenu floated " flexberryClassNames.preventExpandCollapse)
+                    iconClass="icon-guideline-points"
+                    click=(action "onSubmenu")
+                  }}
+                  </div>
+                  {{#if _fitBoundsOperationIsAvailable}}
+                    {{flexberry-button
+                      class=(concat flexberryClassNames.boundsButton " floated " flexberryClassNames.preventExpandCollapse)
+                      iconClass="icon-guideline-resize-plus"
+                      caption=(t "components.flexberry-maplayer.bounds-button.tooltip")
+                      click=(action "onBoundsButtonClick")
+                    }}
+                  {{/if}}
+                  {{#if (and (not readonlyModel) _editLayerIsAvailableApi)}}
+                    {{flexberry-button
+                      class=(concat flexberryClassNames.editButton " floated " flexberryClassNames.preventExpandCollapse)
+                      iconClass="icon-guideline-edit-r"
+                      caption=(t "components.flexberry-maplayer.edit-button.tooltip")
+                      click=(action "onEditButtonClick")
+                    }}
+                  {{/if}}
+                  {{#if createNewLayerAccess}}
+                    {{flexberry-button
+                      class=(concat flexberryClassNames.copyButton " floated " flexberryClassNames.preventExpandCollapse)
+                      iconClass="copy icon"
+                      caption=(t "components.flexberry-maplayer.copy-button.tooltip")
+                      click=(action "onCopyButtonClick")
+                    }}
+                    {{#if (and _addOperationIsAvailable _addFeatureIsAvailableApi)}}
+                      {{flexberry-button
+                        class=(concat flexberryClassNames.addButton " floated " flexberryClassNames.preventExpandCollapse)
+                        iconClass="icon-guideline-plus-r"
+                        caption=(t "components.flexberry-maplayer.add-button.tooltip")
+                        click=(action "onAddButtonClick")
+                      }}
+                    {{/if}}
+                  {{/if}}
+                  {{#if (not readonlyModel)}}
+                    {{#if _deleteLayerIsAvailableApi}}
+                      {{flexberry-button
+                        class=(concat flexberryClassNames.removeButton " floated " flexberryClassNames.preventExpandCollapse)
+                        iconClass="icon-guideline-delete-r"
+                        caption=(t "components.flexberry-maplayer.remove-button.tooltip")
+                        click=(action "onRemoveButtonClick")
+                      }}
+                    {{/if}}
+                    {{#each dynamicButtons as |dynamicButton|}}
+                      {{flexberry-button
+                        class=(concat dynamicButton.class " floated " flexberryClassNames.preventExpandCollapse)
+                        iconClass=dynamicButton.icon
+                        caption=dynamicButton.caption
+                        click=(action "external" dynamicButton.action)
+                      }}
+                    {{/each}}
+                  {{/if}}
+
+                  {{#if (and (not readonlyData) (not isGroup) _editOperationIsAvailable presenceLayerInGeoportal _loadLayerDataIsAvailableApi)}}
+                    {{flexberry-button
+                      class=(concat flexberryClassNames.loadButton " floated " flexberryClassNames.preventExpandCollapse)
+                      iconClass="icon-guideline-download-layer"
+                      caption=(t "components.flexberry-maplayer.load-button.tooltip")
+                      click=(action "onLoadButtonClick")
+                    }}
+                  {{/if}}
+                </div>
+              </div>
+            {{/if}}
+          </div>
+        {{/if}}
+      </div>
+    </div>
+    {{!--
+      Semantic UI modal dialogs takes long time to be initialized
+      so include each dialog in the markup only if dialog has been requested by user (similar "lazy load").
+    --}}
+    {{#if _addDialogHasBeenRequested}}
+      {{component "layers-dialogs/add"
+        class=flexberryClassNames.addDialog
+        visible=_addDialogIsVisible
+        layer=_addDialogLayer
+        leafletMap=leafletMap
+        typeIsReadonly=false
+        approve=(action "onAddDialogApprove")
+        deny=(action "onAddDialogDeny")
+      }}
+    {{/if}}
+    {{#if _copyDialogHasBeenRequested}}
+      {{component "layers-dialogs/copy"
+        class=flexberryClassNames.copyDialog
+        visible=_copyDialogIsVisible
+        layer=_copyDialogLayer
+        typeIsReadonly=true
+        leafletMap=leafletMap
+        approve=(action "onCopyDialogApprove")
+        deny=(action "onCopyDialogDeny")
+      }}
+    {{/if}}
+    {{#if _editDialogHasBeenRequested}}
+      {{component "layers-dialogs/edit"
+        class=flexberryClassNames.editDialog
+        visible=_editDialogIsVisible
+        layer=_editDialogLayer
+        links=layer.layerLink
+        linksPropertyPath="links"
+        typeIsReadonly=true
+        leafletMap=leafletMap
+        approve=(action "onEditDialogApprove")
+        deny=(action "onEditDialogDeny")
+      }}
+    {{/if}}
+    {{#if _removeDialogHasBeenRequested}}
+      {{component "layers-dialogs/remove"
+        class=flexberryClassNames.removeDialog
+        visible=_removeDialogIsVisible
+        layer=_removeDialogLayer
+        approve=(action "onRemoveDialogApprove")
+        deny=(action "onRemoveDialogDeny")
+      }}
+    {{/if}}
+
+    {{#yield-slot "header"}}
+      {{yield}}
+    {{/yield-slot}}
+  {{/block-slot}}
+
+  {{#block-slot "content"}}
+    {{#if _hasLayers}}
+      {{flexberry-maplayers
+        readonly=readonly
+        access=access
+        leafletMap=leafletMap
+        layers=layer.layers
+        sideBySide=sideBySide
+        leftLayer=leftLayer
+        rightLayer=rightLayer
+        isGroup=isGroup
+        backgroundLayers=backgroundLayers
+        ignoreCompareMode=ignoreCompareMode
+      }}
+    {{/if}}
+    {{#yield-slot "content"}}
+      {{yield}}
+      {{#if _canChangeOpacity}}
+        {{flexberry-ddau-slider
+          class=(concat flexberryClassNames.opacitySlider " " flexberryClassNames.preventExpandCollapse)
+          value=layer.settingsAsObject.opacity
+          change=(action "onOpacitySliderChange")
+        }}
+      {{/if}}
+      {{#if (known-for-type "component" (concat "layer-treenode-contents/" layer.type))}}
+        {{component (concat "layer-treenode-contents/" layer.type)
+          layer=layer
+          dynamicActions=layer.dynamicActions
+        }}
+      {{/if}}
+      {{#if (and layer.legendCanBeDisplayed hasBeenExpanded)}}
+        {{component (concat "legends/" layer.type "-legend")
+          layer=layer
+        }}
+      {{/if}}
+    {{/yield-slot}}
+  {{/block-slot}}
+{{/flexberry-treenode}}

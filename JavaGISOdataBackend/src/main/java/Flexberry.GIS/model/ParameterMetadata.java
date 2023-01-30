@@ -23,28 +23,28 @@ public class ParameterMetadata {
     private UUID primarykey;
 
     @Column(name = "ObjectField")
-    private String objectfield;
+    private String objectField;
 
     @Column(name = "LayerField")
-    private String layerfield;
+    private String layerField;
 
     @Column(name = "Expression")
     private String expression;
 
     @Column(name = "QueryKey")
-    private String querykey;
+    private String queryKey;
 
     @Column(name = "LinkField")
-    private Boolean linkfield;
+    private Boolean linkField;
 
     @Column(name = "CreateTime")
-    private String createtime;
+    private String createTime;
 
     @Column(name = "Creator")
     private String creator;
 
     @Column(name = "EditTime")
-    private String edittime;
+    private String editTime;
 
     @Column(name = "Editor")
     private String editor;
@@ -57,7 +57,7 @@ public class ParameterMetadata {
 
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     @JoinColumn(name = "LayerLink", insertable = false, updatable = false)
-    private LinkMetadata layerlink;
+    private LinkMetadata layerLink;
 
 
     public ParameterMetadata() {
@@ -73,19 +73,19 @@ public class ParameterMetadata {
     }
 
     public String getObjectField() {
-      return objectfield;
+      return objectField;
     }
 
     public void setObjectField(String objectfield) {
-      this.objectfield = objectfield;
+      this.objectField = objectfield;
     }
 
     public String getLayerField() {
-      return layerfield;
+      return layerField;
     }
 
     public void setLayerField(String layerfield) {
-      this.layerfield = layerfield;
+      this.layerField = layerfield;
     }
 
     public String getExpression() {
@@ -97,27 +97,27 @@ public class ParameterMetadata {
     }
 
     public String getQueryKey() {
-      return querykey;
+      return queryKey;
     }
 
     public void setQueryKey(String querykey) {
-      this.querykey = querykey;
+      this.queryKey = querykey;
     }
 
     public Boolean getLinkField() {
-      return linkfield;
+      return linkField;
     }
 
     public void setLinkField(Boolean linkfield) {
-      this.linkfield = linkfield;
+      this.linkField = linkfield;
     }
 
     public String getCreateTime() {
-      return createtime;
+      return createTime;
     }
 
     public void setCreateTime(String createtime) {
-      this.createtime = createtime;
+      this.createTime = createtime;
     }
 
     public String getCreator() {
@@ -129,11 +129,11 @@ public class ParameterMetadata {
     }
 
     public String getEditTime() {
-      return edittime;
+      return editTime;
     }
 
     public void setEditTime(String edittime) {
-      this.edittime = edittime;
+      this.editTime = edittime;
     }
 
     public String getEditor() {

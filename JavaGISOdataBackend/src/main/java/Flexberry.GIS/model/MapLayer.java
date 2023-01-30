@@ -30,10 +30,10 @@ public class MapLayer {
     private String description;
 
     @Column(name = "KeyWords")
-    private String keywords;
+    private String keyWords;
 
     @Column(name = "AnyText")
-    private String anytext;
+    private String anyText;
 
     @Column(name = "Index")
     private Integer index;
@@ -51,28 +51,28 @@ public class MapLayer {
     private Integer scale;
 
     @Column(name = "CoordinateReferenceSystem")
-    private String coordinatereferencesystem;
+    private String coordinateReferenceSystem;
 
     @Column(name = "BoundingBox")
-    private String boundingbox;
+    private String boundingBox;
 
     @Column(name = "Public")
-    private Boolean $public;
+    private Boolean Public;
 
     @Column(name = "Owner")
     private String owner;
 
     @Column(name = "SecurityKey")
-    private String securitykey;
+    private String securityKey;
 
     @Column(name = "CreateTime")
-    private String createtime;
+    private String createTime;
 
     @Column(name = "Creator")
     private String creator;
 
     @Column(name = "EditTime")
-    private String edittime;
+    private String editTime;
 
     @Column(name = "Editor")
     private String editor;
@@ -130,19 +130,19 @@ public class MapLayer {
     }
 
     public String getKeyWords() {
-      return keywords;
+      return keyWords;
     }
 
     public void setKeyWords(String keywords) {
-      this.keywords = keywords;
+      this.keyWords = keywords;
     }
 
     public String getAnyText() {
-      return anytext;
+      return anyText;
     }
 
     public void setAnyText(String anytext) {
-      this.anytext = anytext;
+      this.anyText = anytext;
     }
 
     public Integer getIndex() {
@@ -186,27 +186,27 @@ public class MapLayer {
     }
 
     public String getCoordinateReferenceSystem() {
-      return coordinatereferencesystem;
+      return coordinateReferenceSystem;
     }
 
     public void setCoordinateReferenceSystem(String coordinatereferencesystem) {
-      this.coordinatereferencesystem = coordinatereferencesystem;
+      this.coordinateReferenceSystem = coordinatereferencesystem;
     }
 
     public String getBoundingBox() {
-      return boundingbox;
+      return boundingBox;
     }
 
     public void setBoundingBox(String boundingbox) {
-      this.boundingbox = boundingbox;
+      this.boundingBox = boundingbox;
     }
 
     public Boolean getPublic() {
-      return $public;
+      return Public;
     }
 
     public void setPublic(Boolean $public) {
-      this.$public = $public;
+      this.Public = $public;
     }
 
     public String getOwner() {
@@ -218,19 +218,19 @@ public class MapLayer {
     }
 
     public String getSecurityKey() {
-      return securitykey;
+      return securityKey;
     }
 
     public void setSecurityKey(String securitykey) {
-      this.securitykey = securitykey;
+      this.securityKey = securitykey;
     }
 
     public String getCreateTime() {
-      return createtime;
+      return createTime;
     }
 
     public void setCreateTime(String createtime) {
-      this.createtime = createtime;
+      this.createTime = createtime;
     }
 
     public String getCreator() {
@@ -242,11 +242,11 @@ public class MapLayer {
     }
 
     public String getEditTime() {
-      return edittime;
+      return editTime;
     }
 
     public void setEditTime(String edittime) {
-      this.edittime = edittime;
+      this.editTime = edittime;
     }
 
     public String getEditor() {

@@ -24,16 +24,16 @@ public class LinkMetadata {
     private UUID primarykey;
 
     @Column(name = "AllowShow")
-    private Boolean allowshow;
+    private Boolean allowShow;
 
     @Column(name = "CreateTime")
-    private String createtime;
+    private String createTime;
 
     @Column(name = "Creator")
     private String creator;
 
     @Column(name = "EditTime")
-    private String edittime;
+    private String editTime;
 
     @Column(name = "Editor")
     private String editor;
@@ -58,7 +58,7 @@ public class LinkMetadata {
     @JoinColumn(name = "Layer", insertable = false, updatable = false)
     private LayerMetadata layer;
 
-    @OneToMany(mappedBy = "layerlink", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
+    @OneToMany(mappedBy = "layerLink", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     private List<ParameterMetadata> parametermetadatas;
 
 
@@ -75,19 +75,19 @@ public class LinkMetadata {
     }
 
     public Boolean getAllowShow() {
-      return allowshow;
+      return allowShow;
     }
 
     public void setAllowShow(Boolean allowshow) {
-      this.allowshow = allowshow;
+      this.allowShow = allowshow;
     }
 
     public String getCreateTime() {
-      return createtime;
+      return createTime;
     }
 
     public void setCreateTime(String createtime) {
-      this.createtime = createtime;
+      this.createTime = createtime;
     }
 
     public String getCreator() {
@@ -99,11 +99,11 @@ public class LinkMetadata {
     }
 
     public String getEditTime() {
-      return edittime;
+      return editTime;
     }
 
     public void setEditTime(String edittime) {
-      this.edittime = edittime;
+      this.editTime = edittime;
     }
 
     public String getEditor() {

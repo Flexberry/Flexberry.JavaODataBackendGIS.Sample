@@ -1,0 +1,105 @@
+{{ui-message
+  type="error"
+  closeable=true
+  visible=(and _showErrorMessage getCapabilitiesErrorMessage)
+  caption=(t "components.layers-dialogs.edit.error-message.caption")
+  message=getCapabilitiesErrorMessage
+  onShow=(action "onErrorMessageShow")
+  onHide=(action "onErrorMessageHide")
+}}
+<div class="field">
+  {{#if (is-pending getCapabilitiesPromise)}}
+    {{flexberry-button
+      class="fluid loading"
+      caption=(t "components.layers-dialogs.edit.get-capabilities-button.caption")
+    }}
+  {{else}}
+    {{flexberry-button
+      class="fluid icon"
+      iconClass="cloud download icon"
+      click=(action "onGetCapabilitiesClick")
+      caption=(t "components.layers-dialogs.edit.get-capabilities-button.caption")
+    }}
+  {{/if}}
+</div>
+<div class="field">
+  <label>
+    {{t "components.layers-dialogs.settings.wms.info-format-dropdown.caption"}}
+  </label>
+  {{flexberry-dropdown
+    class="fluid"
+    items=_availableInfoFormats
+    value=settings.info_format
+  }}
+</div>
+<div class="field">
+  <label>
+    {{t "components.layers-dialogs.settings.wms.feature-count-textbox.caption"}}
+  </label>
+  {{flexberry-textbox
+    class="fluid"
+    value=settings.feature_count
+  }}
+</div>
+<div class="field">
+  <label>
+    {{t "components.layers-dialogs.settings.wms.url-textbox.caption"}}
+  </label>
+  {{flexberry-textbox
+    class="fluid"
+    value=settings.url
+  }}
+</div>
+<div class="field">
+  <label>
+    {{t "components.layers-dialogs.settings.wms.version-textbox.caption"}}
+  </label>
+  {{flexberry-textbox
+    class="fluid"
+    value=settings.version
+  }}
+</div>
+<div class="field">
+  <label>
+    {{t "components.layers-dialogs.settings.wms.layers-textbox.caption"}}
+  </label>
+  {{flexberry-textbox
+    class="fluid"
+    value=settings.layers
+  }}
+</div>
+<div class="field">
+  <label>
+    {{t "components.layers-dialogs.settings.wms.format-textbox.caption"}}
+  </label>
+  {{flexberry-textbox
+    class="fluid"
+    value=settings.format
+  }}
+</div>
+<div class="field">
+  <label>
+    {{t "components.layers-dialogs.settings.wfs.min-zoom.caption"}}
+  </label>
+  {{flexberry-textbox
+    class="fluid"
+    value=settings.minZoom
+  }}
+</div>
+<div class="field">
+  <label>
+    {{t "components.layers-dialogs.settings.wfs.max-zoom.caption"}}
+  </label>
+  {{flexberry-textbox
+    class="fluid"
+    value=settings.maxZoom
+  }}
+</div>
+<div class="field">
+  <label>
+    {{t "components.layers-dialogs.settings.wms.transparent-checkbox.caption"}}
+  </label>
+  {{flexberry-checkbox
+    value=settings.transparent
+  }}
+</div>
