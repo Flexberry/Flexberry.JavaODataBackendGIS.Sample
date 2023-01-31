@@ -26,8 +26,8 @@ public class PGgeometryConverter implements Converter {
         if ((null == dataValue) || (null == session) || (!(dataValue instanceof PGgeometry)))
             return "";
 
-        // TODO из этого объекта должен получаться JSON.
-        return ((PGgeometry)dataValue).getGeometry().toString();
+        // TODO из объекта ((PGgeometry)dataValue).getGeometry() должен получаться JSON.
+        return "";
     }
 
 
