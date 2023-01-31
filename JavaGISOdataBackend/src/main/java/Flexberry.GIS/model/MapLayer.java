@@ -1,5 +1,7 @@
 package Flexberry.GIS.model;
 
+import Flexberry.GIS.utils.PGgeometryConverter;
+import com.sap.olingo.jpa.metadata.core.edm.annotation.EdmIgnore;
 import org.eclipse.persistence.annotations.Convert;
 import org.eclipse.persistence.annotations.Converter;
 import Flexberry.GIS.utils.UUIDConverter;
@@ -7,7 +9,8 @@ import Flexberry.GIS.utils.UUIDConverter;
 import javax.persistence.*;
 import java.util.UUID;
 
-import com.sap.olingo.jpa.metadata.core.edm.annotation.EdmIgnore;
+import org.postgis.PGgeometry;
+
 import java.util.List;
 
 /**
@@ -53,11 +56,14 @@ public class MapLayer {
     @Column(name = "CoordinateReferenceSystem")
     private String coordinateReferenceSystem;
 
+    @EdmIgnore
+    @Converter(converterClass = PGgeometryConverter.class, name = "BoundingBox")
+    @Convert("BoundingBox")
     @Column(name = "BoundingBox")
-    private String boundingBox;
+    private PGgeometry boundingBox;
 
     @Column(name = "Public")
-    private Boolean Public;
+    private Boolean Public = false;
 
     @Column(name = "Owner")
     private String owner;
@@ -66,13 +72,13 @@ public class MapLayer {
     private String securityKey;
 
     @Column(name = "CreateTime")
-    private String createTime;
+    private java.sql.Timestamp createTime;
 
     @Column(name = "Creator")
     private String creator;
 
     @Column(name = "EditTime")
-    private String editTime;
+    private java.sql.Timestamp editTime;
 
     @Column(name = "Editor")
     private String editor;
@@ -193,11 +199,11 @@ public class MapLayer {
       this.coordinateReferenceSystem = coordinatereferencesystem;
     }
 
-    public String getBoundingBox() {
+    public PGgeometry getBoundingBox() {
       return boundingBox;
     }
 
-    public void setBoundingBox(String boundingbox) {
+    public void setBoundingBox(PGgeometry boundingbox) {
       this.boundingBox = boundingbox;
     }
 
@@ -225,11 +231,11 @@ public class MapLayer {
       this.securityKey = securitykey;
     }
 
-    public String getCreateTime() {
+    public java.sql.Timestamp getCreateTime() {
       return createTime;
     }
 
-    public void setCreateTime(String createtime) {
+    public void setCreateTime(java.sql.Timestamp createtime) {
       this.createTime = createtime;
     }
 
@@ -241,11 +247,11 @@ public class MapLayer {
       this.creator = creator;
     }
 
-    public String getEditTime() {
+    public java.sql.Timestamp getEditTime() {
       return editTime;
     }
 
-    public void setEditTime(String edittime) {
+    public void setEditTime(java.sql.Timestamp edittime) {
       this.editTime = edittime;
     }
 

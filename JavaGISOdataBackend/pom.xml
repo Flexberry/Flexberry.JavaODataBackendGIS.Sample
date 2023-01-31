@@ -58,7 +58,7 @@
         <dependency>
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
-            <version>42.2.20</version>
+            <version>42.5.1</version>
         </dependency>
         <dependency>
             <groupId>org.flywaydb</groupId>
@@ -78,7 +78,17 @@
         <dependency>
             <groupId>com.github.SAP</groupId>
             <artifactId>olingo-jpa-processor-v4</artifactId>
-            <version>0.3.8</version>
+            <version>0.3.10</version>
+        </dependency>
+        <dependency>
+            <groupId>org.postgis</groupId>
+            <artifactId>postgis-jdbc</artifactId>
+            <version>1.3.2</version>
+        </dependency>
+        <dependency>
+            <groupId>com.github.SAP.olingo-jpa-processor-v4</groupId>
+            <artifactId>odata-jpa-annotation</artifactId>
+            <version>0.3.10</version>
         </dependency>
     </dependencies>
     <repositories>

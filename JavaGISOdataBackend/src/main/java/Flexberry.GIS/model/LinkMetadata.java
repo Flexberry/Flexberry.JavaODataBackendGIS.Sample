@@ -1,5 +1,6 @@
 package Flexberry.GIS.model;
 
+import com.sap.olingo.jpa.metadata.core.edm.annotation.EdmIgnore;
 import org.eclipse.persistence.annotations.Convert;
 import org.eclipse.persistence.annotations.Converter;
 import Flexberry.GIS.utils.UUIDConverter;
@@ -7,7 +8,6 @@ import Flexberry.GIS.utils.UUIDConverter;
 import javax.persistence.*;
 import java.util.UUID;
 
-import com.sap.olingo.jpa.metadata.core.edm.annotation.EdmIgnore;
 import java.util.List;
 
 /**
@@ -27,13 +27,13 @@ public class LinkMetadata {
     private Boolean allowShow;
 
     @Column(name = "CreateTime")
-    private String createTime;
+    private java.sql.Timestamp createTime;
 
     @Column(name = "Creator")
     private String creator;
 
     @Column(name = "EditTime")
-    private String editTime;
+    private java.sql.Timestamp editTime;
 
     @Column(name = "Editor")
     private String editor;
@@ -82,11 +82,11 @@ public class LinkMetadata {
       this.allowShow = allowshow;
     }
 
-    public String getCreateTime() {
+    public java.sql.Timestamp getCreateTime() {
       return createTime;
     }
 
-    public void setCreateTime(String createtime) {
+    public void setCreateTime(java.sql.Timestamp createtime) {
       this.createTime = createtime;
     }
 
@@ -98,11 +98,11 @@ public class LinkMetadata {
       this.creator = creator;
     }
 
-    public String getEditTime() {
+    public java.sql.Timestamp getEditTime() {
       return editTime;
     }
 
-    public void setEditTime(String edittime) {
+    public void setEditTime(java.sql.Timestamp edittime) {
       this.editTime = edittime;
     }
 

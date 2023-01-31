@@ -1,14 +1,7 @@
 package Flexberry.GIS.model;
 
-import org.eclipse.persistence.annotations.Convert;
-import org.eclipse.persistence.annotations.Converter;
-import Flexberry.GIS.utils.UUIDConverter;
-
 import javax.persistence.*;
 import java.util.Date;
-import java.util.UUID;
-
-import com.sap.olingo.jpa.metadata.core.edm.annotation.EdmIgnore;
 
 /**
  * Entity implementation class for Entity: NewPlatformFlexberryServicesLock

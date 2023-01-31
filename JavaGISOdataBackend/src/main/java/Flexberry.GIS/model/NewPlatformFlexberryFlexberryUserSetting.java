@@ -8,8 +8,6 @@ import javax.persistence.*;
 import java.util.Date;
 import java.util.UUID;
 
-import com.sap.olingo.jpa.metadata.core.edm.annotation.EdmIgnore;
-
 /**
  * Entity implementation class for Entity: NewPlatformFlexberryFlexberryUserSetting
  */
