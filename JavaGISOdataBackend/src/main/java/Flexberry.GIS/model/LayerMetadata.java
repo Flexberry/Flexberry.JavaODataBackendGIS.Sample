@@ -1,11 +1,9 @@
 package Flexberry.GIS.model;
 
 import Flexberry.GIS.utils.PGgeometryConverter;
-import com.sap.olingo.jpa.metadata.core.edm.annotation.EdmIgnore;
 import org.eclipse.persistence.annotations.Convert;
 import org.eclipse.persistence.annotations.Converter;
 import Flexberry.GIS.utils.UUIDConverter;
-import org.postgis.PGgeometry;
 
 import javax.persistence.*;
 import java.util.UUID;
@@ -49,11 +47,10 @@ public class LayerMetadata {
     @Column(name = "CoordinateReferenceSystem")
     private String coordinateReferenceSystem;
 
-    @EdmIgnore
     @Converter(converterClass = PGgeometryConverter.class, name = "BoundingBox")
     @Convert("BoundingBox")
     @Column(name = "BoundingBox")
-    private PGgeometry boundingBox;
+    private String boundingBox;
 
     @Column(name = "AdditionalData")
     private String additionaldata;
@@ -150,11 +147,11 @@ public class LayerMetadata {
       this.coordinateReferenceSystem = coordinatereferencesystem;
     }
 
-    public PGgeometry getBoundingBox() {
+    public String getBoundingBox() {
       return boundingBox;
     }
 
-    public void setBoundingBox(PGgeometry boundingbox) {
+    public void setBoundingBox(String boundingbox) {
       this.boundingBox = boundingbox;
     }
 

@@ -9,8 +9,6 @@ import Flexberry.GIS.utils.UUIDConverter;
 import javax.persistence.*;
 import java.util.UUID;
 
-import org.postgis.PGgeometry;
-
 import java.util.List;
 
 /**
@@ -56,11 +54,10 @@ public class MapLayer {
     @Column(name = "CoordinateReferenceSystem")
     private String coordinateReferenceSystem;
 
-    @EdmIgnore
     @Converter(converterClass = PGgeometryConverter.class, name = "BoundingBox")
     @Convert("BoundingBox")
     @Column(name = "BoundingBox")
-    private PGgeometry boundingBox;
+    private String boundingBox;
 
     @Column(name = "Public")
     private Boolean Public = false;
@@ -199,11 +196,11 @@ public class MapLayer {
       this.coordinateReferenceSystem = coordinatereferencesystem;
     }
 
-    public PGgeometry getBoundingBox() {
+    public String getBoundingBox() {
       return boundingBox;
     }
 
-    public void setBoundingBox(PGgeometry boundingbox) {
+    public void setBoundingBox(String boundingbox) {
       this.boundingBox = boundingbox;
     }
 
