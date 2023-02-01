@@ -1,5 +1,6 @@
 package Flexberry.GIS.model;
 
+import Flexberry.GIS.utils.PGgeometryConverter;
 import org.eclipse.persistence.annotations.Convert;
 import org.eclipse.persistence.annotations.Converter;
 import Flexberry.GIS.utils.UUIDConverter;
@@ -23,13 +24,13 @@ public class Map {
     private UUID primarykey;
 
     @Column(name = "CreateTime")
-    private String createTime;
+    private java.sql.Timestamp createTime;
 
     @Column(name = "Creator")
     private String creator;
 
     @Column(name = "EditTime")
-    private String editTime;
+    private java.sql.Timestamp editTime;
 
     @Column(name = "Editor")
     private String editor;
@@ -56,7 +57,7 @@ public class Map {
     private Double zoom;
 
     @Column(name = "Public")
-    private Boolean Public;
+    private Boolean Public = false;
 
     @Column(name = "Scale")
     private Integer scale;
@@ -64,6 +65,8 @@ public class Map {
     @Column(name = "CoordinateReferenceSystem")
     private String coordinateReferenceSystem;
 
+    @Converter(converterClass = PGgeometryConverter.class, name = "BoundingBox")
+    @Convert("BoundingBox")
     @Column(name = "BoundingBox")
     private String boundingBox;
 
@@ -74,7 +77,7 @@ public class Map {
     private String picture;
 
     @Column(name = "EditTimeMapLayers")
-    private String editTimeMapLayers;
+    private java.sql.Timestamp editTimeMapLayers;
 
     @OneToMany(mappedBy = "map", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     private List<MapLayer> maplayers;
@@ -92,11 +95,11 @@ public class Map {
         return primarykey;
     }
 
-    public String getCreateTime() {
+    public java.sql.Timestamp getCreateTime() {
       return createTime;
     }
 
-    public void setCreateTime(String createtime) {
+    public void setCreateTime(java.sql.Timestamp createtime) {
       this.createTime = createtime;
     }
 
@@ -108,11 +111,11 @@ public class Map {
       this.creator = creator;
     }
 
-    public String getEditTime() {
+    public java.sql.Timestamp getEditTime() {
       return editTime;
     }
 
-    public void setEditTime(String edittime) {
+    public void setEditTime(java.sql.Timestamp edittime) {
       this.editTime = edittime;
     }
 
@@ -228,13 +231,12 @@ public class Map {
       this.picture = picture;
     }
 
-    public String getEditTimeMapLayers() {
+    public java.sql.Timestamp getEditTimeMapLayers() {
       return editTimeMapLayers;
     }
 
-    public void setEditTimeMapLayers(String edittimemaplayers) {
+    public void setEditTimeMapLayers(java.sql.Timestamp edittimemaplayers) {
       this.editTimeMapLayers = edittimemaplayers;
     }
-
 
 }
