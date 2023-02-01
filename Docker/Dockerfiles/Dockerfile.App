@@ -1,4 +1,4 @@
-﻿FROM maven:3.8.1-adoptopenjdk-8-openj9 as backend
+﻿FROM maven:3.8.3-adoptopenjdk-8-openj9 as backend
 WORKDIR /usr/src/app
 COPY pom.xml .
 RUN mvn -B -e -C -T 1C org.apache.maven.plugins:maven-dependency-plugin:3.1.1:go-offline
