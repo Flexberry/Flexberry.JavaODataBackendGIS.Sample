@@ -1,0 +1,166 @@
+{{ui-message
+  type="error"
+  closeable=true
+  visible=(and _showErrorMessage getCapabilitiesErrorMessage)
+  caption=(t "components.layers-dialogs.edit.error-message.caption")
+  message=getCapabilitiesErrorMessage
+  onShow=(action "onErrorMessageShow")
+  onHide=(action "onErrorMessageHide")
+}}
+<div class="field">
+  {{#if (is-pending getCapabilitiesPromise)}}
+    {{flexberry-button
+      class="fluid loading"
+      caption=(t "components.layers-dialogs.edit.get-capabilities-button.caption")
+    }}
+  {{else}}
+    {{flexberry-button
+      class="fluid icon"
+      iconClass="cloud download icon"
+      click=(action "onGetCapabilitiesClick")
+      caption=(t "components.layers-dialogs.edit.get-capabilities-button.caption")
+    }}
+  {{/if}}
+</div>
+<div class="field">
+  <label>
+    {{t "components.layers-dialogs.settings.wfs.format-dropdown.caption"}}
+  </label>
+  {{flexberry-dropdown
+    class="fluid"
+    items=_availableInfoFormats
+    value=settings.format
+  }}
+</div>
+<div class="field">
+  <label>
+    {{t "components.layers-dialogs.settings.wfs.url-textbox.caption"}}
+  </label>
+  {{flexberry-textbox
+    class="fluid"
+    value=settings.url
+  }}
+</div>
+<div class="field">
+  <label>
+    {{t "components.layers-dialogs.settings.wfs.version-textbox.caption"}}
+  </label>
+  {{flexberry-textbox
+    class="fluid"
+    value=settings.version
+  }}
+</div>
+<div class="field">
+  <label>
+    {{t "components.layers-dialogs.settings.wfs.namespace-uri-textbox.caption"}}
+  </label>
+  {{flexberry-textbox
+    class="fluid"
+    value=settings.namespaceUri
+  }}
+</div>
+<div class="field">
+  <label>
+    {{t "components.layers-dialogs.settings.wfs.type-ns-name-textbox.caption"}}
+  </label>
+  {{flexberry-textbox
+    class="fluid"
+    value=settings.typeNSName
+  }}
+</div>
+<div class="field">
+  <label>
+    {{t "components.layers-dialogs.settings.wfs.type-ns-textbox.caption"}}
+  </label>
+  {{flexberry-textbox
+    class="fluid"
+    value=settings.typeNS
+  }}
+</div>
+<div class="field">
+  <label>
+    {{t "components.layers-dialogs.settings.wfs.type-name-textbox.caption"}}
+  </label>
+  {{flexberry-textbox
+    class="fluid"
+    value=settings.typeName
+  }}
+</div>
+<div class="field">
+  <label>
+    {{t "components.layers-dialogs.settings.wfs.geometry-field-textbox.caption"}}
+  </label>
+  {{flexberry-textbox
+    class="fluid"
+    value=settings.geometryField
+  }}
+</div>
+<div class="field">
+  <label>
+    {{t "components.layers-dialogs.settings.wfs.typeGeometry.caption"}}
+  </label>
+  {{flexberry-dropdown
+    class="compact"
+    items=typeGeometry
+    value=settings.typeGeometry
+  }}
+</div>
+<div class="field">
+  <label>
+    {{t "components.layers-dialogs.settings.wfs.max-features-textbox.caption"}}
+  </label>
+  {{flexberry-textbox
+    class="fluid"
+    value=settings.maxFeatures
+  }}
+</div>
+<div class="field">
+  <label>
+    {{t "components.layers-dialogs.settings.wfs.min-zoom.caption"}}
+  </label>
+  {{flexberry-textbox
+    class="fluid"
+    value=settings.minZoom
+  }}
+</div>
+<div class="field">
+  <label>
+    {{t "components.layers-dialogs.settings.wfs.max-zoom.caption"}}
+  </label>
+  {{flexberry-textbox
+    class="fluid"
+    value=settings.maxZoom
+  }}
+</div>
+<div class="field">
+  <label>
+    {{t "components.layers-dialogs.settings.wfs.show-existing-checkbox.caption"}}
+  </label>
+  {{flexberry-checkbox
+    value=settings.showExisting
+  }}
+</div>
+<div class="field">
+  <label>
+    {{t "components.layers-dialogs.settings.wfs.clusterize.caption"}}
+  </label>
+  {{flexberry-checkbox
+    value=settings.clusterize
+  }}
+</div>
+<div class="field">
+  <label>
+    {{t "components.layers-dialogs.settings.wfs.readonly.caption"}}
+  </label>
+  {{flexberry-checkbox
+    value=settings.readonly
+  }}
+</div>
+<div class="field">
+  <label>
+    {{t "components.layers-dialogs.settings.wfs.forceMulti.caption"}}
+  </label>
+  {{flexberry-checkbox
+    value=settings.forceMulti
+  }}
+</div>

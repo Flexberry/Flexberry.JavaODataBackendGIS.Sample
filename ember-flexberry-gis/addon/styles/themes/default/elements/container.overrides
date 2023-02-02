@@ -1,0 +1,1570 @@
+/*******************************
+         Theme Overrides
+*******************************/
+
+.stackable.grid.container {
+    margin-top: 0px;
+}
+
+/*******************************
+          Flexbery lookup
+*******************************/
+.flexberry-lookup.fluid {
+  .flexberry-dropdown {
+    width: 100%;
+  }
+}
+
+/*******************************
+          Flexberry Map
+*******************************/
+
+.rightFloated{
+	float:right;
+}
+
+.flexberry-map {
+  font-family: inherit;
+  width: @flexberryMapWidth;
+  height: @flexberryMapHeight;
+  background-color: @flexberryMapBackgroundColor;
+
+  &.crosshair {
+    cursor: crosshair;
+  }
+  &.zoom-in {
+    cursor: zoom-in;
+  }
+  &.zoom-out {
+    cursor: zoom-out;
+  }
+  &.help {
+    cursor: help;
+  }
+
+  .flexberry-map-loader.ui.loader {
+    display: none;
+    z-index: 10001 !important;
+    color: @flexberryMapLoaderColor;
+
+    &.active {
+      display: block;
+    }
+  }
+
+  .flexberry-map-loader-dimmer.ui.dimmer {
+    display: none;
+    z-index: 10000 !important;
+
+    &.active {
+      display: block;
+    }
+  }
+}
+
+.flexberry-gis-map {
+    max-width: @flexberryGisMapMaxWidth;
+}
+
+.map-only-container .flexberry-map {
+   height: @flexberryMapOnlyContainerHeight;
+}
+
+/* Inside map */
+
+.mappanel {
+    height: 100%;
+    min-height: 100%;
+    /* Inserted container */
+    &>div {
+        height: 100%;
+    }
+    /* left control container */
+    .leaflet-bar {
+        border: none;
+        a {
+            font-weight: normal;
+            height: @leafletBarButtonHeight;
+            width: @leafletBarButtonWidth;
+            box-shadow: @leafletBarButtonBoxShadow;
+            color: @leafletBarButtonColor;
+            background: @leafletBarButtonBackground;
+            font-size: @leafletBarButtonFontSize;
+
+            &.active,
+            &:hover {
+                color: @leafletBarButtonColor;
+                background: @lightbluecolor;
+                box-shadow: @leafletBarButtonHoveredBoxShadow;
+            }
+            &.leaflet-disabled {
+                color: @lightgraycolor;
+                &:hover {
+                    color: @leafletBarButtonDisabledHoveredColor;
+                    background: @leafletBarButtonDisabledHoveredBackground;
+                }
+                i.icon:before {
+                    color: @lightgraycolor;
+                }
+            }
+        }
+    }
+    .leaflet-left {
+        &.leaflet-top {
+            top: 50px;
+        }
+        .leaflet-control-zoom.leaflet-bar {
+            margin-top: 5px;
+            a {
+                padding-top: 3px;
+                &:first-child {
+                    border-radius: 5px 5px 0px 0px;
+                }
+                &:last-child {
+                    border-radius: 0px 0px 5px 5px;
+                }
+            }
+        }
+    }
+    .leaflet-right.leaflet-top {
+        left: 56px;
+        top: 10px;
+        right: auto;
+        .history-control.leaflet-bar {
+            margin: 0;
+            a {
+                border: none;
+                &:first-child {
+                    border-radius: 5px 0px 0px 5px;
+                }
+                &:last-child {
+                    border-radius: 0px 5px 5px 0px;
+                }
+            }
+        }
+    }
+    .leaflet-bottom.leaflet-right {
+        padding-right: 5px;
+        .leaflet-control {
+            margin: 0;
+        }
+        .leaflet-control-container {
+            vertical-align: bottom;
+            text-align: right;
+        }
+    }
+}
+
+
+/*********************************************
+        Containers with controls inside
+*********************************************/
+
+.mappanel,
+.sidebar-wrapper {
+    /* Table */
+    .ui.table {
+        color: #6f9be3;
+        /* Column header */
+        thead th {
+            color: @darkbluecolor;
+            background-color: @lightbluecolor;
+        }
+        tbody td {
+            color: @bluecolor;
+        }
+    }
+    /* Controls container */
+    .segment {
+        box-shadow: @lightBoxShadow;
+        border: none;
+        /* Container header */
+        .header {
+            color: @inputColor;
+            font-size: 16px;
+        }
+        .field {
+            .input {
+                .ember-text-field {
+                    background-color: @whitecolor;
+                    border-radius: @borderRadius;
+                    border-bottom: @borderBottom;
+                }
+            }
+        }
+    }
+    .ui.form {
+        .field {
+            &>.input {
+                .ember-text-field {
+                    color: @inputColor;
+                    box-shadow: @darkBoxShadow;
+                    border-radius: @borderRadius;
+                    border-bottom: @borderBottom;
+                }
+            }
+            .flexberry-dropdown {
+                border-radius: @borderRadius;
+                border-bottom: @borderBottom;
+                &:focus {
+                    border-radius: @borderRadius;
+                }
+            }
+        }
+    }
+    .ui.small.fluid.buttons:not(.basic):not(.inverted) {
+        &>.or::before {
+            background: @lightgraycolor;
+            color: @bluecolor;
+            box-shadow: @lightBoxShadow;
+        }
+        &>.button.flexberry-button {
+            background: @whitecolor;
+            color: @darkbluecolor;
+            box-shadow: @darkBoxShadow;
+            &.active {
+                background: @lightbluecolor !important;
+            }
+            &:hover {
+                opacity: 0.8;
+            }
+        }
+    }
+}
+
+/*********************************************
+          Flexberry Map tools
+*********************************************/
+
+.flexberry-map-tool-submenu {
+  z-index: 1000000 !important;
+}
+
+.flexberry-maptoolbar.ui.menu {
+  flex-wrap: wrap;
+}
+.mappanel .leaflet-left .leaflet-control-zoom.leaflet-bar a,
+.mappanel .leaflet-right.leaflet-top .history-control.leaflet-bar a {
+  box-shadow: @defaultBoxShadow;
+}
+
+.ui.menu.flexberry-maptoolbar {
+    z-index: 1000 !important;
+    margin: 10px 10px 0px 10px;
+    background-color: transparent !important; // боримся с технологическими стилями
+    overflow: visible;
+    z-index: 999;
+    border: 0px !important; // боримся с технологическими стилями
+    position: absolute;
+    display: inline-block;
+    width: 0px;
+    /* элементы меню */
+    a.item {
+        color: @darkbluecolor;
+        font-size: 0px;
+        background: @whitecolor;
+        box-shadow: @defaultBoxShadow;
+    }
+    /* элементы меню */
+    .item {
+        border-radius: 5px;
+        padding: 4px 8px;
+        font-weight: normal;
+        height: 36px;
+        box-shadow: @darkBoxShadow;
+        margin-bottom: 10px;
+        width: 36px;
+        font-size: 12px;
+    }
+    /* элементы меню при наведении */
+    .item:hover,
+    .link.item:hover,
+    a.item:hover,
+    .active.item:hover,
+    .vertical .active.item:hover,
+    .ui.icon.button:hover {
+        background-color: @lightbluecolor;
+        color: @bluecolor;
+    }
+    /* выбранный элемент меню */
+    .active.item,
+    .vertical .active.item {
+        background-color: @lightbluecolor;
+        color: @darkbluecolor;
+        box-shadow: @darkBoxShadow;
+    }
+    /* фон меню */
+    .item:before {
+        background: none;
+    }
+    /* первый блок */
+    .flexberry-zoom-in-map-tool,
+    .flexberry-zoom-out-map-tool,
+    .flexberry-identify-map-tool,
+    .flexberry-full-extent-map-command {
+        border-right: none;
+        border-left: none;
+        border-radius: 0px;
+        box-shadow: @darkBoxShadow;
+        position: absolute;
+        margin: 0px;
+    }
+    .flexberry-edit-map-command {
+        position: absolute;
+        left: 130px;
+    }
+    /* рука */
+    .flexberry-drag-map-tool {
+        border-right: solid 1px @lightgraycolor;
+        border-radius: 5px 0px 0px 5px;
+        position: absolute;
+        left: 176px;
+    }
+    /* приблизить */
+    .flexberry-zoom-in-map-tool {
+        left: 212px;
+    }
+    /* отдалить */
+    .flexberry-zoom-out-map-tool {
+        left: 248px;
+    }
+    /* переход к точке */
+    .flexberry-identify-map-tool {
+        left: 284px;
+    }
+    .flexberry-compare-map-tool {
+        border-radius: 0px 5px 5px 0px;
+        left: 320px;
+    }
+    .flexberry-full-extent-map-command {
+        border-radius: 5px;
+    }
+    /* поиск по карте */
+    .flexberry-go-to-map-command {
+        margin-top: 130px;
+    }
+    /* раскрывающие списки */
+    .flexberry-search-map-command,
+    .flexberry-measure-map-tool,
+    .flexberry-draw-map-tool,
+    .flexberry-go-to-map-command,
+    .flexberry-export-map-command {
+        i.flexberry-map-tool-submenu-icon.dropdown.icon,
+        i.flexberry-map-command-submenu-icon.dropdown.icon {
+            display: none;
+        }
+        &.active {
+            i.flexberry-map-tool-submenu-icon.dropdown.icon,
+            i.flexberry-map-command-submenu-icon.dropdown.icon {
+                margin-left: 18px;
+                transform: rotate(90deg);
+                display: block;
+                &:before {
+                    font-size: 40px;
+                }
+            }
+        }
+        /* IE10+ фиксы */
+        @media screen and (-ms-high-contrast: active),
+        (-ms-high-contrast: none) {
+            &.active {
+                i.flexberry-map-tool-submenu-icon.dropdown.icon,
+                i.flexberry-map-command-submenu-icon.dropdown.icon {
+                    margin-left: 50px;
+                    margin-top: -20px;
+                }
+            }
+        }
+    }
+    .flexberry-more-map-command {
+        i.flexberry-map-tool-submenu-icon.dropdown.icon,
+        i.flexberry-map-command-submenu-icon.dropdown.icon {
+            display: none;
+        }
+
+        .flexberry-map-command-submenu {
+          a.flexberry-map-tool {
+            padding: 5px !important;
+            i.icon {
+              margin: 0px;
+            }
+
+            i.icon:before {
+              font-size: 15px;
+            }
+          }
+        }
+    }
+    /* показать слои */
+    .flexberry-maplayers-show {
+        display: inline-flex;
+        top: 35px;
+        left: 240px;
+        i.icon.list:before {
+            font-size: 20px;
+        }
+    }
+    /* иконки */
+    i.icon {
+      &.dropdown:before {
+          font-family: Icons;
+      }
+    }
+    /* отступ в кнопках с иконками */
+    .ui.icon.button {
+        padding: 5px;
+    }
+    /* укрупненные иконки */
+    .flexberry-map-tool>i.icon:before,
+    .treeview>i.icon:before,
+    .flexberry-map-layers-add-button>i.plus.icon:before,
+    .icon.tpi {
+        font-size: 20px;
+    }
+    /* отображение слоёв */
+    i.icon.table:before {
+        content: "\e819";
+    }
+    /* рука */
+    i.icon.hand.paper:before {
+        content: "\e823";
+    }
+     /* поиск пересечений */
+    i.icon.intersections:before {
+      font-family: Icons;
+      content: "\f24d";
+    }
+    i.icon.favorites:before {
+      font-family: Icons;
+      content: "\f006";
+    }
+    i.icon.background-layers:before {
+      font-family: Icons;
+      content: "\f009";
+    }
+    i.icon.compare:before {
+      font-family: Icons;
+      content: "\f0ec";
+    }
+    /* + */
+    i.icon.zoom:before {
+        content: "\e831";
+    }
+    /* - */
+    i.icon.zoom.out:before {
+        content: "\e832";
+    }
+    /* перейти к точке */
+    i.icon.location.arrow:before {
+        content: "\e812";
+    }
+    i.icon.resize:before {
+        font-family: Icons;
+        content: "\f0b2";
+    }
+    /* геолокация */
+    i.icon.bullseye:before {
+        font-family: Icons;
+        content: "\f140";
+    }
+    /* поиск по адресу */
+    .address.search i.icon.address:before {
+        font-family: Icons;
+        content: "\f02d";
+        font-size: 20px;
+    }
+    /* идентифицировать слои */
+    i.icon.info.circle {
+        margin-left: -4px;
+        margin-right: 4px;
+        &:before {
+            content: "\e827";
+        }
+    }
+    /* все слои, дерево слоёв*/
+    i.icon.square.outline:before,
+    i.icon.list:before {
+        font-family: Crimean;
+        content: "\e825";
+    }
+    /* видимые слои */
+    i.icon.checkmark.box:before {
+        content: "\e829";
+    }
+    /* Favorites */
+    i.icon.favorites:before {
+      font-family: Icons;
+      content:"\f006"
+    }
+    /* верхний видимый */
+    i.icon.chevron.up:before {
+        content: "\e828";
+    }
+    /* измерить */
+    i.icon.wizard {
+        margin-right: 2px;
+        &:before {
+            content: "\e82a";
+        }
+    }
+    /* координаты */
+    i.icon.marker:before {
+        content: "\e812";
+    }
+    /* радиус */
+    i.icon.circle:before {
+        content: "\e82b";
+    }
+    /* расстояние */
+    i.icon.empty.star:before {
+        font-family: Icons;
+        content: "\f065"
+    }
+    /* площадь */
+    i.icon.square:before {
+        font-family: Icons;
+        content: "\f248";
+    }
+    /* нарисовать */
+    i.icon.write:before,
+    i.icon.edit:before {
+        content: "\e810";
+    }
+    /* линейка */
+    i.icon.star:before {
+        content: "\e802";
+    }
+    /* экспортировать */
+    i.icon.external {
+        margin-left: -2px;
+        margin-right: 2px;
+        &:before {
+            content: "\e822";
+        }
+    }
+    i.icon.minimap {
+      &:before {
+        content: '\f278';
+        font-family: Icons;
+      }
+    }
+    /* изображение */
+    i.icon.download:before {
+        content: "\e824";
+    }
+    /* напечатать */
+    i.icon.print:before {
+        content: "\e80f";
+    }
+    /* + в сайдбаре */
+    i.icon.plus:before {
+        height: 26px;
+        color: @greencolor;
+        content: "\e833";
+    }
+    /* удаление */
+    i.icon.trash:before {
+        content: "\e814";
+    }
+    /* сохранить */
+    i.icon.save:before {
+        content: "\e80c";
+    }
+    /* поиск */
+    i.icon.search:before {
+        content: "\e803";
+    }
+    /* градсправка */
+    i.icon.tpi:before {
+        content: "\e836";
+    }
+    /* папка слоя */
+    i.icon.folder {
+        margin-right: 0px;
+        /* иконка */
+        &:before {
+            font-size: 18px;
+            font-family: FontAwesome;
+            content: "\f114";
+        }
+    }
+}
+
+.background-layers.flexberry-maptoolbar.ui.menu {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  float: right;
+  width: 100%;
+  padding: 0;
+  .flexberry-background-layers-map-tool-div {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 0px 30px 30px 0px;
+    width: 360px;
+    .flexberry-background-layers-map-tool {
+      margin-bottom: 0px;
+    }
+    .visible {
+      border-radius: 5px 5px 0px 0px;
+      border-bottom-width: 0px;
+      clip-path: inset(-2px -2px 0px -2px);
+    }
+    .main-background-layers {
+      position: absolute;
+      bottom: 0px;
+      right: 0px;
+      max-width: 357px;
+      background: @whitecolor;
+      box-shadow: @uiIconButtonBoxShadow;
+      clip-path: inset(0px -2px 0px -2px);
+      padding: 15px;
+      border: 1px solid  @bluecolor;
+      box-sizing: border-box;
+      border-top-width: 0px;
+    }
+    .secondary.menu {
+      border: none;
+      min-height: 30px;
+      a.tab {
+        cursor: pointer;
+        color: #8F928F;
+        font-size: 14px;
+        font-weight: normal;
+        border-bottom: none;
+        padding: 0 10px;
+        line-height: 30px;
+        &.active {
+          color: @activeItemColor;
+          font-weight: normal;
+        }
+      }
+    }
+    a:not('.tab') {
+      position: absolute;
+      right: 0;
+    }
+    .last-item {
+      padding-right: 0px;
+    }
+    .first-item {
+      padding-right: 17px;
+    }
+    .child-background-layers{
+      position: relative;
+      padding-bottom: 10px;
+      display: inline-block;
+      .picture {
+        border: @defaultGrayBorder;
+        box-shadow: @defaultBoxShadow;
+        width: 94px;
+        height: 49px;
+        box-sizing: border-box;
+      }
+      .active {
+        border: 1px solid @darkbluecolor;
+      }
+      p {
+        text-align: center;
+        font-size: 11px;
+        width: 94px;
+        line-height: 13px;
+        word-break: break-word;
+      }
+    }
+  }
+}
+
+.flexberry-drag-box {
+  position: absolute;
+  cursor: all-scroll;
+}
+
+div.minimap-drag-panel {
+  width: 175px;
+  height: 175px;
+  background: #fff;
+  border: 2px solid #7ba7d9;
+  border-radius: 5px;
+  padding: 15px 10px 5px 10px;
+
+  .leaflet-control-minimap {
+   box-shadow: none;
+  }
+
+  .flexberry-minimap-close {
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 1000;
+    cursor: pointer;
+  }
+}
+
+div.measure-drag-panel {
+  width: 215px;
+  height: 60px;
+  margin: 5px 10px;
+  background: #fff;
+  border: 2px solid @bluesky;
+  border-radius: 5px;
+  box-shadow: 0 0 4px #3c4f76;
+  padding-top: 30px;
+  i.icon {
+    font-size: 20px;
+  }
+
+  .measure-map-tool-panel-title {
+    position: absolute;
+      top: 0px;
+      left: 4px;
+  }
+
+  a.flexberry-map-tool {
+    padding: 4px 4px;
+    cursor: pointer;
+    &.flexberry-measure-close-map-tool {
+      position: absolute;
+      top: 0px;
+      right: 0px;
+      i.icon {
+        font-size: 12px;
+      }
+    }
+  }
+}
+
+/*********************************************
+          Flexberry Identify Panel
+*********************************************/
+
+.sidebar.identify {
+  background: #fff none;
+}
+
+.flexberry-identify-panel {
+  background: #fff none;
+  .button {
+    border-radius: 5px;
+  }
+  i.icon {
+    font-family: rgis;
+    &.map.marker {
+      font-family: 'Icons';
+    }
+    &.minus {
+      margin-right: 0.6em !important;
+      margin-top: -2px !important;
+    }
+    &.rectangle {
+      margin-top: 1px !important;
+    }
+  }
+  &,
+  &-layers-options,
+  &-tools-options,
+  &-options {
+    box-shadow: none !important;
+    padding: 0px !important;
+  }
+  .flexberry-identify-panel-layers-options {
+    display: inline-block;
+    margin-right: 12px;
+    i.icon.square.outline:before,
+    i.icon.list:before {
+      font-family: Crimean;
+      content: "\e825";
+    }
+    /* видимые слои */
+    i.icon.checkmark.box:before {
+      font-family: Crimean;
+      content: "\e829";
+    }
+    /* верхний видимый */
+    i.icon.chevron.up:before {
+      content: "\e828";
+    }
+  }
+  .flexberry-identify-panel-tools-options {
+    display: inline-block;
+    margin-right: 12px;
+    i.icon.rectangle:before {
+      font-family: Icons;
+      content: "\f248";
+    }
+    /* линейка */
+    i.icon.star:before {
+      font-family: Crimean;
+      content: "\e802";
+    }
+  }
+  .flexberry-identify-panel-options {
+    display: inline-block;
+  }
+  /* удаление */
+  i.icon.remove:before {
+    content: "\e814";
+  }
+  .buffer-caption{
+    margin-top: 8px;
+  }
+  .buffer-tools {
+    margin-top: 8px;
+    .field {
+      width: 45%;
+      display: inline-block;
+      border: none;
+      box-shadow: 0 0 4px #3c4f76;
+      border-radius: 5px;
+      vertical-align: top;
+      .item.ui.dropdown {
+        border: none;
+        box-shadow: none;
+      }
+      .input {
+        border-bottom: none;
+        height: 38px;
+      }
+      &:first-child {
+        height: 38px;
+        margin-right: 15px;
+      }
+    }
+  }
+}
+
+/*********************************************
+            Layers result list
+*********************************************/
+
+.layer-result-list {
+  padding-top: 15px;
+  text-align: center;
+
+  .ui.active.inline.loader {
+    margin-top: 10px;
+    left: 45%;
+    display: block;
+    margin-bottom: 10px;
+  }
+  .feature-result-item {
+    display: flex;
+    display: -webkit-flex;
+    flex-direction: column;
+    &-title {
+        display: flex;
+        display: -webkit-flex;
+        flex-direction: row;
+    }
+    &-caption {
+        padding-left: 8px;
+        text-overflow: ellipsis;
+        max-width: 80%;
+        min-width: 350px;
+    }
+    .links~.feature-result-item-caption {
+        max-width: 300px;
+        min-width: 300px;
+    }
+    &-toolbar {
+        .ui.dropdown>.dropdown.icon {
+            margin: 0;
+        }
+    }
+    a.icon.item.more {
+      line-height: 5px;
+      z-index: 100;
+    }
+    .more.submenu {
+      position: absolute;
+      top: 4px;
+      left: 47px;
+      width: 250px;
+      z-index: 100;
+      background: @whitecolor;
+      border: none;
+      box-sizing: border-box;
+      border-radius: 3.5px;
+      p {
+        text-align: left;
+        margin-bottom: 0px;
+        padding-left: 7px;
+        line-height: 1px;
+      }
+      div {
+        margin-bottom: 10px;
+      }
+    }
+    .icon.item.more {
+      width: 300px;
+    }
+  }
+  .feature-result-item-toolbar .feature-result-item-edit-forms~.more.submenu {
+    left: 62px;
+  }
+  .feature-result-item-title {
+    height: 40px;
+    position: relative;
+    .ui.checkbox {
+      margin: auto 0;
+    }
+    .ui.checkbox label {
+      padding-left: 26px;
+    }
+  }
+  .feature-result-item-caption {
+    max-width: 68%;
+    word-break: break-word;
+    word-wrap: break-word;
+    font-size: 14px;
+    color: @darkbluecolor;
+    align-self: center;
+  }
+  .feature-result-item-select.icon.item, .feature-result-item-upload.icon.item {
+    font-size: 1.4em;
+  }
+  .feature-result-item-list.icon.item {
+    font-size: 1.35em;
+  }
+  .feature-result-item-group {
+    text-align: left;
+    position: relative;
+
+    .ui.dropdown>.dropdown.icon {
+        margin: 0;
+    }
+    &>.icon.item {
+      color: @darkbluecolor;
+      &.hover {
+        color: @graybluecolor;
+      }
+    }
+  }
+  .feature-result-item-toolbar {
+    position: absolute;
+    display: flex;
+    flex-direction: row;
+    width: 300px;
+    height: 100px;
+    left: 28px;
+    &>.icon.item {
+      font-size: 1.15em;
+    }
+    .icon.favorites:before {
+      font-family: Icons;
+      content: "\f006";
+    }
+    .icon.favorites.filled:before {
+      font-family: Icons;
+      content: "\f005";
+    }
+  }
+  .ui.accordion .title .dropdown.icon {
+    padding: 0 !important;
+    display: block;
+    float: left;
+  }
+
+  .layer-result-list-toggler {
+    .title {
+      display: flex;
+      align-items: end;
+      .flexberry-toggler-caption {
+        margin-left: 6px;
+        display: block;
+        float: left;
+        max-width: 80%;
+        font-size: 14px;
+      }
+    }
+  }
+
+  .flexberry-toggler {
+    padding: 5px;
+    margin-bottom: 5px;
+    margin-top: 5px;
+  }
+  .ui.accordion:not(.styled) .title~.content:not(.ui):last-child:not(.flexberry-toggler-content) {
+    padding: 5px;
+  }
+  .flexberry-toggler-content {
+    .item:not(.icon) {
+      padding: 5px 5px 5px 8px;
+      margin-bottom: 5px;
+      .ui.table {
+        margin-top: 0px;
+        color: @darkbluecolor;
+        border: none;
+        tr th {
+          background: @lightbluecolor;
+        }
+        td {
+          word-break: break-word;
+          word-wrap: break-word;
+          min-width: 80px;
+          border: none;
+          padding: 0px;
+          color:  #343A32;
+        }
+      }
+    }
+  }
+  .flexberry-progressbar {
+    margin-top: .5em !important;
+    margin-right: .7em;
+    div.bar {
+      background: @bluecolor;
+      &::after {
+        background: @lightbluecolor;
+      }
+      &::before {
+        background: @lightbluecolor;
+      }
+    }
+    .label {
+      color: @darkbluecolor;
+    }
+  }
+  .item {
+    cursor: pointer;
+    &.active {
+      background: #aecff7;
+      border: 1px solid gray;
+      border-radius: 2px;
+    }
+  }
+  &-toggler .title {
+    .flexberry-toggler-caption {
+      margin-left: 1em;
+    }
+  }
+  .feature-div-property-name {
+    font-size: 12px;
+    color: #8F928F;
+    padding: 10px 0px 5px 0px;
+  }
+  .feature-div-property-value {
+    font-size: 12px;
+    color: #343A32;
+    .table {
+      width: 400px;
+      border: none;
+      tr td {
+        border: none;
+      }
+    }
+    .intersection-table tr{
+      height: 1em;
+    }
+  }
+  .feature-result-item-content {
+    padding-left: 32px;
+  }
+}
+
+.details {
+  .detail.caption {
+    font-size: 14px;
+  }
+  .detail {
+    font-size: 13px;
+  }
+}
+
+.ui.bottom.bottompanel .intersections-panel-form-row {
+    .feature-result-item-upload {
+      display: none;
+    }
+    .flexberry-toggler-caption {
+      margin-left: 0px;
+    }
+}
+
+/*********************************************
+            Search form
+*********************************************/
+.gis-search-form {
+  // Alignment for 'anyText' input & its buttons.
+  .ui.action.input {
+    .search-button {
+      position: absolute;
+      right: 35px;
+      border: none;
+      height: 35px;
+    }
+
+    .clear-search-button {
+      position: absolute;
+      right: 0;
+      border: none;
+      height: 35px;
+    }
+  }
+
+  // Hide segments borders exept tabular menu segments.
+  .ui.segment:not(.tab), .ui.segments {
+    border: none;
+    box-shadow: none;
+  }
+
+  // Alignment for tabular menu.
+  .ui.tabular.fluid.menu {
+    width: 100% !important;
+    margin-top: 35px;
+  }
+
+  // Fix display of horizontal segments inside accordion content.
+  .ui.horizontal.segments.content {
+    min-width: 325px;
+    &.active, &.animating {
+      display: flex;
+      flex-direction: row;
+    }
+  }
+
+  .advanced-search {
+    .ui.horizontal.segments {
+      &> .segment.advanced-search-what-segment {
+        width: 50%;
+      }
+
+      &> .segment.advanced-search-where-segment {
+        width: 50%;
+
+        .flexberry-boundingbox {
+          .flexberry-map {
+            max-height: 300px;
+          }
+        }
+      }
+    }
+  }
+
+  // Fix colors of labels inside accordion header.
+  .ui.label {
+    &.active {
+      background-color: #dcebfc;
+      border: 0px solid transparent;
+      background-image: none;
+      color: rgba(0, 0, 0, 0.6);
+    }
+  }
+
+  // Hide icon in header of search-results segment.
+  .ui.segments:not(.horizontal) > .ui.segment.search-results {
+    margin-top: 1em;
+
+    .ui.label {
+      i {
+        opacity: 0;
+      }
+    }
+  }
+
+  // Alignment for results table top toolbar & its items.
+  .search-result-top-panel {
+    a {
+      line-height: 35px !important;
+    }
+    &-clear {
+      cursor: pointer;
+    }
+    &-item {
+      display: inline-block;
+      span {
+        margin: 5px;
+      }
+    }
+  }
+}
+
+.scale-filter {
+  margin: 0em 0em 0.5em;
+  white-space: nowrap;
+
+  .compact.selection {
+    width: 5%;
+  }
+
+  .scale-value {
+    &:not(.flexberry-dropdown) {
+      width: ~"calc(100% - 64px)";
+      display: inline-block;
+
+      .flexberry-dropdown {
+        i.dropdown.icon {
+          right: 32px;
+        }
+      }
+    }
+  }
+
+  .ui.button {
+    position: absolute;
+    right: 0;
+    border: none;
+    height: 35px;
+
+    .remove.icon:hover:before {
+      color: @red;
+    }
+  }
+}
+
+/*********************************************
+            Flexberry table
+*********************************************/
+.ui.table.flexberry-table {
+  font-size: 12px;
+  th.narrow, td.narrow {
+    width: 90px;
+    max-width: 90px;
+  }
+  th.checkbox-rhumb, td.checkbox-rhumb {
+    text-align: center;
+  }
+  th.narrow.rhumb, td.narrow.rhumb {
+    width: 120px;
+    max-width: 120px;
+  }
+
+  th.checkbox, td.checkbox {
+    width: 26px;
+  }
+
+  th, td {
+    max-width: 200px;
+  }
+
+  td {
+    .ui.checkbox {
+      width: 26px;
+    }
+  }
+
+  td input[type="text"] {
+    padding: 0.3em 1em;
+    display: inline-block;
+    max-width: 200px;
+  }
+}
+
+.ui.table.flexberry-table-no-model {
+  width: 100% !important;
+}
+
+/************************************************************
+    Simple layers-style (components/layers-styles/simple)
+************************************************************/
+
+.hiddenAnchor{
+  display: none;
+}
+
+.ui.selection.dropdown {
+  &.simple-layers-style-stroke-linejoin-dropdown,
+  &.simple-layers-style-stroke-linecap-dropdown,
+  &.simple-layers-style-stroke-dasharray-dropdown {
+    min-width: 0;
+    padding-top: 3px;
+    padding-bottom: 3px;
+
+    >.dropdown.icon {
+      top: 1.5em;
+    }
+
+    .menu {
+      // About three items is enough.
+      max-height: 150px;
+
+      >.item {
+        // Impartans are needed here because of importants in original Semantic UI dropdown styles.
+        padding-top: 3px !important;
+        padding-bottom: 3px !important;
+      }
+    }
+  }
+}
+
+.image-markers-style-icon-editor {
+  // Relative position is necessary for inner loader.
+  position: relative;
+
+  .flexberry-file {
+    .ui.action.input {
+      .ui.icon.button {
+        border: none;
+        background: none;
+        position: absolute;
+
+        &.flexberry-file-add-button {
+          right: -5px;
+        }
+
+        &.flexberry-file-remove-button {
+          right: -45px;
+          // Remove button is unnecessary here, but flexberry-file component doesn't have an option to hide it.
+          display: none;
+        }
+      }
+    }
+  }
+
+  .enable-icon-checkbox,
+  .restore-original-icon-size-button {
+    cursor: pointer;
+  }
+
+  .icon-image-wrapper {
+    position: relative;
+    margin: 0 auto;
+    height: 150px;
+    width: 150px;
+    overflow: auto;
+
+    .icon-image {
+      position: absolute;
+      top: 0;
+      left: 0;
+      margin: 4px;
+    }
+
+    .icon-anchor {
+      position: absolute;
+      top: 0;
+      left: 0;
+      margin: 4px;
+    }
+  }
+}
+
+form.flexberry-edit-layermap {
+  .simple-layers-style {
+    .ui.pointing.secondary.menu {
+      .item {
+        display: flex;
+        justify-content: center;
+        width: 50%;
+      }
+    }
+
+    .ui.tab.segment {
+      // Sticky canvas inside tab won't work without visible overflow.
+      overflow: visible;
+
+      border: none;
+      box-shadow: none;
+      padding: 0;
+
+      .ui.grid.style-settings-with-preview {
+        margin: 0;
+        padding: 0;
+        padding-top: 1px;
+
+        >.column {
+          padding: 0;
+
+          &:last-child {
+            padding-left: 1rem;
+          }
+        }
+
+        canvas {
+          margin: 0 auto;
+          border: 1px solid rgba(34, 36, 38, 0.15);
+          border-radius: 0.285rem;
+          width: 240px;
+          height: 160px;
+
+          // Force canvas to be sticky at the top of tab segment.
+          position: static;
+          position: -webkit-sticky !important;
+          position: -moz-sticky !important;
+          position: -ms-sticky !important;
+          position: -o-sticky !important;
+          position: sticky !important;
+          top: 10px;
+        }
+
+        .flexberry-jsonarea {
+          margin-left: 1px;
+        }
+
+        .flexberry-colorpicker {
+          width: 40px;
+          border: 1px solid #b1cae8;
+          border-radius: 0.285rem;
+        }
+
+        .empty-space {
+          // It is needed to have enough space for colorpicker's sprite.
+          height: 150px;
+        }
+
+        .simple-layers-style-path-editor {
+          .ui.table {
+            margin-bottom: 1rem;
+
+            th:first-child {
+              width: 70px;
+            }
+
+            td {
+              &>input {
+                max-width: 60px;
+                height: 50px;
+              }
+
+              &>.ui.dropdown {
+                height: 50px;
+              }
+            }
+          }
+        }
+
+        .simple-layers-style-stroke-editor {
+          div.ui.dropdown .text {
+            width: 35px;
+          }
+        }
+
+        .markers-styles-editor {
+          .ui.table {
+            margin-bottom: 1rem;
+          }
+        }
+      }
+    }
+  }
+}
+
+/*******************************************************************************************************************
+      Unique and graduated layers-styles (components/layers-styles/unique   components/layers-styles/graduated)
+*******************************************************************************************************************/
+.unique-layers-style, .graduated-layers-style {
+  .toolbar {
+    display: inline-block;
+    width: 100%;
+
+    .add-and-remove-categories-segment {
+      float: left;
+    }
+
+    .gradient-tools-segment {
+      float: left;
+      margin-left: 1rem;
+    }
+
+    .classify-categories-segment {
+      float: right;
+
+      input.categories-count {
+        width: 70px;
+        height: 38px;
+      }
+    }
+  }
+
+  .ui.table.categories-table {
+    th {
+      &.category-selection-column {
+        width: 5%;
+      }
+
+      &.category-symbol-column {
+        width: 15%;
+      }
+
+      &.category-name-column, &.category-value-column {
+        width: 40%;
+      }
+    }
+  }
+
+  .category-style-editor {
+    display: none;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: #ffffff;
+
+    &.active {
+      display: block;
+    }
+
+    .category-style-editor-close-button {
+      position: absolute;
+      top: 0.4rem;
+      right: 0.4rem;
+      cursor: pointer;
+      z-index: 100;
+    }
+
+    .category-style-editor-content-wrapper {
+      overflow: auto;
+      width: 100%;
+      max-height: 100%;
+    }
+
+    .category-style-editor-content {
+      // Sticky canvas inside tab won't work without visible overflow.
+      overflow: visible;
+      width: 100%;
+      padding: 1rem;
+    }
+  }
+}
+
+/*********************************************
+            Gradient component
+*********************************************/
+.gradient-edit {
+  .flexberry-colorpicker {
+    border: @gradientToolsComponentsBorder;
+  }
+
+  .flag {
+    border: @gradientToolsComponentsBorder;
+    width: 24px;
+    height: 14px;
+  }
+}
+
+.dropdown-gradient {
+
+  .flag {
+    border: @gradientToolsComponentsBorder;
+    width: 110px;
+    height: 14px;
+  }
+}
+
+/* создание объектов */
+.ui.tab.createObject {
+  .coordinates-area {
+    width: 100%;
+    margin: 8px 0 0 0;
+
+    .flexberry-textarea {
+      width: 100%;
+
+      textarea {
+        min-height: 240px;
+        max-height: 480px;
+        min-width: 100%;
+        max-width: 100%;
+      }
+    }
+  }
+}
+
+.flexberry-gis-edit-panel .flexberry-buttons.left {
+  float: left;
+}
+
+.flexberry-gis-edit-panel .flexberry-buttons.right {
+  float: right;
+}

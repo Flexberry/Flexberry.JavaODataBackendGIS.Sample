@@ -1,5 +1,6 @@
 package Flexberry.GIS.model;
 
+import Flexberry.GIS.utils.PGgeometryConverter;
 import org.eclipse.persistence.annotations.Convert;
 import org.eclipse.persistence.annotations.Converter;
 import Flexberry.GIS.utils.UUIDConverter;
@@ -23,13 +24,13 @@ public class Map {
     private UUID primarykey;
 
     @Column(name = "CreateTime")
-    private String createtime;
+    private java.sql.Timestamp createTime;
 
     @Column(name = "Creator")
     private String creator;
 
     @Column(name = "EditTime")
-    private String edittime;
+    private java.sql.Timestamp editTime;
 
     @Column(name = "Editor")
     private String editor;
@@ -41,10 +42,10 @@ public class Map {
     private String description;
 
     @Column(name = "KeyWords")
-    private String keywords;
+    private String keyWords;
 
     @Column(name = "AnyText")
-    private String anytext;
+    private String anyText;
 
     @Column(name = "Lat")
     private Double lat;
@@ -56,16 +57,18 @@ public class Map {
     private Double zoom;
 
     @Column(name = "Public")
-    private Boolean $public;
+    private Boolean Public = false;
 
     @Column(name = "Scale")
     private Integer scale;
 
     @Column(name = "CoordinateReferenceSystem")
-    private String coordinatereferencesystem;
+    private String coordinateReferenceSystem;
 
+    @Converter(converterClass = PGgeometryConverter.class, name = "BoundingBox")
+    @Convert("BoundingBox")
     @Column(name = "BoundingBox")
-    private String boundingbox;
+    private String boundingBox;
 
     @Column(name = "Owner")
     private String owner;
@@ -74,7 +77,7 @@ public class Map {
     private String picture;
 
     @Column(name = "EditTimeMapLayers")
-    private String edittimemaplayers;
+    private java.sql.Timestamp editTimeMapLayers;
 
     @OneToMany(mappedBy = "map", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     private List<MapLayer> maplayers;
@@ -92,12 +95,12 @@ public class Map {
         return primarykey;
     }
 
-    public String getCreateTime() {
-      return createtime;
+    public java.sql.Timestamp getCreateTime() {
+      return createTime;
     }
 
-    public void setCreateTime(String createtime) {
-      this.createtime = createtime;
+    public void setCreateTime(java.sql.Timestamp createtime) {
+      this.createTime = createtime;
     }
 
     public String getCreator() {
@@ -108,12 +111,12 @@ public class Map {
       this.creator = creator;
     }
 
-    public String getEditTime() {
-      return edittime;
+    public java.sql.Timestamp getEditTime() {
+      return editTime;
     }
 
-    public void setEditTime(String edittime) {
-      this.edittime = edittime;
+    public void setEditTime(java.sql.Timestamp edittime) {
+      this.editTime = edittime;
     }
 
     public String getEditor() {
@@ -141,19 +144,19 @@ public class Map {
     }
 
     public String getKeyWords() {
-      return keywords;
+      return keyWords;
     }
 
     public void setKeyWords(String keywords) {
-      this.keywords = keywords;
+      this.keyWords = keywords;
     }
 
     public String getAnyText() {
-      return anytext;
+      return anyText;
     }
 
     public void setAnyText(String anytext) {
-      this.anytext = anytext;
+      this.anyText = anytext;
     }
 
     public Double getLat() {
@@ -181,11 +184,11 @@ public class Map {
     }
 
     public Boolean getPublic() {
-      return $public;
+      return Public;
     }
 
-    public void setPublic(Boolean $public) {
-      this.$public = $public;
+    public void setPublic(Boolean Public) {
+      this.Public = Public;
     }
 
     public Integer getScale() {
@@ -197,19 +200,19 @@ public class Map {
     }
 
     public String getCoordinateReferenceSystem() {
-      return coordinatereferencesystem;
+      return coordinateReferenceSystem;
     }
 
     public void setCoordinateReferenceSystem(String coordinatereferencesystem) {
-      this.coordinatereferencesystem = coordinatereferencesystem;
+      this.coordinateReferenceSystem = coordinatereferencesystem;
     }
 
     public String getBoundingBox() {
-      return boundingbox;
+      return boundingBox;
     }
 
     public void setBoundingBox(String boundingbox) {
-      this.boundingbox = boundingbox;
+      this.boundingBox = boundingbox;
     }
 
     public String getOwner() {
@@ -228,13 +231,12 @@ public class Map {
       this.picture = picture;
     }
 
-    public String getEditTimeMapLayers() {
-      return edittimemaplayers;
+    public java.sql.Timestamp getEditTimeMapLayers() {
+      return editTimeMapLayers;
     }
 
-    public void setEditTimeMapLayers(String edittimemaplayers) {
-      this.edittimemaplayers = edittimemaplayers;
+    public void setEditTimeMapLayers(java.sql.Timestamp edittimemaplayers) {
+      this.editTimeMapLayers = edittimemaplayers;
     }
-
 
 }

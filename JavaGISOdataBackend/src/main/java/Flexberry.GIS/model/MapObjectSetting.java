@@ -1,13 +1,12 @@
 package Flexberry.GIS.model;
 
+import com.sap.olingo.jpa.metadata.core.edm.annotation.EdmIgnore;
 import org.eclipse.persistence.annotations.Convert;
 import org.eclipse.persistence.annotations.Converter;
 import Flexberry.GIS.utils.UUIDConverter;
 
 import javax.persistence.*;
 import java.util.UUID;
-
-import com.sap.olingo.jpa.metadata.core.edm.annotation.EdmIgnore;
 
 /**
  * Entity implementation class for Entity: MapObjectSetting
@@ -23,19 +22,19 @@ public class MapObjectSetting {
     private UUID primarykey;
 
     @Column(name = "TypeName")
-    private String typename;
+    private String typeName;
 
     @Column(name = "ListForm")
-    private String listform;
+    private String listForm;
 
     @Column(name = "EditForm")
-    private String editform;
+    private String editForm;
 
     @Column(name = "Title")
     private String title;
 
     @Column(name = "MultEditForm")
-    private String multeditform;
+    private String multEditForm;
 
     @EdmIgnore
     @Converter(converterClass = UUIDConverter.class, name = "DefaultMap")
@@ -45,7 +44,7 @@ public class MapObjectSetting {
 
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     @JoinColumn(name = "DefaultMap", insertable = false, updatable = false)
-    private Map defaultmap;
+    private Map defaultMap;
 
 
     public MapObjectSetting() {
@@ -61,27 +60,27 @@ public class MapObjectSetting {
     }
 
     public String getTypeName() {
-      return typename;
+      return typeName;
     }
 
     public void setTypeName(String typename) {
-      this.typename = typename;
+      this.typeName = typename;
     }
 
     public String getListForm() {
-      return listform;
+      return listForm;
     }
 
     public void setListForm(String listform) {
-      this.listform = listform;
+      this.listForm = listform;
     }
 
     public String getEditForm() {
-      return editform;
+      return editForm;
     }
 
     public void setEditForm(String editform) {
-      this.editform = editform;
+      this.editForm = editform;
     }
 
     public String getTitle() {
@@ -93,11 +92,11 @@ public class MapObjectSetting {
     }
 
     public String getMultEditForm() {
-      return multeditform;
+      return multEditForm;
     }
 
     public void setMultEditForm(String multeditform) {
-      this.multeditform = multeditform;
+      this.multEditForm = multeditform;
     }
 
 

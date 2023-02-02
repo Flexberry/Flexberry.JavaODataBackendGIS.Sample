@@ -1,0 +1,69 @@
+<form class="ui form {{flexberryClassNames.prefix}}" role="form">
+  <div class="ui pointing group secondary menu">
+    {{#if _mainGroupIsAvailableForType}}
+      <a class="item {{if (eq _tabularMenuState.activeGroup "main-group") "active"}}" data-tab="main-group" onclick={{action "onGroupClick"}}>
+        {{t "components.layers-dialogs.edit.groups.main-group.caption"}}
+      </a>
+    {{/if}}
+    {{#if _displayGroupIsAvailableForType}}
+      <a class="item {{if (eq _tabularMenuState.activeGroup "display-group") "active"}}" data-tab="display-group" onclick={{action "onGroupClick"}}>
+        {{t "components.layers-dialogs.edit.groups.display-group.caption"}}
+      </a>
+    {{/if}}
+    {{#if _linksGroupIsAvailableForType}}
+      <a class="item {{if (eq _tabularMenuState.activeGroup "links-group") "active"}}" data-tab="links-group" onclick={{action "onGroupClick"}}>
+        {{t "components.layers-dialogs.edit.groups.links-group.caption"}}
+      </a>
+    {{/if}}
+  </div>
+  {{#if _mainGroupIsAvailableForType}}
+    <div class="ui group tab segment {{if (eq _tabularMenuState.activeGroup "main-group") "active"}}" data-tab="main-group">
+      {{layers-dialogs/tabs/main
+        _mainSettingsAreAvailableForType=_mainSettingsAreAvailableForType
+        _crsSettingsAreAvailableForType=_crsSettingsAreAvailableForType
+        _layerSettingsAreAvailableForType=_layerSettingsAreAvailableForType
+        _bboxSettingsAreAvailableForType=_bboxSettingsAreAvailableForType
+        _pmodesAreAvailableForType=_pmodesAreAvailableForType
+        _loadFileAreAvailableForType=_loadFileAreAvailableForType
+        _layer=_layer
+        _availableModes=_availableModes
+        _typeIsReadonly=_typeIsReadonly
+        _availableTypes=_availableTypes
+        _hideBbox=_hideBbox
+        _selectedModeCaption=_selectedModeCaption
+        layerEditingFinished=(action 'onEditingFinished')
+        onUploadFile = (action 'onUploadFile')
+      }}
+    </div>
+  {{/if}}
+  {{#if _displayGroupIsAvailableForType}}
+    <div class="ui group tab segment {{if (eq _tabularMenuState.activeGroup "display-group") "active"}}" data-tab="display-group">
+      {{layers-dialogs/tabs/display
+        _layer=_layer
+        leafletMap = leafletMap
+        layerModel = layer
+        _displaySettingsAreAvailableForType=_displaySettingsAreAvailableForType
+        _identifySettingsAreAvailableForType=_identifySettingsAreAvailableForType
+        _searchSettingsAreAvailableForType=_searchSettingsAreAvailableForType
+        _legendSettingsAreAvailableForType=_legendSettingsAreAvailableForType
+        _filterSettingsAreAvailableForType=_filterSettingsAreAvailableForType
+        _styleSettingsAreAvailableForType=_styleSettingsAreAvailableForType
+        _labelsSettingsAreAvailableForType=_labelsSettingsAreAvailableForType
+      }}
+    </div>
+  {{/if}}
+  {{#if _linksGroupIsAvailableForType}}
+    <div class="ui group tab segment {{if (eq _tabularMenuState.activeGroup "links-group") "active"}}" data-tab="links-group">
+      {{layers-dialogs/tabs/links
+        _linksSettingsAreAvailableForType=_linksSettingsAreAvailableForType
+        links=links
+        linksPropertyPath=linksPropertyPath
+        parametersModelName=parametersModelName
+        parametersModelProjection=parametersModelProjection
+        addLink=(action 'addLayerLink')
+        removeLink=(action 'removeLayerLink')
+        allowShowCheckboxChange=(action "allowShowCheckboxChange")
+      }}
+    </div>
+  {{/if}}
+</form>

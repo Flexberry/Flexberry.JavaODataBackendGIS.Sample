@@ -1,0 +1,33 @@
+/*******************************
+      Components colors
+*******************************/
+
+@darkbluecolor: #3C4F76;
+@bluecolor: #4D5F82;
+@bluesky: #7ba7d9;
+@graybluecolor: #768CBB;
+@lightbluecolor: #f1f7ff;
+@darkgraycolor: #444444;
+@lightgraycolor: #e9e9e9;
+@whitecolor: #fff;
+@greencolor: #65A43F;
+@orangecolor: #EB1C24;
+@mediumbluecolor: #DDEBFF;
+
+
+/*******************************
+      Components variables
+*******************************/
+@sidebarWidth: 400px;
+
+
+
+@lightBoxShadow: 0 0 4px @bluecolor;
+@darkBoxShadow: 0 0 4px @darkbluecolor;
+
+@erroneousFieldColor: #E0B4B4;
+
+@inputBackgroundColor: #F4F7FB;
+@borderColor: #c5c7ca;
+@headerTextColor: #0C49CD;
+@activeItemColor: #3B4256;

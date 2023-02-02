@@ -1,0 +1,14 @@
+﻿{
+  "newForm": "new-platform-flexberry-g-i-s-map-e",
+  "editForm": "new-platform-flexberry-g-i-s-map-e",
+  "caption": null,
+  "name": "NewPlatformFlexberryGISMapL",
+  "className": "MapL",
+  "attrs": [],
+  "projections": [
+    {
+      "modelName": "new-platform-flexberry-g-i-s-map",
+      "modelProjection": "MapL"
+    }
+  ]
+}

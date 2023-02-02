@@ -1,0 +1,11 @@
+{{input
+  class=(concat flexberryClassNames.input " prompt")
+  type="text"
+  value=value
+  placeholder=(t "components.flexberry-search.placeholder")
+  enter=(action "enter")
+  focusIn=(action "focusIn")
+}}
+{{yield}}
+<div class="{{flexberryClassNames.results}} results">
+</div>

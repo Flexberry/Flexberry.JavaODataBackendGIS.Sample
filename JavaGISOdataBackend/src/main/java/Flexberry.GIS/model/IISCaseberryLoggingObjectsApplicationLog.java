@@ -8,8 +8,6 @@ import javax.persistence.*;
 import java.util.Date;
 import java.util.UUID;
 
-import com.sap.olingo.jpa.metadata.core.edm.annotation.EdmIgnore;
-
 /**
  * Entity implementation class for Entity: IISCaseberryLoggingObjectsApplicationLog
  */
@@ -24,46 +22,46 @@ public class IISCaseberryLoggingObjectsApplicationLog {
     private UUID primarykey;
 
     @Column(name = "Category", nullable = true)
-    private String Category;
+    private String category;
 		
 	@Column(name = "EventId", nullable = true)
-    private Integer EventId;
+    private Integer eventId;
 	
 	@Column(name = "Priority", nullable = true)
-    private Integer Priority;
+    private Integer priority;
 		
 	@Column(name = "Severity", nullable = true)
-    private String Severity;
+    private String severity;
 	
 	@Column(name = "Title", nullable = true)
-    private String Title;
+    private String title;
 	
 	@Column(name = "Timestamp", nullable = true)
-    private Date Timestamp;
+    private Date timestamp;
 	
 	@Column(name = "MachineName", nullable = true)
-    private String MachineName;
+    private String machineName;
 	
 	@Column(name = "AppDomainName", nullable = true)
-    private String AppDomainName;
+    private String appDomainName;
 	
 	@Column(name = "ProcessId", nullable = true)
-    private String ProcessId;
+    private String processId;
 	
 	@Column(name = "ProcessName", nullable = true)
-    private String ProcessName;
+    private String processName;
 	
 	@Column(name = "ThreadName", nullable = true)
-    private String ThreadName;
+    private String threadName;
 		
 	@Column(name = "Win32ThreadId", nullable = true)
-    private String Win32ThreadId;
+    private String win32ThreadId;
 	
 	@Column(name = "Message", nullable = true)
-    private String Message;
+    private String message;
 	
 	@Column(name = "FormattedMessage", nullable = true)
-    private String FormattedMessage;
+    private String formattedMessage;
 	
 	public IISCaseberryLoggingObjectsApplicationLog() {
         super();
@@ -78,114 +76,114 @@ public class IISCaseberryLoggingObjectsApplicationLog {
     }
 
     public String getCategory() {
-        return Category;
+        return category;
     }
 
     public void setCategory(String category) {
-        this.Category = category;
+        this.category = category;
     }
 	
 	public Integer getEventId() {
-        return EventId;
+        return eventId;
     }
 
     public void setEventId(Integer eventId) {
-        this.EventId = eventId;
+        this.eventId = eventId;
     }
 	
 	public Integer getPriority() {
-        return Priority;
+        return priority;
     }
 
     public void setPriority(Integer priority) {
-        this.Priority = priority;
+        this.priority = priority;
     }
 	
 	public String getSeverity() {
-        return Severity;
+        return severity;
     }
 
     public void setSeverity(String severity) {
-        this.Severity = severity;
+        this.severity = severity;
     }
 	
 	public String getTitle() {
-        return Title;
+        return title;
     }
 
     public void setTitle(String title) {
-        this.Title = title;
+        this.title = title;
     }
 	
 	public Date getTimestamp() {
-        return Timestamp;
+        return timestamp;
     }
 
     public void setTimestamp(Date timestamp) {
-        this.Timestamp =timestamp;
+        this.timestamp =timestamp;
     }
 	
 	public String getMachineName() {
-        return MachineName;
+        return machineName;
     }
 
     public void setMachineName(String machineName) {
-        this.MachineName = machineName;
+        this.machineName = machineName;
     }
 	
 	public String getAppDomainName() {
-        return AppDomainName;
+        return appDomainName;
     }
 
     public void setAppDomainName(String appDomainName) {
-        this.AppDomainName = appDomainName;
+        this.appDomainName = appDomainName;
     }
 	
 	public String getProcessId() {
-        return ProcessId;
+        return processId;
     }
 
     public void setAppProcessId(String processId) {
-        this.ProcessId = processId;
+        this.processId = processId;
     }
 	
 	public String getProcessName() {
-        return ProcessName;
+        return processName;
     }
 
     public void setProcessName(String processName) {
-        this.ProcessName = processName;
+        this.processName = processName;
     }
 	
 	public String getThreadName() {
-        return ThreadName;
+        return threadName;
     }
 
     public void setThreadName(String threadName) {
-        this.ThreadName = threadName;
+        this.threadName = threadName;
     }
 	
 	public String getWin32ThreadId() {
-        return Win32ThreadId;
+        return win32ThreadId;
     }
 
     public void setWin32ThreadId(String win32ThreadId) {
-        this.Win32ThreadId = win32ThreadId;
+        this.win32ThreadId = win32ThreadId;
     }
 	
 	public String getMessage() {
-        return Message;
+        return message;
     }
 
     public void setMessage(String message) {
-        this.Message = message;
+        this.message = message;
     }
 	
 	public String getFormattedMessage() {
-        return FormattedMessage;
+        return formattedMessage;
     }
 
     public void setFormattedMessage(String formattedMessage) {
-        this.FormattedMessage = formattedMessage;
+        this.formattedMessage = formattedMessage;
     }
 }

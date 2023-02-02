@@ -1,0 +1,71 @@
+{{#map-tools/base
+  class=(concat flexberryClassNames.wrapper " " class)
+  name="draw"
+  caption=caption
+  tooltip=tooltip
+  iconClass=iconClass
+  leafletMap=leafletMap
+}}
+  {{#block-slot "submenu"}}
+    {{#if drawMarker}}
+      {{map-tools/base
+        class=(concat flexberryClassNames.drawMarker " " drawMarkerClass)
+        name="draw-marker"
+        caption=drawMarkerCaption
+        iconClass=drawMarkerIconClass
+        leafletMap=leafletMap
+        mapToolProperties=_drawToolProperties
+      }}
+    {{/if}}
+    {{#if drawPolyline}}
+      {{map-tools/base
+        class=(concat flexberryClassNames.drawPolyline " " drawPolylineClass)
+        name="draw-polyline"
+        caption=drawPolylineCaption
+        iconClass=drawPolylineIconClass
+        leafletMap=leafletMap
+        mapToolProperties=_drawToolProperties
+      }}
+    {{/if}}
+    {{#if drawCircle}}
+      {{map-tools/base
+        class=(concat flexberryClassNames.drawCircle " " drawCircleClass)
+        name="draw-circle"
+        caption=drawCircleCaption
+        iconClass=drawCircleIconClass
+        leafletMap=leafletMap
+        mapToolProperties=_drawToolProperties
+      }}
+    {{/if}}
+    {{#if drawRectangle}}
+      {{map-tools/base
+        class=(concat flexberryClassNames.drawRectangle " " drawRectangleClass)
+        name="draw-rectangle"
+        caption=drawRectangleCaption
+        iconClass=drawRectangleIconClass
+        leafletMap=leafletMap
+        mapToolProperties=_drawToolProperties
+      }}
+    {{/if}}
+    {{#if drawPolygon}}
+      {{map-tools/base
+        class=(concat flexberryClassNames.drawPolygon " " drawPolygonClass)
+        name="draw-polygon"
+        caption=drawPolygonCaption
+        iconClass=drawPolygonIconClass
+        leafletMap=leafletMap
+        mapToolProperties=_drawToolProperties
+      }}
+    {{/if}}
+    {{#if drawClear}}
+      {{map-tools/base
+        class=(concat flexberryClassNames.drawClear " " drawClearClass)
+        name="draw-clear"
+        caption=drawClearCaption
+        iconClass=drawClearIconClass
+        leafletMap=leafletMap
+        mapToolProperties=_drawToolProperties
+      }}
+    {{/if}}
+  {{/block-slot}}
+{{/map-tools/base}}

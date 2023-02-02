@@ -1,0 +1,64 @@
+<div class="field">
+  {{flexberry-checkbox
+    class='toggle'
+    label=(t 'components.layers-dialogs.settings.group.tab.legend-settings.legend-can-be-displayed')
+    value=value.legendCanBeDisplayed
+    readonly=readonly
+  }}
+</div>
+{{#if _isVectorType}}
+  <div class="field">
+    {{flexberry-checkbox
+      class='toggle'
+      label=(t 'components.layers-dialogs.settings.group.tab.legend-settings.geometries-can-be-displayed')
+      value=value.geometriesCanBeDisplayed
+      readonly=readonly
+    }}
+  </div>
+  <div class="field">
+    {{flexberry-checkbox
+      class='toggle'
+      label=(t 'components.layers-dialogs.settings.group.tab.legend-settings.markers-can-be-displayed')
+      value=value.markersCanBeDisplayed
+      readonly=readonly
+    }}
+  </div>
+{{/if}}
+{{#if _isWmsType}}
+  <div class="field">
+    <label>
+      {{t "components.layers-dialogs.settings.group.tab.legend-settings.url"}}
+    </label>
+    {{flexberry-textbox
+      class="fluid"
+      value=value.url
+    }}
+  </div>
+  <div class="field">
+    <label>
+      {{t "components.layers-dialogs.settings.group.tab.legend-settings.version"}}
+    </label>
+    {{flexberry-textbox
+      class="fluid"
+      value=value.version
+    }}
+  </div>
+  <div class="field">
+    <label>
+      {{t "components.layers-dialogs.settings.group.tab.legend-settings.format"}}
+    </label>
+    {{flexberry-textbox
+      class="fluid"
+      value=value.format
+    }}
+  </div>
+  <div class="field">
+    <label>
+      {{t "components.layers-dialogs.settings.group.tab.legend-settings.layers"}}
+    </label>
+    {{flexberry-textbox
+      class="fluid"
+      value=value.layers
+    }}
+  </div>
+{{/if}}

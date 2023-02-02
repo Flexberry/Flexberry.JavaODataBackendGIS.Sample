@@ -1,0 +1,61 @@
+{{#flexberry-dialog class=(concat class " " flexberryClassNames.prefix)
+  caption=caption
+  approveButtonCaption=approveButtonCaption
+  denyButtonCaption=denyButtonCaption
+  visible=visible
+  beforeShow=(action "onBeforeShow")
+  beforeHide=(action "onBeforeHide")
+  show=(action "onShow")
+  hide=(action "onHide")
+  approve=(action "onApprove")
+  deny=(action "onDeny")
+}}
+{{ui-message
+  type="error"
+  closeable=true
+  visible=_showErrorMessage
+  caption=errorMessageCaption
+  message=errorMessageContent
+  onShow=(action "onErrorMessageShow")
+  onHide=(action "onErrorMessageHide")
+}}
+<form class="ui form" role="form">
+  <div class="field">
+    <label>
+      {{modeDropdownCaption}}
+    </label>
+    {{flexberry-dropdown
+      class="fluid"
+      items=_availableCaptions
+      value=_selectedMode
+    }}
+  </div>
+  <div class="goto point">
+    <div class="field">
+      <label>
+        {{_selectedCrs.xCaption}}
+      </label>
+      {{flexberry-textbox
+        class="fluid"
+        value=_options.x
+        keyPress=(action "coordsInputKeyPress")
+      }}
+    </div>
+    <div class="field">
+      <label>
+        {{_selectedCrs.yCaption}}
+      </label>
+      {{flexberry-textbox
+        class="fluid"
+        value=_options.y
+        keyPress=(action "coordsInputKeyPress")
+      }}
+    </div>
+    {{flexberry-button
+      iconClass="resize vertical icon"
+      class="switch"
+      click=(action "switchXY")
+    }}
+  </div>
+</form>
+{{/flexberry-dialog}}

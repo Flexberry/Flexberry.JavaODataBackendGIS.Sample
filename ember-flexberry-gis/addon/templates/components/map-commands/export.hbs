@@ -1,0 +1,27 @@
+
+{{map-commands/base
+  class=(concat  flexberryClassNames.wrapper " " class " " flexberryClassNames.exportDownload " " exportDownloadClass)
+  name="export"
+  caption=caption
+  tooltip=tooltip
+  iconClass=iconClass
+  click=(action "onButtonClick")
+}}
+
+{{#if _exportDialogHasBeenRequested}}
+  {{component "map-commands-dialogs/export"
+    class=flexberryClassNames.exportDialog
+    visible=_exportDialogIsVisible
+    isBusy=_exportIsInProgress
+    showDownloadingFileSettings=showDownloadingFileSettings
+    showErrorMessage=_showExportErrorMessage
+    errorMessage=_exportErrorMessage
+    leafletMap=leafletMap
+    layers=layers
+    defaultMapCaption=defaultMapCaption
+    timeout=timeout
+    approve=(action "onExportDialogApprove")
+    scalesForExport=scalesForExport
+    switchScaleControlMapName=switchScaleControlMapName
+  }}
+{{/if}}

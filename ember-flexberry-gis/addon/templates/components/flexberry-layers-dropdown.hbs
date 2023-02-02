@@ -1,0 +1,7 @@
+{{flexberry-dropdown
+  class=(concat flexberryClassNames.wrapper " " class)
+  items=_availableLayersNames
+  value=(get this "_selectedLayerName")
+  onChange=(action "onChange")
+  placeholder=placeholder
+}}

@@ -1,0 +1,78 @@
+<div class="ui centered grid">
+  <div class="six wide column">
+    <div class="ui grid">
+      <div class="left aligned column">
+        {{flexberry-button
+          caption=(t "components.charts.index-chart.create-button")
+          click=(action "onGenerateChart")
+        }}
+      </div>
+    </div>
+    <div class="field">
+      <label>
+        {{t "components.charts.index-chart.typr-charts.caption"}}
+      </label>
+      {{#ui-dropdown class="compact selection" onChange=(action "onModeTypeChange")}}
+        <i class="dropdown icon"></i>
+        <div class="text">
+          {{selectedModeType}}
+        </div>
+        <div class="menu">
+          {{#each-in _availableTypes as |key value|}}
+            <div class="item" data-value="{{key}}">{{value}}</div>
+          {{/each-in}}
+        </div>
+      {{/ui-dropdown}}
+    </div>
+    <div class="field">
+      <label>
+        {{t "components.charts.index-chart.caption-charts"}}
+      </label>
+      {{flexberry-textbox
+        value=_captionChart
+      }}
+    </div>
+    <div class="ui grid">
+      <div class="column">
+        {{#if _selectedModeType}}
+          {{component (concat "charts/type-charts/" _selectedModeType)
+            isObject=_isObjPropertiesComputed
+            localizedProperties=_localizedProperties
+            titleChart=_captionChart
+            chartType=_selectedModeType
+            onInit=(action "initJsonCharts")
+          }}
+        {{/if}}
+      </div>
+    </div>
+    <div class="field">
+      {{flexberry-checkbox
+        value=_classifyProperty
+        label=(t "components.charts.index-chart.classify-checkbox")
+      }}
+    </div>
+    {{#if _classifyProperty}}
+      <div class="field">
+        <label>
+          {{t "components.charts.index-chart.classify-property-checkbox"}}
+        </label>
+        {{flexberry-dropdown
+            items=_localizedProperties
+            value=_propertyForClassifyValue
+        }}
+      </div>
+      <div class="field {{if _propertyForClassifyValue "" " disabled"}}">
+        <label>
+          {{t "components.charts.index-chart.unique-symbol-checkbox"}}
+        </label>
+        {{flexberry-dropdown
+            items=_uniqueSymbolClassifyPropertyItems
+            value=_uniqueSymbolClassifyPropertyValue
+        }}
+      </div>
+    {{/if}}
+  </div>
+  <div class="nine wide column">
+    <canvas class="chart-canvas"></canvas>
+  </div>
+</div>

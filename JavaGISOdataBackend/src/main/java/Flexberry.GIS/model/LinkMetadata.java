@@ -1,5 +1,6 @@
 package Flexberry.GIS.model;
 
+import com.sap.olingo.jpa.metadata.core.edm.annotation.EdmIgnore;
 import org.eclipse.persistence.annotations.Convert;
 import org.eclipse.persistence.annotations.Converter;
 import Flexberry.GIS.utils.UUIDConverter;
@@ -7,7 +8,6 @@ import Flexberry.GIS.utils.UUIDConverter;
 import javax.persistence.*;
 import java.util.UUID;
 
-import com.sap.olingo.jpa.metadata.core.edm.annotation.EdmIgnore;
 import java.util.List;
 
 /**
@@ -24,16 +24,16 @@ public class LinkMetadata {
     private UUID primarykey;
 
     @Column(name = "AllowShow")
-    private Boolean allowshow;
+    private Boolean allowShow;
 
     @Column(name = "CreateTime")
-    private String createtime;
+    private java.sql.Timestamp createTime;
 
     @Column(name = "Creator")
     private String creator;
 
     @Column(name = "EditTime")
-    private String edittime;
+    private java.sql.Timestamp editTime;
 
     @Column(name = "Editor")
     private String editor;
@@ -58,7 +58,7 @@ public class LinkMetadata {
     @JoinColumn(name = "Layer", insertable = false, updatable = false)
     private LayerMetadata layer;
 
-    @OneToMany(mappedBy = "layerlink", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
+    @OneToMany(mappedBy = "layerLink", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     private List<ParameterMetadata> parametermetadatas;
 
 
@@ -75,19 +75,19 @@ public class LinkMetadata {
     }
 
     public Boolean getAllowShow() {
-      return allowshow;
+      return allowShow;
     }
 
     public void setAllowShow(Boolean allowshow) {
-      this.allowshow = allowshow;
+      this.allowShow = allowshow;
     }
 
-    public String getCreateTime() {
-      return createtime;
+    public java.sql.Timestamp getCreateTime() {
+      return createTime;
     }
 
-    public void setCreateTime(String createtime) {
-      this.createtime = createtime;
+    public void setCreateTime(java.sql.Timestamp createtime) {
+      this.createTime = createtime;
     }
 
     public String getCreator() {
@@ -98,12 +98,12 @@ public class LinkMetadata {
       this.creator = creator;
     }
 
-    public String getEditTime() {
-      return edittime;
+    public java.sql.Timestamp getEditTime() {
+      return editTime;
     }
 
-    public void setEditTime(String edittime) {
-      this.edittime = edittime;
+    public void setEditTime(java.sql.Timestamp edittime) {
+      this.editTime = edittime;
     }
 
     public String getEditor() {

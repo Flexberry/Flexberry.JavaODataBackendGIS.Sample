@@ -27,17 +27,31 @@ public class MutableHttpFilter implements javax.servlet.Filter {
 
         // Replace substring in request query string.
         mutableRequest.replaceSubstringInQuery("__PrimaryKey", "Primarykey");
+        mutableRequest.replaceSubstringInQuery("+eq+", " eq ");
 
         // Replace substring in request body. For POST and DELETE operations.
         mutableRequest.replaceSubstringInBody("__PrimaryKey", "Primarykey");
+        mutableRequest.replaceSubstringInBody("+eq+", " eq ");
 
         HttpServletResponse resp = (HttpServletResponse) response;
         MutableHttpResponse mutableResponse = new MutableHttpResponse(resp);
 
-        chain.doFilter(mutableRequest, mutableResponse);
+        mutableResponse.setHeader("Access-Control-Allow-Origin", req.getHeader("Origin"));
+        mutableResponse.setHeader("Access-Control-Allow-Credentials", "true");
+        mutableResponse.setHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, DELETE");
+        mutableResponse.setHeader("Access-Control-Max-Age", "3600");
+        mutableResponse.setHeader("Access-Control-Allow-Headers", "Content-Type, Accept, X-Requested-With, remember-me, OData-Version, Prefer");
+
+        if ("OPTIONS".equalsIgnoreCase(req.getMethod())) {
+            resp.setStatus(HttpServletResponse.SC_OK);
+            mutableResponse.setStatus(HttpServletResponse.SC_OK);
+        } else {
+            chain.doFilter(mutableRequest, mutableResponse);
+        }
 
         // Replace changed parameter name backward for response to frontend.
         mutableResponse.replaceSubstringInResponse("Primarykey", "__PrimaryKey");
+        mutableResponse.replaceSubstringInResponse(" eq ", "+eq+");
     }
 
     @Override

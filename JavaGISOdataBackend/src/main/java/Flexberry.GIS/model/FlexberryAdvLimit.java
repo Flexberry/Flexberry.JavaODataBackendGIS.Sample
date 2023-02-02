@@ -7,8 +7,6 @@ import Flexberry.GIS.utils.UUIDConverter;
 import javax.persistence.*;
 import java.util.UUID;
 
-import com.sap.olingo.jpa.metadata.core.edm.annotation.EdmIgnore;
-
 /**
  * Entity implementation class for Entity: FlexberryAdvLimit
  */
@@ -26,16 +24,16 @@ public class FlexberryAdvLimit {
     private String User;
 
     @Column(name = "Module", nullable = true)
-    private String Module;
+    private String module;
 
     @Column(name = "Name", nullable = true)
-    private String Name;
+    private String name;
 
     @Column(name = "Value", nullable = true)
-    private String Value;
+    private String value;
 	
 	@Column(name = "HotKeyData", nullable = true)
-    private Integer HotKeyData;
+    private Integer hotKeyData;
 
     public FlexberryAdvLimit() {
         super();
@@ -50,42 +48,42 @@ public class FlexberryAdvLimit {
     }
 	
 	public String getUser() {
-        return User;
+        return user;
     }
 
     public void setUser(String user) {
-        this.User = user;
+        this.user = user;
     }
 
     public String getModule() {
-        return Module;
+        return module;
     }
 
     public void setModule(String module) {
-        this.Module = module;
+        this.module = module;
     }
 
 	public String getName() {
-        return Name;
+        return name;
     }
 
     public void setName(String name) {
-        this.Name = name;
+        this.name = name;
     }
 	
 	public String getValue() {
-        return Value;
+        return value;
     }
 
     public void setValue(String value) {
-        this.Value = value;
+        this.value = value;
     }
 	
 	public Integer getHotKeyData() {
-        return HotKeyData;
+        return hotKeyData;
     }
 
     public void setHotKeyData(Integer hotKeyData) {
-        this.HotKeyData = hotKeyData;
+        this.hotKeyData = hotKeyData;
     }
 }

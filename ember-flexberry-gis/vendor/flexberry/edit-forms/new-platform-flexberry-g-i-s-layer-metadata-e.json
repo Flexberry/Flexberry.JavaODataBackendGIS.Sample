@@ -1,0 +1,38 @@
+﻿{
+  "propertyLookup": [
+    {
+      "master": null,
+      "displayAttributeName": null,
+      "required": false,
+      "relationName": "LinkMetadata.Layer",
+      "projection": "LayerMetadataL",
+      "detailModelName": null
+    },
+    {
+      "master": null,
+      "displayAttributeName": null,
+      "required": false,
+      "relationName": "LinkMetadata.MapObjectSetting",
+      "projection": "",
+      "detailModelName": null
+    },
+    {
+      "master": null,
+      "displayAttributeName": null,
+      "required": false,
+      "relationName": "LinkMetadata.Parameters.LayerLink",
+      "projection": "",
+      "detailModelName": null
+    }
+  ],
+  "caption": null,
+  "name": "NewPlatformFlexberryGISLayerMetadataE",
+  "className": "LayerMetadataE",
+  "attrs": [],
+  "projections": [
+    {
+      "modelName": "new-platform-flexberry-g-i-s-layer-metadata",
+      "modelProjection": "LayerMetadataE"
+    }
+  ]
+}

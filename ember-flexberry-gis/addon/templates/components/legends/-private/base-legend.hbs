@@ -1,0 +1,23 @@
+{{#if (gt _legends.length 0)}}
+  {{#if legendForPrint}}
+    <div class="{{flexberryClassNames.imageWrapper}} layer-caption">
+      <canvas class="{{flexberryClassNames.image}}" height="{{height}}" width="0px" style="position: absolute;"></canvas>
+      <label class="layer-legend-caption" style="line-height: 1.3; vertical-align: top;">{{layer.name}}:</label>
+    </div>
+  {{/if}}
+  {{#each _legends as |legend|}}
+    <div class="{{flexberryClassNames.imageWrapper}}" style="{{if legend.style legend.style ""}}">
+      <img class="{{flexberryClassNames.image}}" src="{{legend.src}}" onerror='this.style.display = "none"'>
+      {{#if legend.useLayerName}}
+        <label class="layer-legend-caption">{{legend.layerName}}</label>
+      {{/if}}
+    </div>
+  {{/each}}
+{{else}}
+  <div class="{{flexberryClassNames.imageWrapper}}">
+    <i class="{{flexberryClassNames.image}} {{flexberryClassNames.defaultImage}} help icon"></i>
+    {{#if showLayerName}}
+      <label class="{{flexberryClassNames.caption}}">{{layer.name}}</label>
+    {{/if}}
+  </div>
+{{/if}}

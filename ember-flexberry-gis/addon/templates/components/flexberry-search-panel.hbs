@@ -1,0 +1,62 @@
+{{#flexberry-search
+    class="fluid action input"
+    dynamicProperties=searchSettings
+    value=queryString
+    enter=(action "querySearch" false)
+    select=(action "querySearch" false)
+    focusIn=(action "focus")
+}}
+  <button class="ui icon clear-search-button {{if queryStringEmpty "" "hidden"}}" {{action "clearSearch"}}>
+    <i class="icon-guideline-cross-r"></i>
+  </button>
+  <button class="ui icon search-button" {{action "querySearch" false}}>
+    <i class="icon-guideline-search-r"></i>
+  </button>
+  <button class="ui icon separate">
+    <i class="icon"></i>
+  </button>
+  <button class="ui icon attr-search-button" {{action "attrSearch"}}>
+    <i class="icon-guideline-navigate-arrow-down"></i>
+  </button>
+{{/flexberry-search}}
+{{ui-message
+  type="error"
+  closeable=true
+  visible=showErrorMessage
+  caption=errorMessageCaption
+  message=errorMessage
+  onShow=(action "onErrorMessageShow")
+  onHide=(action "onErrorMessageHide")
+}}
+{{#if attrVisible }}
+  <div class="flexberry-search-attr">
+    <div class="field layers">
+      <label>
+        {{t "components.flexberry-search.search-layers.caption"}}
+      </label>
+      {{flexberry-layers-dropdown
+        class="fluid"
+        filter=(action _layerCanBeSearched)
+        layers=layers
+        value=_selectedLayer
+        layerChange=(action "onLayersDropdownLayerChange")
+        placeholder=placeholder
+      }}
+    </div>
+    <div class="field properties">
+      <label>
+        {{t "components.flexberry-search.search-properties.caption"}}
+      </label>
+      {{flexberry-dropdown
+        class="fluid"
+        items=_selectedLayerFeaturesLocalizedProperties
+        onChange=(action "onChange")
+        value=_localizedValue
+        placeholder=placeholder
+      }}
+    </div>
+    <button class="ui icon close-attr-search" {{action "attrSearch"}}>
+      <i class="icon-guideline-cross-r"></i>
+    </button>
+  </div>
+{{/if}}
