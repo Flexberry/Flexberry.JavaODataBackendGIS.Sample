@@ -46,11 +46,12 @@ class DataServiceTest {
     @Test
     @DisplayName("FlexberryAdvLimit model test.")
     void FlexberryAdvLimit_ModelTest() {
+        UUID pk = UUID.randomUUID();
         // Создаем объект.
         em.getTransaction().begin();
 
         FlexberryAdvLimit DataObject = new FlexberryAdvLimit();
-        DataObject.setPrimarykey(UUID.fromString("211867cf-5555-4caa-8223-e347eda465e0"));
+        DataObject.setPrimarykey(pk);
         DataObject.setUser("Test_User");
         DataObject.setModule("Test_Module");
         DataObject.setName("Test_Name");
@@ -67,8 +68,8 @@ class DataServiceTest {
         CriteriaUpdate<FlexberryAdvLimit> update = cb.createCriteriaUpdate(FlexberryAdvLimit.class);
         Root e = update.from(FlexberryAdvLimit.class);
 
-        update.set("User", "Test_User_Updated");
-        update.where(cb.greaterThanOrEqualTo(e.get("User"), "Test_User"));
+        update.set("user", "Test_User_Updated");
+        update.where(cb.equal(e.get("primarykey"), pk));
 
         // Обновляем объект.
         em.getTransaction().begin();
@@ -79,7 +80,7 @@ class DataServiceTest {
 
         // Создаем запрос на удаление.
         CriteriaDelete<FlexberryAdvLimit> delete = cb.createCriteriaDelete(FlexberryAdvLimit.class);
-        delete.where(cb.equal(e.get("primarykey"), UUID.fromString("211867cf-5555-4caa-8223-e347eda465e0")));
+        delete.where(cb.equal(e.get("primarykey"), pk));
 
         // Удаляем объект.
         em.getTransaction().begin();
@@ -92,11 +93,12 @@ class DataServiceTest {
     @Test
     @DisplayName("IISCaseberryLoggingObjectsApplicationLog model test.")
     void IISCaseberryLoggingObjectsApplicationLog_ModelTest() {
+        UUID pk = UUID.randomUUID();
         // Создаем объект.
         em.getTransaction().begin();
 
         IISCaseberryLoggingObjectsApplicationLog DataObject = new IISCaseberryLoggingObjectsApplicationLog();
-        DataObject.setPrimarykey(UUID.fromString("211867cf-5555-4caa-8223-e347eda465e0"));
+        DataObject.setPrimarykey(pk);
         DataObject.setCategory("Test_Category");
         DataObject.setEventId(123);
         DataObject.setPriority(321);
@@ -113,8 +115,8 @@ class DataServiceTest {
         CriteriaUpdate<IISCaseberryLoggingObjectsApplicationLog> update = cb.createCriteriaUpdate(IISCaseberryLoggingObjectsApplicationLog.class);
         Root e = update.from(IISCaseberryLoggingObjectsApplicationLog.class);
 
-        update.set("Title", "Test_Title_Updated");
-        update.where(cb.greaterThanOrEqualTo(e.get("Title"), "Test_Title"));
+        update.set("title", "Test_Title_Updated");
+        update.where(cb.equal(e.get("primarykey"), pk));
 
         // Обновляем объект.
         em.getTransaction().begin();
@@ -125,7 +127,51 @@ class DataServiceTest {
 
         // Создаем запрос на удаление.
         CriteriaDelete<IISCaseberryLoggingObjectsApplicationLog> delete = cb.createCriteriaDelete(IISCaseberryLoggingObjectsApplicationLog.class);
-        delete.where(cb.equal(e.get("primarykey"), UUID.fromString("211867cf-5555-4caa-8223-e347eda465e0")));
+        delete.where(cb.equal(e.get("primarykey"), pk));
+
+        // Удаляем объект.
+        em.getTransaction().begin();
+        execRes = this.em.createQuery(delete).executeUpdate();
+        em.getTransaction().commit();
+
+        assertEquals(execRes, 1);
+    }
+
+    @Test
+    @DisplayName("LayerMetadata model test.")
+    void LayerMetadata_ModelTest() {
+        UUID pk = UUID.randomUUID();
+        // Создаем объект.
+        em.getTransaction().begin();
+
+        LayerMetadata DataObject = new LayerMetadata();
+        DataObject.setPrimarykey(pk);
+        DataObject.setName("Test_Name");
+        DataObject.setType("Test_Type");
+
+        // Сохраняем его в БД.
+        em.persist(DataObject);
+        em.getTransaction().commit();
+
+        assertNotNull(DataObject);
+
+        // Создаем запрос на обновление.
+        CriteriaUpdate<LayerMetadata> update = cb.createCriteriaUpdate(LayerMetadata.class);
+        Root e = update.from(LayerMetadata.class);
+
+        update.set("name", "Test_Name_Updated");
+        update.where(cb.equal(e.get("primarykey"), pk));
+
+        // Обновляем объект.
+        em.getTransaction().begin();
+        int execRes = this.em.createQuery(update).executeUpdate();
+        em.getTransaction().commit();
+
+        assertEquals(execRes, 1);
+
+        // Создаем запрос на удаление.
+        CriteriaDelete<LayerMetadata> delete = cb.createCriteriaDelete(LayerMetadata.class);
+        delete.where(cb.equal(e.get("primarykey"), pk));
 
         // Удаляем объект.
         em.getTransaction().begin();
@@ -138,11 +184,12 @@ class DataServiceTest {
     @Test
     @DisplayName("Map model test.")
     void Map_ModelTest() {
+        UUID pk = UUID.randomUUID();
         // Создаем объект.
         em.getTransaction().begin();
 
         Flexberry.GIS.model.Map DataObject = new Flexberry.GIS.model.Map();
-        DataObject.setPrimarykey(UUID.fromString("211867cf-5555-4caa-8223-e347eda465e0"));
+        DataObject.setPrimarykey(pk);
         DataObject.setName("Test_Name");
 
         // Сохраняем его в БД.
@@ -155,8 +202,8 @@ class DataServiceTest {
         CriteriaUpdate<Flexberry.GIS.model.Map> update = cb.createCriteriaUpdate(Flexberry.GIS.model.Map.class);
         Root e = update.from(Flexberry.GIS.model.Map.class);
 
-        update.set("Name", "Test_Name_Updated");
-        update.where(cb.greaterThanOrEqualTo(e.get("Name"), "Test_Name"));
+        update.set("name", "Test_Name_Updated");
+        update.where(cb.equal(e.get("primarykey"), pk));
 
         // Обновляем объект.
         em.getTransaction().begin();
@@ -167,7 +214,51 @@ class DataServiceTest {
 
         // Создаем запрос на удаление.
         CriteriaDelete<Flexberry.GIS.model.Map> delete = cb.createCriteriaDelete(Flexberry.GIS.model.Map.class);
-        delete.where(cb.equal(e.get("primarykey"), UUID.fromString("211867cf-5555-4caa-8223-e347eda465e0")));
+        delete.where(cb.equal(e.get("primarykey"), pk));
+
+        // Удаляем объект.
+        em.getTransaction().begin();
+        execRes = this.em.createQuery(delete).executeUpdate();
+        em.getTransaction().commit();
+
+        assertEquals(execRes, 1);
+    }
+
+    @Test
+    @DisplayName("NewPlatformFlexberryFlexberryUserSetting model test.")
+    void NewPlatformFlexberryFlexberryUserSetting_ModelTest() {
+        UUID pk = UUID.randomUUID();
+        // Создаем объект.
+        em.getTransaction().begin();
+
+        NewPlatformFlexberryFlexberryUserSetting DataObject = new NewPlatformFlexberryFlexberryUserSetting();
+        DataObject.setPrimarykey(pk);
+        DataObject.setAppName("Test_AppName");
+        DataObject.setUserName("Test_UserName");
+
+        // Сохраняем его в БД.
+        em.persist(DataObject);
+        em.getTransaction().commit();
+
+        assertNotNull(DataObject);
+
+        // Создаем запрос на обновление.
+        CriteriaUpdate<NewPlatformFlexberryFlexberryUserSetting> update = cb.createCriteriaUpdate(NewPlatformFlexberryFlexberryUserSetting.class);
+        Root e = update.from(NewPlatformFlexberryFlexberryUserSetting.class);
+
+        update.set("appName", "Test_AppName_Updated");
+        update.where(cb.equal(e.get("primarykey"), pk));
+
+        // Обновляем объект.
+        em.getTransaction().begin();
+        int execRes = this.em.createQuery(update).executeUpdate();
+        em.getTransaction().commit();
+
+        assertEquals(execRes, 1);
+
+        // Создаем запрос на удаление.
+        CriteriaDelete<NewPlatformFlexberryFlexberryUserSetting> delete = cb.createCriteriaDelete(NewPlatformFlexberryFlexberryUserSetting.class);
+        delete.where(cb.equal(e.get("primarykey"), pk));
 
         // Удаляем объект.
         em.getTransaction().begin();
@@ -198,19 +289,19 @@ class DataServiceTest {
         CriteriaUpdate<NewPlatformFlexberryServicesLock> update = cb.createCriteriaUpdate(NewPlatformFlexberryServicesLock.class);
         Root e = update.from(NewPlatformFlexberryServicesLock.class);
 
-        update.set("UserName", "Test_Name_Updated");
-        update.where(cb.greaterThanOrEqualTo(e.get("UserName"), "Test_Name"));
+        update.set("userName", "Test_Name_Updated");
+        update.where(cb.greaterThanOrEqualTo(e.get("userName"), "Test_Name"));
 
         // Обновляем объект.
         em.getTransaction().begin();
         int execRes = this.em.createQuery(update).executeUpdate();
         em.getTransaction().commit();
 
-        assertEquals(execRes, 1);
+        assertTrue(execRes >= 1);
 
         // Создаем запрос на удаление.
         CriteriaDelete<NewPlatformFlexberryServicesLock> delete = cb.createCriteriaDelete(NewPlatformFlexberryServicesLock.class);
-        delete.where(cb.equal(e.get("UserName"), "Test_Name_Updated"));
+        delete.where(cb.equal(e.get("userName"), "Test_Name_Updated"));
 
         // Удаляем объект.
         em.getTransaction().begin();

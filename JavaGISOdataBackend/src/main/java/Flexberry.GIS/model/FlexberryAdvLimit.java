@@ -21,7 +21,7 @@ public class FlexberryAdvLimit {
     private UUID primarykey;
 	
 	@Column(name = "\"User\"", nullable = true)
-    private String User;
+    private String user;
 
     @Column(name = "Module", nullable = true)
     private String module;
