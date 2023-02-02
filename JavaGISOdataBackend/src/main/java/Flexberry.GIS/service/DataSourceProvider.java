@@ -1,6 +1,5 @@
 package Flexberry.GIS.service;
 
-import org.flywaydb.core.Flyway;
 import org.flywaydb.core.internal.util.jdbc.DriverDataSource;
 
 import java.rmi.ServerException;
