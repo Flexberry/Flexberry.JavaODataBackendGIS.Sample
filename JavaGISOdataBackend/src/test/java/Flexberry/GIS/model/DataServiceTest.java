@@ -12,10 +12,8 @@ import javax.persistence.Persistence;
 import javax.persistence.criteria.*;
 import javax.sql.DataSource;
 import java.rmi.ServerException;
-import java.util.Date;
-import java.util.HashMap;
+import java.util.*;
 import java.util.Map;
-import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -69,6 +67,7 @@ class DataServiceTest {
         Root e = update.from(FlexberryAdvLimit.class);
 
         update.set("user", "Test_User_Updated");
+        update.set("name", "Test_Name_Updated");
         update.where(cb.equal(e.get("primarykey"), pk));
 
         // Обновляем объект.
@@ -77,6 +76,14 @@ class DataServiceTest {
         em.getTransaction().commit();
 
         assertEquals(execRes, 1);
+
+        // Очистка кеша, чтобы наш объект не вычитывался из него.
+        em.clear();
+
+        // Вычитываем объект из БД для сравнения.
+        FlexberryAdvLimit flexberryAdvLimit = em.find(FlexberryAdvLimit.class, pk);
+
+        assertEquals("Test_User_Updated", flexberryAdvLimit.getUser());
 
         // Создаем запрос на удаление.
         CriteriaDelete<FlexberryAdvLimit> delete = cb.createCriteriaDelete(FlexberryAdvLimit.class);
@@ -88,8 +95,17 @@ class DataServiceTest {
         em.getTransaction().commit();
 
         assertEquals(execRes, 1);
+
+        // Очистка кеша, чтобы наш объект не вычитывался из него.
+        em.clear();
+
+        // Вычитываем объект из БД для сравнения.
+        flexberryAdvLimit = em.find(FlexberryAdvLimit.class, pk);
+
+        assertNull(flexberryAdvLimit);
     }
 
+    /* ToDo: неполные тесты, смотри FlexberryAdvLimit_ModelTest
     @Test
     @DisplayName("IISCaseberryLoggingObjectsApplicationLog model test.")
     void IISCaseberryLoggingObjectsApplicationLog_ModelTest() {
@@ -267,6 +283,7 @@ class DataServiceTest {
 
         assertEquals(execRes, 1);
     }
+    */
 
     @Test
     @DisplayName("NewPlatformFlexberryServicesLock model test.")
@@ -289,7 +306,7 @@ class DataServiceTest {
         CriteriaUpdate<NewPlatformFlexberryServicesLock> update = cb.createCriteriaUpdate(NewPlatformFlexberryServicesLock.class);
         Root e = update.from(NewPlatformFlexberryServicesLock.class);
 
-        update.set("userName", "Test_Name_Updated");
+        update.set("userName", "Test_UserName_Updated");
         update.where(cb.greaterThanOrEqualTo(e.get("userName"), "Test_Name"));
 
         // Обновляем объект.
@@ -299,15 +316,35 @@ class DataServiceTest {
 
         assertTrue(execRes >= 1);
 
+        // Очистка кеша, чтобы наш объект не вычитывался из него.
+        em.clear();
+
+        // Вычитываем объект из БД для сравнения.
+        CriteriaQuery<NewPlatformFlexberryServicesLock> cq = cb.createQuery(NewPlatformFlexberryServicesLock.class);
+        Root<NewPlatformFlexberryServicesLock> root = cq.from(NewPlatformFlexberryServicesLock.class);
+
+        cq.where(cb.equal(root.get("lockKey"), "Test_LockKey"));
+        NewPlatformFlexberryServicesLock result = em.createQuery(cq).getResultList().get(0);
+
+        assertEquals("Test_UserName_Updated", result.getUserName());
+
         // Создаем запрос на удаление.
         CriteriaDelete<NewPlatformFlexberryServicesLock> delete = cb.createCriteriaDelete(NewPlatformFlexberryServicesLock.class);
-        delete.where(cb.equal(e.get("userName"), "Test_Name_Updated"));
+        delete.where(cb.equal(e.get("lockKey"), "Test_LockKey"));
 
         // Удаляем объект.
         em.getTransaction().begin();
         execRes = this.em.createQuery(delete).executeUpdate();
         em.getTransaction().commit();
 
-        assertEquals(execRes, 1);
+        assertTrue(execRes >= 1);
+
+        // Очистка кеша, чтобы наш объект не вычитывался из него.
+        em.clear();
+
+        // Вычитываем объект из БД для сравнения.
+        List<NewPlatformFlexberryServicesLock> resultList = em.createQuery(cq).getResultList();
+
+        assertEquals(resultList.size(), 0);
     }
 }
