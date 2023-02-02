@@ -80,6 +80,11 @@
             <artifactId>olingo-jpa-processor-v4</artifactId>
             <version>0.3.8</version>
         </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <version>5.9.1</version>
+        </dependency>
     </dependencies>
     <repositories>
         <repository>

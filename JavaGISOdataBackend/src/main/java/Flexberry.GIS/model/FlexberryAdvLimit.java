@@ -22,7 +22,7 @@ public class FlexberryAdvLimit {
     @Column(name = "primarykey", length = 16, unique = true, nullable = false)
     private UUID primarykey;
 	
-	@Column(name = "User", nullable = true)
+	@Column(name = "\"User\"", nullable = true)
     private String User;
 
     @Column(name = "Module", nullable = true)
