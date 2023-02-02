@@ -27,9 +27,11 @@ public class MutableHttpFilter implements javax.servlet.Filter {
 
         // Replace substring in request query string.
         mutableRequest.replaceSubstringInQuery("__PrimaryKey", "Primarykey");
+        mutableRequest.replaceSubstringInQuery("+eq+", " eq ");
 
         // Replace substring in request body. For POST and DELETE operations.
         mutableRequest.replaceSubstringInBody("__PrimaryKey", "Primarykey");
+        mutableRequest.replaceSubstringInBody("+eq+", " eq ");
 
         HttpServletResponse resp = (HttpServletResponse) response;
         MutableHttpResponse mutableResponse = new MutableHttpResponse(resp);
@@ -49,6 +51,7 @@ public class MutableHttpFilter implements javax.servlet.Filter {
 
         // Replace changed parameter name backward for response to frontend.
         mutableResponse.replaceSubstringInResponse("Primarykey", "__PrimaryKey");
+        mutableResponse.replaceSubstringInResponse(" eq ", "+eq+");
     }
 
     @Override
