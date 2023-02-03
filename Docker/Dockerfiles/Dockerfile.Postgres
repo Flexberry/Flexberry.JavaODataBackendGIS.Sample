@@ -6,7 +6,7 @@ ENV POSTGRES_DB appdb
 
 COPY 00-create-gis-extension.sql /docker-entrypoint-initdb.d/
 COPY 01-create-geo.sql /docker-entrypoint-initdb.d/
-COPY 02-02-2023-create-favoritefeatures.sql /docker-entrypoint-initdb.d/
+COPY 02-02-2023-create-favoritefearure-table.sql /docker-entrypoint-initdb.d/
 COPY 02-create-tables.sql /docker-entrypoint-initdb.d/
 COPY import_water_line.sql /docker-entrypoint-initdb.d/
 COPY import_water_poly.sql /docker-entrypoint-initdb.d/

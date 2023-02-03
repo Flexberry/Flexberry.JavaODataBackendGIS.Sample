@@ -11,9 +11,9 @@ import javax.persistence.Table;
 import java.util.Date;
 import java.util.UUID;
 
-@Entity(name = "FavoriteFeatures")
-@Table(schema = "public", name = "STORMAdvLimit")
-public class FavoriteFeatures {
+@Entity(name = "FavoriteFeature")
+@Table(schema = "public", name = "FavoriteFeature")
+public class FavoriteFeature {
 
     @Id
     @Converter(converterClass = UUIDConverter.class, name = "primarykey")
@@ -42,7 +42,7 @@ public class FavoriteFeatures {
     @Column(name = "UserKey", nullable = false)
     private String userKey;
 
-    public FavoriteFeatures() {
+    public FavoriteFeature() {
         super();
     }
 

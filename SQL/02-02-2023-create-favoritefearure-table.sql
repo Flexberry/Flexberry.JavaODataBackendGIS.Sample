@@ -1,4 +1,4 @@
-CREATE TABLE public.favoritefeatures
+CREATE TABLE public.favoritefeature
 (
     userkey character varying(50) NOT NULL,
     primarykey uuid NOT NULL,
@@ -8,12 +8,12 @@ CREATE TABLE public.favoritefeatures
     editor character varying(255),
     creator character varying(255),
     createtime timestamp(3) without time zone,
-    CONSTRAINT favoritefeatures_pkey PRIMARY KEY (primarykey)
+    CONSTRAINT favoritefeature_pkey PRIMARY KEY (primarykey)
 )
 WITH (
     OIDS = FALSE
 )
 TABLESPACE pg_default;
 
-ALTER TABLE public.favoritefeatures
+ALTER TABLE public.favoritefeature
     OWNER to flexberryuser;

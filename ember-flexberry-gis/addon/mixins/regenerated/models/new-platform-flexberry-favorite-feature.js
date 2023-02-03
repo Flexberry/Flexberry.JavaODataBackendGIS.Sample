@@ -30,7 +30,7 @@ export function defineNamespace(modelClass) {
 }
 
 export let defineProjections = function (modelClass) {
-  modelClass.defineProjection('FavoriteFeaturesL', 'i-i-s-r-g-i-s-p-k-favorite-features', {
+  modelClass.defineProjection('FavoriteFeaturesL', 'new-platform-flexberry-favorite-feature', {
     objectKey: Projection.attr('Ключ объекта'),
     userKey: Projection.attr('Ключ пользователя')
   });
