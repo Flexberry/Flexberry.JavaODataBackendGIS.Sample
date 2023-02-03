@@ -10,10 +10,3 @@ CREATE TABLE public.favoritefeature
     createtime timestamp(3) without time zone,
     CONSTRAINT favoritefeature_pkey PRIMARY KEY (primarykey)
 )
-WITH (
-    OIDS = FALSE
-)
-TABLESPACE pg_default;
-
-ALTER TABLE public.favoritefeature
-    OWNER to flexberryuser;

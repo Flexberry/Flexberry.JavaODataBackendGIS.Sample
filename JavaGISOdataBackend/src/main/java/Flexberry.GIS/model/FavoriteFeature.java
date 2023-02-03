@@ -22,20 +22,24 @@ public class FavoriteFeature {
     private UUID primarykey;
 
     @Column(name = "CreateTime", nullable = true)
-    private Date createTime;
+    private java.sql.Timestamp createTime;
 
     @Column(name = "Creator", nullable = true)
     private String creator;
 
     @Column(name = "EditTime", nullable = true)
-    private Date editTime;
+    private java.sql.Timestamp editTime;
 
     @Column(name = "Editor", nullable = true)
     private String editor;
 
+    @Converter(converterClass = UUIDConverter.class, name = "ObjectKey")
+    @Convert("ObjectKey")
     @Column(name = "ObjectKey", nullable = false)
     private UUID objectKey;
 
+    @Converter(converterClass = UUIDConverter.class, name = "ObjectLayerKey")
+    @Convert("ObjectLayerKey")
     @Column(name = "ObjectLayerKey", nullable = false)
     private UUID objectLayerKey;
 
@@ -54,11 +58,11 @@ public class FavoriteFeature {
         return primarykey;
     }
 
-    public Date getCreateTime() {
+    public java.sql.Timestamp getCreateTime() {
         return createTime;
     }
 
-    public void setCreateTime(Date createTime) {
+    public void setCreateTime(java.sql.Timestamp createTime) {
         this.createTime = createTime;
     }
 
@@ -70,11 +74,11 @@ public class FavoriteFeature {
         this.creator = creator;
     }
 
-    public Date getEditTime() {
+    public java.sql.Timestamp getEditTime() {
         return editTime;
     }
 
-    public void setEditTime(Date editTime) {
+    public void setEditTime(java.sql.Timestamp editTime) {
         this.editTime = editTime;
     }
 
