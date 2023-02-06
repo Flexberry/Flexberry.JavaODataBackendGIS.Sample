@@ -47,8 +47,7 @@ public class LayerLink {
     private MapLayer layer;
 
     @OneToMany(mappedBy = "layerLink", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
-    private List<LinkParameter> linkparameters;
-
+    private List<LinkParameter> parameters;
 
     public LayerLink() {
         super();
@@ -70,5 +69,12 @@ public class LayerLink {
       this.allowShow = allowshow;
     }
 
+    public List<LinkParameter> getParameters() {
+        return parameters;
+    }
+
+    public void setParameters(List<LinkParameter> parameters) {
+        this.parameters = parameters;
+    }
 
 }

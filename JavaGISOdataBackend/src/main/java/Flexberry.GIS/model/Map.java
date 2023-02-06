@@ -35,7 +35,7 @@ public class Map {
     @Column(name = "Editor")
     private String editor;
 
-    @Column(name = "Name")
+    @Column(name = "Name", nullable = false)
     private String name;
 
     @Column(name = "Description")
@@ -80,7 +80,7 @@ public class Map {
     private java.sql.Timestamp editTimeMapLayers;
 
     @OneToMany(mappedBy = "map", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
-    private List<MapLayer> maplayers;
+    private List<MapLayer> mapLayer;
 
 
     public Map() {
@@ -239,4 +239,11 @@ public class Map {
       this.editTimeMapLayers = edittimemaplayers;
     }
 
+    public List<MapLayer> getMapLayer() {
+        return mapLayer;
+    }
+
+    public void setMapLayer(List<MapLayer> mapLayer) {
+        this.mapLayer = mapLayer;
+    }
 }
