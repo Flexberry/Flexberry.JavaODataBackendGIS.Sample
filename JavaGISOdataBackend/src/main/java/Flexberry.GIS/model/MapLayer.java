@@ -101,7 +101,7 @@ public class MapLayer {
     private Map map;
 
     @OneToMany(mappedBy = "layer", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
-    private List<LayerLink> layerlinks;
+    private List<LayerLink> layerLink;
 
 
     public MapLayer() {
@@ -260,5 +260,12 @@ public class MapLayer {
       this.editor = editor;
     }
 
+    public List<LayerLink> getLayerLink() {
+        return layerLink;
+    }
+
+    public void setLayerLink(List<LayerLink> layerLink) {
+        this.layerLink = layerLink;
+    }
 
 }
