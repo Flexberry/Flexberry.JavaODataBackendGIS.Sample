@@ -21,7 +21,7 @@ public class MutableHttpRequest extends HttpServletRequestWrapper {
         excessHeaders = new ArrayList<String>();
         replacedQuerySubstrings = new HashMap<String,String>();
 
-        cachRequestBody(request);
+        catchRequestBody(request);
     }
 
     @Override
@@ -85,7 +85,7 @@ public class MutableHttpRequest extends HttpServletRequestWrapper {
         existedEntities = entities;
     }
 
-    private void cachRequestBody(HttpServletRequest request) throws IOException {
+    private void catchRequestBody(HttpServletRequest request) throws IOException {
         StringBuilder stringBuilder = new StringBuilder();
         BufferedReader bufferedReader = null;
 
@@ -125,7 +125,7 @@ public class MutableHttpRequest extends HttpServletRequestWrapper {
 
         // olingo-jpa-processor не поддерживает, чтобы в запросе, в select указывались параметры, которые указывают на связанные сущности.
         // Они должны запрашиваться только через expand.
-        // Находим блоки select и удаляем из них связанные сущности, список которых сформироват в классе Servlet.
+        // Находим блоки select и удаляем из них связанные сущности, список которых сформирован в классе Servlet.
         for (String entityName : existedEntities) {
             Pattern pattern = Pattern.compile("\\(%24select(.*?)\\)|%24select=(.*?)$", Pattern.CASE_INSENSITIVE);
             Matcher matcher = pattern.matcher(modifiedQueryString);

@@ -70,7 +70,7 @@ public class Servlet extends HttpServlet {
         }
       }
 
-      // Передаем этот список в MutableHttpRequest для модификации закпроса.
+      // Передаем этот список в MutableHttpRequest для модификации запроса.
       ((MutableHttpRequest) req).setExistingEntitiesList(entities);
 
       final JPAODataCRUDHandler handler = new JPAODataCRUDHandler(serviceContext);
