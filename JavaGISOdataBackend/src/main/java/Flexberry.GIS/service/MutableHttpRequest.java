@@ -2,6 +2,8 @@ package Flexberry.GIS.service;
 
 import java.io.*;
 import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.servlet.ServletInputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletRequestWrapper;
@@ -11,13 +13,15 @@ public class MutableHttpRequest extends HttpServletRequestWrapper {
     private List<String> excessHeaders;
     private Map<String,String> replacedQuerySubstrings;
 
+    private List<String> existedEntities;
+
     public MutableHttpRequest(HttpServletRequest request) throws IOException {
         super(request);
 
         excessHeaders = new ArrayList<String>();
         replacedQuerySubstrings = new HashMap<String,String>();
 
-        CachRequestBody(request);
+        catchRequestBody(request);
     }
 
     @Override
@@ -59,11 +63,7 @@ public class MutableHttpRequest extends HttpServletRequestWrapper {
             return null;
         }
 
-        String modifiedQueryString = queryString;
-
-        for (Map.Entry<String, String> entry : replacedQuerySubstrings.entrySet()) {
-            modifiedQueryString = modifiedQueryString.replace(entry.getKey(), entry.getValue());
-        }
+        String modifiedQueryString = modifyQueryString(queryString);
 
         return modifiedQueryString;
     }
@@ -80,7 +80,12 @@ public class MutableHttpRequest extends HttpServletRequestWrapper {
         body = body.replace(originSubstring, finalSubstring);
     }
 
-    private void CachRequestBody(HttpServletRequest request) throws IOException {
+    public void setExistingEntitiesList(List<String> entities)
+    {
+        existedEntities = entities;
+    }
+
+    private void catchRequestBody(HttpServletRequest request) throws IOException {
         StringBuilder stringBuilder = new StringBuilder();
         BufferedReader bufferedReader = null;
 
@@ -113,5 +118,35 @@ public class MutableHttpRequest extends HttpServletRequestWrapper {
         }
 
         body = stringBuilder.toString();
+    }
+
+    private String modifyQueryString(String originString) {
+        String modifiedQueryString = originString;
+
+        // olingo-jpa-processor не поддерживает, чтобы в запросе, в select указывались параметры, которые указывают на связанные сущности.
+        // Они должны запрашиваться только через expand.
+        // Находим блоки select и удаляем из них связанные сущности, список которых сформирован в классе Servlet.
+        for (String entityName : existedEntities) {
+            Pattern pattern = Pattern.compile("\\(%24select(.*?)\\)|%24select=(.*?)$", Pattern.CASE_INSENSITIVE);
+            Matcher matcher = pattern.matcher(modifiedQueryString);
+
+            while(matcher.find())
+            {
+                String findedSelect = matcher.group();
+
+                String selectWithoutEntities = findedSelect.replaceAll("%2C" + entityName + "$", "");
+                selectWithoutEntities = selectWithoutEntities.replaceAll("%2C" + entityName + "%", "%");
+                selectWithoutEntities = selectWithoutEntities.replaceAll("%2C" + entityName + "\\)", "\\)");
+
+                modifiedQueryString = modifiedQueryString.replace(findedSelect, selectWithoutEntities);
+            }
+        }
+
+        // Меняем в строке запроса дополнительные подстроки, сформированные в классе MutableHttpFilter.
+        for (Map.Entry<String, String> entry : replacedQuerySubstrings.entrySet()) {
+            modifiedQueryString = modifiedQueryString.replace(entry.getKey(), entry.getValue());
+        }
+
+        return modifiedQueryString;
     }
 }
