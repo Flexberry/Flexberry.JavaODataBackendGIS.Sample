@@ -103,7 +103,6 @@ public class MapLayer {
     @OneToMany(mappedBy = "layer", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     private List<LayerLink> layerLink;
 
-
     public MapLayer() {
         super();
     }
@@ -258,6 +257,14 @@ public class MapLayer {
 
     public void setEditor(String editor) {
       this.editor = editor;
+    }
+
+    public Map getMap() {
+        return map;
+    }
+
+    public void setMap(Map map) {
+        this.map = map;
     }
 
     public List<LayerLink> getLayerLink() {
