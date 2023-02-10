@@ -1,5 +1,7 @@
 package Flexberry.GIS.service;
 
+import org.json.JSONObject;
+
 import java.io.*;
 import java.util.*;
 import java.util.regex.Matcher;
@@ -77,6 +79,7 @@ public class MutableHttpRequest extends HttpServletRequestWrapper {
     }
 
     public void replaceSubstringInBody(String originSubstring, String finalSubstring) {
+        body = convertGISJsonValuesToString(body);
         body = body.replace(originSubstring, finalSubstring);
     }
 
@@ -148,5 +151,24 @@ public class MutableHttpRequest extends HttpServletRequestWrapper {
         }
 
         return modifiedQueryString;
+    }
+
+    private String convertGISJsonValuesToString(String body) {
+        if (body.equals("")) return body;
+
+        // Olingo не понимает тип JSON, только строку. Поэтому нужно преобразовать значение полей с геоданными в строку.
+        String convertedBody = body;
+        JSONObject bodyAsJson = new JSONObject(convertedBody);
+
+        if (bodyAsJson.has("BoundingBox")) {
+            String boundingBoxValueAsString = bodyAsJson.get("BoundingBox").toString();
+
+            bodyAsJson.remove("BoundingBox");
+            bodyAsJson.put("BoundingBox", boundingBoxValueAsString);
+
+            convertedBody = bodyAsJson.toString();
+        }
+
+        return convertedBody;
     }
 }
