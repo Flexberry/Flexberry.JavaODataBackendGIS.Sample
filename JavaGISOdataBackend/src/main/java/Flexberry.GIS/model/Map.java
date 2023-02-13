@@ -38,13 +38,13 @@ public class Map {
     @Column(name = "Name", nullable = false)
     private String name;
 
-    @Column(name = "Description")
+    @Column(name = "Description", length = -1)
     private String description;
 
-    @Column(name = "KeyWords")
+    @Column(name = "KeyWords", length = -1)
     private String keyWords;
 
-    @Column(name = "AnyText")
+    @Column(name = "AnyText", length = -1)
     private String anyText;
 
     @Column(name = "Lat")

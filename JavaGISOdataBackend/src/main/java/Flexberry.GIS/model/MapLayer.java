@@ -27,13 +27,13 @@ public class MapLayer {
     @Column(name = "Name")
     private String name;
 
-    @Column(name = "Description")
+    @Column(name = "Description", length = -1)
     private String description;
 
-    @Column(name = "KeyWords")
+    @Column(name = "KeyWords", length = -1)
     private String keyWords;
 
-    @Column(name = "AnyText")
+    @Column(name = "AnyText", length = -1)
     private String anyText;
 
     @Column(name = "Index")
@@ -45,7 +45,7 @@ public class MapLayer {
     @Column(name = "Type")
     private String type;
 
-    @Column(name = "Settings")
+    @Column(name = "Settings", length = -1)
     private String settings;
 
     @Column(name = "Scale")

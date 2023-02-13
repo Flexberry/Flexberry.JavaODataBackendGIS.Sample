@@ -33,7 +33,7 @@ public class IISCaseberryLoggingObjectsApplicationLog {
 	@Column(name = "Severity", nullable = true)
     private String severity;
 	
-	@Column(name = "Title", nullable = true)
+	@Column(name = "Title", nullable = true, length = -1)
     private String title;
 	
 	@Column(name = "Timestamp", nullable = true)
@@ -42,25 +42,25 @@ public class IISCaseberryLoggingObjectsApplicationLog {
 	@Column(name = "MachineName", nullable = true)
     private String machineName;
 	
-	@Column(name = "AppDomainName", nullable = true)
+	@Column(name = "AppDomainName", nullable = true, length = -1)
     private String appDomainName;
 	
-	@Column(name = "ProcessId", nullable = true)
+	@Column(name = "ProcessId", nullable = true, length = -1)
     private String processId;
 	
-	@Column(name = "ProcessName", nullable = true)
+	@Column(name = "ProcessName", nullable = true, length = -1)
     private String processName;
 	
-	@Column(name = "ThreadName", nullable = true)
+	@Column(name = "ThreadName", nullable = true, length = -1)
     private String threadName;
 		
 	@Column(name = "Win32ThreadId", nullable = true)
     private String win32ThreadId;
 	
-	@Column(name = "Message", nullable = true)
+	@Column(name = "Message", nullable = true, length = -1)
     private String message;
 	
-	@Column(name = "FormattedMessage", nullable = true)
+	@Column(name = "FormattedMessage", nullable = true, length = -1)
     private String formattedMessage;
 	
 	public IISCaseberryLoggingObjectsApplicationLog() {

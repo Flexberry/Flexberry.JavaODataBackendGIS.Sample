@@ -29,7 +29,7 @@ public class FlexberryAdvLimit {
     @Column(name = "Name", nullable = true)
     private String name;
 
-    @Column(name = "Value", nullable = true)
+    @Column(name = "Value", nullable = true, length = -1)
     private String value;
 	
 	@Column(name = "HotKeyData", nullable = true)
