@@ -20,16 +20,16 @@ public class FlexberryAdvLimit {
     @Column(name = "primarykey", length = 16, unique = true, nullable = false)
     private UUID primarykey;
 	
-	@Column(name = "User", nullable = true)
+	@Column(name = "User", nullable = true, length = 255)
     private String user;
 
-    @Column(name = "Module", nullable = true)
+    @Column(name = "Module", nullable = true, length = 255)
     private String module;
 
-    @Column(name = "Name", nullable = true)
+    @Column(name = "Name", nullable = true, length = 255)
     private String name;
 
-    @Column(name = "Value", nullable = true)
+    @Column(name = "Value", nullable = true, length = -1)
     private String value;
 	
 	@Column(name = "HotKeyData", nullable = true)

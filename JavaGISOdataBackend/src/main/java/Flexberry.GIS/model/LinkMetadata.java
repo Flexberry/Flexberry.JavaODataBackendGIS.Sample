@@ -29,13 +29,13 @@ public class LinkMetadata {
     @Column(name = "CreateTime")
     private java.sql.Timestamp createTime;
 
-    @Column(name = "Creator")
+    @Column(name = "Creator", length = 255)
     private String creator;
 
     @Column(name = "EditTime")
     private java.sql.Timestamp editTime;
 
-    @Column(name = "Editor")
+    @Column(name = "Editor", length = 255)
     private String editor;
 
     @EdmIgnore

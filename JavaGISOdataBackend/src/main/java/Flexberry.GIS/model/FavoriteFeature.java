@@ -24,13 +24,13 @@ public class FavoriteFeature {
     @Column(name = "CreateTime", nullable = true)
     private java.sql.Timestamp createTime;
 
-    @Column(name = "Creator", nullable = true)
+    @Column(name = "Creator", nullable = true, length = 255)
     private String creator;
 
     @Column(name = "EditTime", nullable = true)
     private java.sql.Timestamp editTime;
 
-    @Column(name = "Editor", nullable = true)
+    @Column(name = "Editor", nullable = true, length = 255)
     private String editor;
 
     @Converter(converterClass = UUIDConverter.class, name = "ObjectKey")
@@ -43,7 +43,7 @@ public class FavoriteFeature {
     @Column(name = "ObjectLayerKey", nullable = false)
     private UUID objectLayerKey;
 
-    @Column(name = "UserKey", nullable = false)
+    @Column(name = "UserKey", nullable = false, length = 50)
     private String userKey;
 
     public FavoriteFeature() {

@@ -23,28 +23,28 @@ public class LayerMetadata {
     @Column(name = "primarykey", length = 16, unique = true, nullable = false)
     private UUID primarykey;
 
-    @Column(name = "Name")
+    @Column(name = "Name", length = 255)
     private String name;
 
-    @Column(name = "Description")
+    @Column(name = "Description", length = -1)
     private String description;
 
-    @Column(name = "KeyWords")
+    @Column(name = "KeyWords", length = -1)
     private String keyWords;
 
-    @Column(name = "AnyText")
+    @Column(name = "AnyText", length = -1)
     private String anyText;
 
-    @Column(name = "Type")
+    @Column(name = "Type", length = 255)
     private String type;
 
-    @Column(name = "Settings")
+    @Column(name = "Settings", length = -1)
     private String settings;
 
     @Column(name = "Scale")
     private Integer scale;
 
-    @Column(name = "CoordinateReferenceSystem")
+    @Column(name = "CoordinateReferenceSystem", length = 255)
     private String coordinateReferenceSystem;
 
     @Converter(converterClass = PGgeometryConverter.class, name = "BoundingBox")
@@ -52,19 +52,19 @@ public class LayerMetadata {
     @Column(name = "BoundingBox", length = -1)
     private String boundingBox;
 
-    @Column(name = "AdditionalData")
+    @Column(name = "AdditionalData", length = -1)
     private String additionaldata;
 
     @Column(name = "CreateTime")
     private java.sql.Timestamp createTime;
 
-    @Column(name = "Creator")
+    @Column(name = "Creator", length = 255)
     private String creator;
 
     @Column(name = "EditTime")
     private java.sql.Timestamp editTime;
 
-    @Column(name = "Editor")
+    @Column(name = "Editor", length = 255)
     private String editor;
 
     @OneToMany(mappedBy = "layer", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)

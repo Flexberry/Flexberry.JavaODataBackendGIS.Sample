@@ -21,16 +21,16 @@ public class LinkParameter {
     @Column(name = "primarykey", length = 16, unique = true, nullable = false)
     private UUID primarykey;
 
-    @Column(name = "ObjectField")
+    @Column(name = "ObjectField", length = 255)
     private String objectField;
 
-    @Column(name = "LayerField")
+    @Column(name = "LayerField", length = 255)
     private String layerField;
 
-    @Column(name = "Expression")
+    @Column(name = "Expression", length = 255)
     private String expression;
 
-    @Column(name = "QueryKey")
+    @Column(name = "QueryKey", length = 255)
     private String queryKey;
 
     @Column(name = "LinkField")
