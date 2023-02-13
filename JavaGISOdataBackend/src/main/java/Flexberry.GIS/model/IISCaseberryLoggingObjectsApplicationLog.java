@@ -21,7 +21,7 @@ public class IISCaseberryLoggingObjectsApplicationLog {
     @Column(name = "primarykey", length = 16, unique = true, nullable = false)
     private UUID primarykey;
 
-    @Column(name = "Category", nullable = true)
+    @Column(name = "Category", nullable = true, length = 64)
     private String category;
 		
 	@Column(name = "EventId", nullable = true)
@@ -30,34 +30,34 @@ public class IISCaseberryLoggingObjectsApplicationLog {
 	@Column(name = "Priority", nullable = true)
     private Integer priority;
 		
-	@Column(name = "Severity", nullable = true)
+	@Column(name = "Severity", nullable = true, length = 32)
     private String severity;
 	
-	@Column(name = "Title", nullable = true, length = -1)
+	@Column(name = "Title", nullable = true, length = 256)
     private String title;
 	
 	@Column(name = "Timestamp", nullable = true)
     private Date timestamp;
 	
-	@Column(name = "MachineName", nullable = true)
+	@Column(name = "MachineName", nullable = true, length = 32)
     private String machineName;
 	
-	@Column(name = "AppDomainName", nullable = true, length = -1)
+	@Column(name = "AppDomainName", nullable = true, length = 512)
     private String appDomainName;
 	
-	@Column(name = "ProcessId", nullable = true, length = -1)
+	@Column(name = "ProcessId", nullable = true, length = 256)
     private String processId;
 	
-	@Column(name = "ProcessName", nullable = true, length = -1)
+	@Column(name = "ProcessName", nullable = true, length = 512)
     private String processName;
 	
-	@Column(name = "ThreadName", nullable = true, length = -1)
+	@Column(name = "ThreadName", nullable = true, length = 512)
     private String threadName;
 		
-	@Column(name = "Win32ThreadId", nullable = true)
+	@Column(name = "Win32ThreadId", nullable = true, length = 128)
     private String win32ThreadId;
 	
-	@Column(name = "Message", nullable = true, length = -1)
+	@Column(name = "Message", nullable = true, length = 2500)
     private String message;
 	
 	@Column(name = "FormattedMessage", nullable = true, length = -1)

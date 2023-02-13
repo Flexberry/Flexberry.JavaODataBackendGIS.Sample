@@ -21,19 +21,19 @@ public class MapObjectSetting {
     @Column(name = "primarykey", length = 16, unique = true, nullable = false)
     private UUID primarykey;
 
-    @Column(name = "TypeName")
+    @Column(name = "TypeName", length = 255)
     private String typeName;
 
-    @Column(name = "ListForm")
+    @Column(name = "ListForm", length = 255)
     private String listForm;
 
-    @Column(name = "EditForm")
+    @Column(name = "EditForm", length = 255)
     private String editForm;
 
-    @Column(name = "Title")
+    @Column(name = "Title", length = 255)
     private String title;
 
-    @Column(name = "MultEditForm")
+    @Column(name = "MultEditForm", length = 255)
     private String multEditForm;
 
     @EdmIgnore

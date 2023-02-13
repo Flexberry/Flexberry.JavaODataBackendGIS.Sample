@@ -24,7 +24,7 @@ public class MapLayer {
     @Column(name = "primarykey", length = 16, unique = true, nullable = false)
     private UUID primarykey;
 
-    @Column(name = "Name")
+    @Column(name = "Name", length = 255)
     private String name;
 
     @Column(name = "Description", length = -1)
@@ -42,7 +42,7 @@ public class MapLayer {
     @Column(name = "Visibility")
     private Boolean visibility;
 
-    @Column(name = "Type")
+    @Column(name = "Type", length = 255)
     private String type;
 
     @Column(name = "Settings", length = -1)
@@ -51,7 +51,7 @@ public class MapLayer {
     @Column(name = "Scale")
     private Integer scale;
 
-    @Column(name = "CoordinateReferenceSystem")
+    @Column(name = "CoordinateReferenceSystem", length = 255)
     private String coordinateReferenceSystem;
 
     @Converter(converterClass = PGgeometryConverter.class, name = "BoundingBox")
@@ -62,22 +62,22 @@ public class MapLayer {
     @Column(name = "Public")
     private Boolean Public = false;
 
-    @Column(name = "Owner")
+    @Column(name = "Owner", length = 255)
     private String owner;
 
-    @Column(name = "SecurityKey")
+    @Column(name = "SecurityKey", length = 255)
     private String securityKey;
 
     @Column(name = "CreateTime")
     private java.sql.Timestamp createTime;
 
-    @Column(name = "Creator")
+    @Column(name = "Creator", length = 255)
     private String creator;
 
     @Column(name = "EditTime")
     private java.sql.Timestamp editTime;
 
-    @Column(name = "Editor")
+    @Column(name = "Editor", length = 255)
     private String editor;
 
     @EdmIgnore

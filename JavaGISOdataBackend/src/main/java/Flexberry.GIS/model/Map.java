@@ -26,16 +26,16 @@ public class Map {
     @Column(name = "CreateTime")
     private java.sql.Timestamp createTime;
 
-    @Column(name = "Creator")
+    @Column(name = "Creator", length = 255)
     private String creator;
 
     @Column(name = "EditTime")
     private java.sql.Timestamp editTime;
 
-    @Column(name = "Editor")
+    @Column(name = "Editor", length = 255)
     private String editor;
 
-    @Column(name = "Name", nullable = false)
+    @Column(name = "Name", nullable = false, length = 255)
     private String name;
 
     @Column(name = "Description", length = -1)
@@ -62,7 +62,7 @@ public class Map {
     @Column(name = "Scale")
     private Integer scale;
 
-    @Column(name = "CoordinateReferenceSystem")
+    @Column(name = "CoordinateReferenceSystem", length = 255)
     private String coordinateReferenceSystem;
 
     @Converter(converterClass = PGgeometryConverter.class, name = "BoundingBox")
@@ -70,10 +70,10 @@ public class Map {
     @Column(name = "BoundingBox", length = -1)
     private String boundingBox;
 
-    @Column(name = "Owner")
+    @Column(name = "Owner", length = 255)
     private String owner;
 
-    @Column(name = "Picture")
+    @Column(name = "Picture", length = 255)
     private String picture;
 
     @Column(name = "EditTimeMapLayers")

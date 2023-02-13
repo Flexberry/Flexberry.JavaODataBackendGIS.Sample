@@ -11,10 +11,10 @@ import java.util.Date;
 public class NewPlatformFlexberryServicesLock {
 
     @Id
-    @Column(name = "LockKey", unique = true, nullable = false, length = -1)
+    @Column(name = "LockKey", unique = true, nullable = false, length = 300)
     private String lockKey;
 
-    @Column(name = "UserName", nullable = false, length = -1)
+    @Column(name = "UserName", nullable = false, length = 300)
     private String userName;
 	
 	@Column(name = "LockDate", nullable = true)
