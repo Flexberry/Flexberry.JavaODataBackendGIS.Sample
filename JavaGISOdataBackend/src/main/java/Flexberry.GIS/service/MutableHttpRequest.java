@@ -155,18 +155,22 @@ public class MutableHttpRequest extends HttpServletRequestWrapper {
 
     private String convertGISJsonValuesToString(String body) {
         if (body.equals("")) return body;
-
+        
         // Olingo не понимает тип JSON, только строку. Поэтому нужно преобразовать значение полей с геоданными в строку.
         String convertedBody = body;
-        JSONObject bodyAsJson = new JSONObject(convertedBody);
 
-        if (bodyAsJson.has("BoundingBox")) {
-            String boundingBoxValueAsString = bodyAsJson.get("BoundingBox").toString();
+        Pattern pattern = Pattern.compile("\"BoundingBox\":\\{(.*?)\\}\\}\\}", Pattern.CASE_INSENSITIVE);
+        Matcher matcher = pattern.matcher(convertedBody);
 
-            bodyAsJson.remove("BoundingBox");
-            bodyAsJson.put("BoundingBox", boundingBoxValueAsString);
+        while(matcher.find())
+        {
+            String findedSelect = matcher.group();
+            String modifyFinded = findedSelect.replaceAll("\"","\\\\\"");
+            modifyFinded = modifyFinded.replaceAll("\\\\\"BoundingBox\\\\\"", "\"BoundingBox\"");
+            modifyFinded = modifyFinded.replaceAll("\"BoundingBox\":\\{", "\"BoundingBox\":\"{");
+            modifyFinded = modifyFinded + "\"";
 
-            convertedBody = bodyAsJson.toString();
+            convertedBody = convertedBody.replace(findedSelect, modifyFinded);
         }
 
         return convertedBody;
