@@ -1,3 +1,4 @@
+import Ember from 'ember';
 import Transform from 'ember-data/transform';
 
 /**
@@ -18,6 +19,20 @@ export default Transform.extend({
     Deserializes serialized attribute value.
   */
   deserialize(serialized) {
+    if (typeof (serialized) === 'string') {
+      try {
+        let result = JSON.parse(serialized);
+
+        if (!Ember.isEmpty(result)) {
+          return result;
+        }
+      } catch (e) {
+        console.warn('Trying convert "' + serialized + '" to JSON.');
+        console.error(e);
+        return serialized;
+      }
+    }
+
     return serialized;
   },
 
