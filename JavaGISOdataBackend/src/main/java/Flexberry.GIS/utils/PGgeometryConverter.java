@@ -7,6 +7,8 @@ import org.eclipse.persistence.sessions.Session;
 import org.json.JSONObject;
 import org.postgis.Geometry;
 import org.postgis.PGgeometry;
+import org.postgis.Point;
+import org.postgresql.util.PGobject;
 
 import java.sql.SQLException;
 
@@ -26,11 +28,12 @@ public class PGgeometryConverter implements Converter {
 
     @Override
     public String convertDataValueToObjectValue(Object dataValue, Session session) {
-        if ((null == dataValue) || (null == session) || (!(dataValue instanceof PGgeometry)))
+        if ((null == dataValue) || (null == session) || (!(dataValue instanceof PGobject)))
             return "";
 
-        // TODO из объекта ((PGgeometry)dataValue).getGeometry() должен получаться JSON.
-        return "";
+        PGobject postgresObject = (PGobject) dataValue;
+
+        return ConvertPGobjectWithGeometryToString(postgresObject);
     }
 
     @Override
@@ -83,6 +86,37 @@ public class PGgeometryConverter implements Converter {
             return postgisGeometryObject;
         } catch (SQLException e) {
             return null;
+        }
+    }
+
+    private String ConvertPGobjectWithGeometryToString(PGobject postgresObject) {
+        try {
+            Geometry geometry = PGgeometry.geomFromString(postgresObject.getValue());
+
+            int srid = geometry.srid;
+            String type = geometry.getTypeString().toLowerCase();
+            type = type.substring(0, 1).toUpperCase() + type.substring(1);
+
+            String coordinates = "";
+
+            int pointsCount = geometry.numPoints();
+            for (int i = 0; i < pointsCount; i++) {
+                Point point = geometry.getPoint(i);
+                coordinates += "[" + point.getX() + "," + point.getY() + "]";
+            }
+
+            coordinates = coordinates.replaceAll("\\]\\[", "],[");
+            coordinates = "[[" + coordinates + "]]";
+
+            String result = String.format(
+                    "{\"crs\":{\"type\":\"name\",\"properties\":{\"name\":\"EPSG:%s\"}},\"coordinates\":%s,\"type\":\"%s\"}",
+                    srid,
+                    coordinates,
+                    type);
+
+            return result;
+        } catch (SQLException e) {
+            return "";
         }
     }
 }
