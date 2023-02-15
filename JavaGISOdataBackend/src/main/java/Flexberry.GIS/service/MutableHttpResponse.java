@@ -1,5 +1,8 @@
 package Flexberry.GIS.service;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
@@ -13,6 +16,7 @@ public class MutableHttpResponse extends HttpServletResponseWrapper {
     private ServletOutputStream output;
     private PrintWriter writer;
     private HttpServletResponse currentResponse;
+    private String originalContent;
 
     public MutableHttpResponse(HttpServletResponse response) {
         super(response);
@@ -76,11 +80,17 @@ public class MutableHttpResponse extends HttpServletResponseWrapper {
         }
     }
 
-    public void replaceSubstringInResponse(String originSubstring, String finalSubstring) throws IOException {
-        String originalContent = this.getCaptureAsString();
-        String replacedContent = originalContent != null ? originalContent.replace(originSubstring, finalSubstring) : null;
-        this.currentResponse.setContentLength(replacedContent.length());
-        this.currentResponse.getOutputStream().write(replacedContent.getBytes());
+    public void InitOriginalContent() throws IOException {
+        this.originalContent = this.getCaptureAsString();
+    }
+
+    public void SetupOrdinalContent() throws IOException {
+        this.currentResponse.setContentLength(this.originalContent.length());
+        this.currentResponse.getOutputStream().write(this.originalContent.getBytes());
+    }
+
+    public void replaceSubstringInResponse(String originSubstring, String finalSubstring) {
+        this.originalContent = this.originalContent.replace(originSubstring, finalSubstring);
     }
 
     private byte[] getCaptureAsBytes() throws IOException {
@@ -95,5 +105,27 @@ public class MutableHttpResponse extends HttpServletResponseWrapper {
 
     private String getCaptureAsString() throws IOException {
         return new String(getCaptureAsBytes(), getCharacterEncoding());
+    }
+
+    public void convertAttributeToJson(String attrName) {
+        try {
+            String currentCaptureValue = this.originalContent;
+            JSONObject currentCaptureJson = new JSONObject(currentCaptureValue);
+            JSONArray arrValues = currentCaptureJson.optJSONArray("value");
+
+            for (Object  tObj: arrValues) {
+                if (tObj instanceof JSONObject) {
+                    JSONObject jObj = (JSONObject) tObj;
+                    String attrValue = jObj.optString(attrName);
+                    JSONObject attrJson = new JSONObject(attrValue);
+
+                    jObj.put(attrName, attrJson);
+                }
+            }
+
+            this.originalContent = currentCaptureJson.toString();
+        } catch (Exception ignored) {
+
+        }
     }
 }
