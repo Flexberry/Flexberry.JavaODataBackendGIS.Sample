@@ -53,7 +53,7 @@ public class MutableHttpFilter implements javax.servlet.Filter {
         mutableResponse.InitOriginalContent();
         mutableResponse.replaceSubstringInResponse("Primarykey", "__PrimaryKey");
         mutableResponse.replaceSubstringInResponse(" eq ", "+eq+");
-        mutableResponse.convertAttributeToJson("BoundingBox");
+        mutableResponse.convertAttributeToJsonInResponse("BoundingBox");
         mutableResponse.SetupOriginalContent();
     }
 

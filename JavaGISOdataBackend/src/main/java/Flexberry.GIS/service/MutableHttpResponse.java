@@ -107,7 +107,7 @@ public class MutableHttpResponse extends HttpServletResponseWrapper {
         return new String(getCaptureAsBytes(), getCharacterEncoding());
     }
 
-    public void convertAttributeToJson(String attrName) {
+    public void convertAttributeToJsonInResponse(String attrName) {
         JSONObject currentCaptureJson;
 
         try {
