@@ -80,11 +80,11 @@ public class MutableHttpResponse extends HttpServletResponseWrapper {
         }
     }
 
-    public void InitOriginalContent() throws IOException {
+    public void CacheOriginalContent() throws IOException {
         this.originalContent = this.getCaptureAsString();
     }
 
-    public void SetupOriginalContent() throws IOException {
+    public void ApplyChangesForResponse() throws IOException {
         this.currentResponse.setContentLength(this.originalContent.length());
         this.currentResponse.getOutputStream().write(this.originalContent.getBytes());
     }
