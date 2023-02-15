@@ -108,24 +108,31 @@ public class MutableHttpResponse extends HttpServletResponseWrapper {
     }
 
     public void convertAttributeToJson(String attrName) {
-        try {
-            String currentCaptureValue = this.originalContent;
-            JSONObject currentCaptureJson = new JSONObject(currentCaptureValue);
-            JSONArray arrValues = currentCaptureJson.optJSONArray("value");
+        JSONObject currentCaptureJson;
 
-            for (Object  tObj: arrValues) {
+        try {
+            currentCaptureJson = new JSONObject(this.originalContent);
+        } catch (Exception ignored) {
+            return;
+        }
+
+        JSONArray arrValues = currentCaptureJson.optJSONArray("value");
+
+        if (arrValues != null) {
+            for (Object tObj : arrValues) {
                 if (tObj instanceof JSONObject) {
                     JSONObject jObj = (JSONObject) tObj;
                     String attrValue = jObj.optString(attrName);
-                    JSONObject attrJson = new JSONObject(attrValue);
 
-                    jObj.put(attrName, attrJson);
+                    try {
+                        JSONObject attrJson = new JSONObject(attrValue);
+                        jObj.put(attrName, attrJson);
+                    } catch (Exception ignored) {
+                    }
                 }
             }
-
-            this.originalContent = currentCaptureJson.toString();
-        } catch (Exception ignored) {
-
         }
+
+        this.originalContent = currentCaptureJson.toString();
     }
 }
