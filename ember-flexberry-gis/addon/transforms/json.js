@@ -1,4 +1,3 @@
-import Ember from 'ember';
 import Transform from 'ember-data/transform';
 
 /**
