@@ -84,7 +84,7 @@ public class MutableHttpResponse extends HttpServletResponseWrapper {
         this.originalContent = this.getCaptureAsString();
     }
 
-    public void SetupOrdinalContent() throws IOException {
+    public void SetupOriginalContent() throws IOException {
         this.currentResponse.setContentLength(this.originalContent.length());
         this.currentResponse.getOutputStream().write(this.originalContent.getBytes());
     }
