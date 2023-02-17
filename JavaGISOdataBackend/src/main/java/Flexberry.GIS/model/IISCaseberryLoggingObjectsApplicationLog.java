@@ -1,12 +1,11 @@
 package Flexberry.GIS.model;
 
+import Flexberry.GIS.utils.UUIDToStringConverter;
 import org.eclipse.persistence.annotations.Convert;
 import org.eclipse.persistence.annotations.Converter;
-import Flexberry.GIS.utils.UUIDConverter;
 
 import javax.persistence.*;
 import java.util.Date;
-import java.util.UUID;
 
 /**
  * Entity implementation class for Entity: IISCaseberryLoggingObjectsApplicationLog
@@ -16,10 +15,10 @@ import java.util.UUID;
 public class IISCaseberryLoggingObjectsApplicationLog {
 
     @Id
-    @Converter(converterClass = UUIDConverter.class, name = "primarykey")
+    @Converter(converterClass = UUIDToStringConverter.class, name = "primarykey")
     @Convert("primarykey")
-    @Column(name = "primarykey", length = 16, unique = true, nullable = false)
-    private UUID primarykey;
+    @Column(name = "primarykey", unique = true, nullable = false)
+    private String primarykey;
 
     @Column(name = "Category", nullable = true, length = 64)
     private String category;
@@ -67,11 +66,11 @@ public class IISCaseberryLoggingObjectsApplicationLog {
         super();
     }
 
-    public void setPrimarykey(UUID primarykey) {
+    public void setPrimarykey(String primarykey) {
         this.primarykey = primarykey;
     }
 
-    public UUID getPrimarykey() {
+    public String getPrimarykey() {
         return primarykey;
     }
 

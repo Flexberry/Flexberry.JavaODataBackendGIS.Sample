@@ -1,6 +1,7 @@
 package Flexberry.GIS.model;
 
 import Flexberry.GIS.utils.UUIDConverter;
+import Flexberry.GIS.utils.UUIDToStringConverter;
 import org.eclipse.persistence.annotations.Convert;
 import org.eclipse.persistence.annotations.Converter;
 
@@ -8,7 +9,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import java.util.Date;
 import java.util.UUID;
 
 @Entity(name = "FavoriteFeature")
@@ -16,10 +16,10 @@ import java.util.UUID;
 public class FavoriteFeature {
 
     @Id
-    @Converter(converterClass = UUIDConverter.class, name = "primarykey")
+    @Converter(converterClass = UUIDToStringConverter.class, name = "primarykey")
     @Convert("primarykey")
-    @Column(name = "primarykey", length = 16, unique = true, nullable = false)
-    private UUID primarykey;
+    @Column(name = "primarykey", unique = true, nullable = false)
+    private String primarykey;
 
     @Column(name = "CreateTime", nullable = true)
     private java.sql.Timestamp createTime;
@@ -50,11 +50,11 @@ public class FavoriteFeature {
         super();
     }
 
-    public void setPrimarykey(UUID primarykey) {
+    public void setPrimarykey(String primarykey) {
         this.primarykey = primarykey;
     }
 
-    public UUID getPrimarykey() {
+    public String getPrimarykey() {
         return primarykey;
     }
 

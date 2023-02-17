@@ -33,12 +33,14 @@ public class MutableHttpFilter implements javax.servlet.Filter {
         mutableRequest.replaceSubstringInBody("__PrimaryKey", "Primarykey");
         mutableRequest.replaceSubstringInBody("+eq+", " eq ");
 
+        mutableRequest.fixPrimaryKeyValuesInBody();
+
         HttpServletResponse resp = (HttpServletResponse) response;
         MutableHttpResponse mutableResponse = new MutableHttpResponse(resp);
 
         mutableResponse.setHeader("Access-Control-Allow-Origin", req.getHeader("Origin"));
         mutableResponse.setHeader("Access-Control-Allow-Credentials", "true");
-        mutableResponse.setHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, DELETE");
+        mutableResponse.setHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, DELETE, PATCH");
         mutableResponse.setHeader("Access-Control-Max-Age", "3600");
         mutableResponse.setHeader("Access-Control-Allow-Headers", "Content-Type, Accept, X-Requested-With, remember-me, OData-Version, Prefer");
 

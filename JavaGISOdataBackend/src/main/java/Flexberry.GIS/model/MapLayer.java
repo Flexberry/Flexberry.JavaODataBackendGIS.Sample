@@ -1,13 +1,12 @@
 package Flexberry.GIS.model;
 
 import Flexberry.GIS.utils.PGgeometryConverter;
+import Flexberry.GIS.utils.UUIDToStringConverter;
 import com.sap.olingo.jpa.metadata.core.edm.annotation.EdmIgnore;
 import org.eclipse.persistence.annotations.Convert;
 import org.eclipse.persistence.annotations.Converter;
-import Flexberry.GIS.utils.UUIDConverter;
 
 import javax.persistence.*;
-import java.util.UUID;
 
 import java.util.List;
 
@@ -19,10 +18,10 @@ import java.util.List;
 public class MapLayer {
 
     @Id
-    @Converter(converterClass = UUIDConverter.class, name = "primarykey")
+    @Converter(converterClass = UUIDToStringConverter.class, name = "primarykey")
     @Convert("primarykey")
-    @Column(name = "primarykey", length = 16, unique = true, nullable = false)
-    private UUID primarykey;
+    @Column(name = "primarykey", unique = true, nullable = false)
+    private String primarykey;
 
     @Column(name = "Name", length = 255)
     private String name;
@@ -81,20 +80,20 @@ public class MapLayer {
     private String editor;
 
     @EdmIgnore
-    @Converter(converterClass = UUIDConverter.class, name = "Parent")
+    @Converter(converterClass = UUIDToStringConverter.class, name = "Parent")
     @Convert("Parent")
-    @Column(name = "Parent", length = 16, unique = true, nullable = false)
-    private UUID _parentid;
+    @Column(name = "Parent", unique = true, nullable = false)
+    private String _parentid;
 
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     @JoinColumn(name = "Parent", insertable = false, updatable = false)
     private MapLayer parent;
 
     @EdmIgnore
-    @Converter(converterClass = UUIDConverter.class, name = "Map")
-    @Convert("Map")
-    @Column(name = "Map", length = 16, unique = true, nullable = false)
-    private UUID _mapid;
+    @Converter(converterClass = UUIDToStringConverter.class, name = "MapID")
+    @Convert("MapID")
+    @Column(name = "Map", unique = true, nullable = false)
+    private String _mapid;
 
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     @JoinColumn(name = "Map", insertable = false, updatable = false)
@@ -107,11 +106,11 @@ public class MapLayer {
         super();
     }
 
-    public void setPrimarykey(UUID primarykey) {
+    public void setPrimarykey(String primarykey) {
         this.primarykey = primarykey;
     }
 
-    public UUID getPrimarykey() {
+    public String getPrimarykey() {
         return primarykey;
     }
 
@@ -259,12 +258,28 @@ public class MapLayer {
       this.editor = editor;
     }
 
+    public MapLayer getParent() {
+        return parent;
+    }
+
+    public void setParent(MapLayer parent) {
+        this.parent = parent;
+
+        if (parent != null) {
+            this._parentid = parent.getPrimarykey();
+        }
+    }
+
     public Map getMap() {
         return map;
     }
 
     public void setMap(Map map) {
         this.map = map;
+
+        if (map != null) {
+            this._mapid = map.getPrimarykey();
+        }
     }
 
     public List<LayerLink> getLayerLink() {

@@ -65,6 +65,10 @@ CREATE TABLE LinkMetadata (
 
 CREATE TABLE MapObjectSetting (
  primaryKey UUID NOT NULL,
+ CreateTime TIMESTAMP(3) NULL,
+ Creator VARCHAR(255) NULL,
+ Editor VARCHAR(255) NULL,
+ EditTime TIMESTAMP(3) NULL,
  EditForm VARCHAR(255) NULL,
  ListForm VARCHAR(255) NULL,
  MultEditForm VARCHAR(255) NULL,

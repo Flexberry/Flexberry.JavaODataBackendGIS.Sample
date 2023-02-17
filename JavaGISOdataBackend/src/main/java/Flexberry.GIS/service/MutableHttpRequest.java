@@ -1,5 +1,6 @@
 package Flexberry.GIS.service;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.*;
@@ -83,6 +84,31 @@ public class MutableHttpRequest extends HttpServletRequestWrapper {
         body = body.replace(originSubstring, finalSubstring);
     }
 
+    public void fixPrimaryKeyValuesInBody() {
+        JSONObject currentBodyJson;
+
+        if (body == null || body.length() == 0) return;
+
+        try {
+            currentBodyJson = new JSONObject(this.body);
+        } catch (Exception ignored) {
+            return;
+        }
+
+        for (String keyStr : currentBodyJson.keySet()) {
+            if (keyStr.endsWith("@odata.bind")) {
+                String keyValue = currentBodyJson.get(keyStr).toString();
+
+                if (!keyValue.contains("\'")) {
+                    keyValue = keyValue.replace("(", "('").replace(")", "')");
+                    currentBodyJson.put(keyStr, keyValue);
+                }
+            }
+        }
+
+        body = currentBodyJson.toString();
+    }
+
     public void setExistingEntitiesList(List<String> entities)
     {
         existedEntities = entities;
@@ -143,6 +169,21 @@ public class MutableHttpRequest extends HttpServletRequestWrapper {
 
                 modifiedQueryString = modifiedQueryString.replace(findedSelect, selectWithoutEntities);
             }
+        }
+
+        // filter PrimaryKey
+        Pattern patternFilterPk = Pattern.compile("%24filter=[^\\%]*__PrimaryKey[^\\%\\,]*\\+[0-9a-f\\-]{36}", Pattern.CASE_INSENSITIVE);
+        Matcher matcherFilterPk = patternFilterPk.matcher(modifiedQueryString);
+
+        while(matcherFilterPk.find())
+        {
+            String foundPkFilter = matcherFilterPk.group();
+            int foundPkFilterLength = foundPkFilter.length();
+
+            String fixedPkFiler = foundPkFilter.substring(0, foundPkFilterLength - 36) +
+                    "'" + foundPkFilter.substring(foundPkFilterLength - 36, foundPkFilterLength) + "'";
+
+            modifiedQueryString = modifiedQueryString.replace(foundPkFilter, fixedPkFiler);
         }
 
         // Меняем в строке запроса дополнительные подстроки, сформированные в классе MutableHttpFilter.

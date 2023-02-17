@@ -1,12 +1,11 @@
 package Flexberry.GIS.model;
 
+import Flexberry.GIS.utils.UUIDToStringConverter;
 import com.sap.olingo.jpa.metadata.core.edm.annotation.EdmIgnore;
 import org.eclipse.persistence.annotations.Convert;
 import org.eclipse.persistence.annotations.Converter;
-import Flexberry.GIS.utils.UUIDConverter;
 
 import javax.persistence.*;
-import java.util.UUID;
 
 /**
  * Entity implementation class for Entity: ParameterMetadata
@@ -16,10 +15,10 @@ import java.util.UUID;
 public class ParameterMetadata {
 
     @Id
-    @Converter(converterClass = UUIDConverter.class, name = "primarykey")
+    @Converter(converterClass = UUIDToStringConverter.class, name = "primarykey")
     @Convert("primarykey")
-    @Column(name = "primarykey", length = 16, unique = true, nullable = false)
-    private UUID primarykey;
+    @Column(name = "primarykey", unique = true, nullable = false)
+    private String primarykey;
 
     @Column(name = "ObjectField", length = 255)
     private String objectField;
@@ -49,10 +48,10 @@ public class ParameterMetadata {
     private String editor;
 
     @EdmIgnore
-    @Converter(converterClass = UUIDConverter.class, name = "LayerLink")
+    @Converter(converterClass = UUIDToStringConverter.class, name = "LayerLink")
     @Convert("LayerLink")
-    @Column(name = "LayerLink", length = 16, unique = true, nullable = false)
-    private UUID _layerlinkid;
+    @Column(name = "LayerLink", unique = true, nullable = false)
+    private String _layerlinkid;
 
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     @JoinColumn(name = "LayerLink", insertable = false, updatable = false)
@@ -63,11 +62,11 @@ public class ParameterMetadata {
         super();
     }
 
-    public void setPrimarykey(UUID primarykey) {
+    public void setPrimarykey(String primarykey) {
         this.primarykey = primarykey;
     }
 
-    public UUID getPrimarykey() {
+    public String getPrimarykey() {
         return primarykey;
     }
 
@@ -143,5 +142,15 @@ public class ParameterMetadata {
       this.editor = editor;
     }
 
+    public LinkMetadata getLayerLink() {
+        return layerLink;
+    }
 
+    public void setLayerLink(LinkMetadata layerLink) {
+        this.layerLink = layerLink;
+
+        if (layerLink != null) {
+            this._layerlinkid = layerLink.getPrimarykey();
+        }
+    }
 }

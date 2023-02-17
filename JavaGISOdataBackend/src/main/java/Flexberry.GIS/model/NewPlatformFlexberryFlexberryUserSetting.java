@@ -1,5 +1,6 @@
 package Flexberry.GIS.model;
 
+import Flexberry.GIS.utils.UUIDToStringConverter;
 import org.eclipse.persistence.annotations.Convert;
 import org.eclipse.persistence.annotations.Converter;
 import Flexberry.GIS.utils.UUIDConverter;
@@ -16,10 +17,10 @@ import java.util.UUID;
 public class NewPlatformFlexberryFlexberryUserSetting {
 
     @Id
-    @Converter(converterClass = UUIDConverter.class, name = "primarykey")
+    @Converter(converterClass = UUIDToStringConverter.class, name = "primarykey")
     @Convert("primarykey")
-    @Column(name = "primarykey", length = 16, unique = true, nullable = false)
-    private UUID primarykey;
+    @Column(name = "primarykey", unique = true, nullable = false)
+    private String primarykey;
 
     @Column(name = "AppName", nullable = true, length = 256)
     private String appName;
@@ -78,11 +79,11 @@ public class NewPlatformFlexberryFlexberryUserSetting {
         super();
     }
 
-    public void setPrimarykey(UUID primarykey) {
+    public void setPrimarykey(String primarykey) {
         this.primarykey = primarykey;
     }
 
-    public UUID getPrimarykey() {
+    public String getPrimarykey() {
         return primarykey;
     }
 
