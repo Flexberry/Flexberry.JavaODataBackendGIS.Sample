@@ -52,8 +52,11 @@ public class MutableHttpFilter implements javax.servlet.Filter {
         }
 
         // Replace changed parameter name backward for response to frontend.
+        mutableResponse.CacheOriginalContent();
         mutableResponse.replaceSubstringInResponse("Primarykey", "__PrimaryKey");
         mutableResponse.replaceSubstringInResponse(" eq ", "+eq+");
+        mutableResponse.convertAttributeToJsonInResponse("BoundingBox");
+        mutableResponse.ApplyChangesForResponse();
     }
 
     @Override
