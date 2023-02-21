@@ -53,7 +53,7 @@ public class MapObjectSetting {
     @Column(name = "DefaultMap", unique = true, nullable = false)
     private String _defaultmapid;
 
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @ManyToOne(optional = true, fetch = FetchType.LAZY)
     @JoinColumn(name = "DefaultMap", insertable = false, updatable = false)
     private Map defaultMap;
 

@@ -131,15 +131,23 @@ public class MutableHttpRequest extends HttpServletRequestWrapper {
             return strBody;
         }
 
+        ArrayList<String> keysToRemove = new ArrayList<>();
+
         for (String keyStr : currentBodyJson.keySet()) {
             if (keyStr.endsWith("@odata.bind")) {
                 String keyValue = currentBodyJson.get(keyStr).toString();
 
-                if (!keyValue.contains("\'")) {
+                if (keyValue.equalsIgnoreCase("null")) {
+                    keysToRemove.add(keyStr);
+                } else if (!keyValue.contains("\'")) {
                     keyValue = keyValue.replace("(", "('").replace(")", "')");
                     currentBodyJson.put(keyStr, keyValue);
                 }
             }
+        }
+
+        for (String keyStr : keysToRemove) {
+            currentBodyJson.remove(keyStr);
         }
 
         return currentBodyJson.toString();
