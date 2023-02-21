@@ -278,6 +278,9 @@ public class MutableHttpRequest extends HttpServletRequestWrapper {
 
     public static String getBatchBoundary(HttpServletRequest request) {
         String contentType =  request.getContentType();
+
+        if (contentType == null) return null;
+
         int indexBoundary = contentType.indexOf("boundary=");
 
         if (indexBoundary >= 0) {
