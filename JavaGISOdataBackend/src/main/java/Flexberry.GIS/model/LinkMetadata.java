@@ -41,11 +41,11 @@ public class LinkMetadata {
     @Converter(converterClass = UUIDToStringConverter.class, name = "MapObjectSetting")
     @Convert("MapObjectSetting")
     @Column(name = "MapObjectSetting", unique = true, nullable = false)
-    private String _mapobjectsettingid;
+    private String _mapObjectSetting;
 
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     @JoinColumn(name = "MapObjectSetting", insertable = false, updatable = false)
-    private MapObjectSetting mapobjectsetting;
+    private MapObjectSetting mapObjectSetting;
 
     @EdmIgnore
     @Converter(converterClass = UUIDToStringConverter.class, name = "Layer")
@@ -58,7 +58,7 @@ public class LinkMetadata {
     private LayerMetadata layer;
 
     @OneToMany(mappedBy = "layerLink", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
-    private List<ParameterMetadata> parametermetadatas;
+    private List<ParameterMetadata> parameters;
 
 
     public LinkMetadata() {
@@ -114,14 +114,14 @@ public class LinkMetadata {
     }
 
     public MapObjectSetting getMapObjectSetting() {
-        return mapobjectsetting;
+        return mapObjectSetting;
     }
 
     public void setMapObjectSetting(MapObjectSetting mapObjectSetting) {
-        this.mapobjectsetting = mapObjectSetting;
+        this.mapObjectSetting = mapObjectSetting;
 
         if (mapObjectSetting != null) {
-            this._mapobjectsettingid = mapobjectsetting.getPrimarykey();
+            this._mapObjectSetting = mapObjectSetting.getPrimarykey();
         }
     }
 
@@ -135,5 +135,13 @@ public class LinkMetadata {
         if (layer != null) {
             this._layerid = layer.getPrimarykey();
         }
+    }
+
+    public List<ParameterMetadata> getParameters() {
+        return parameters;
+    }
+
+    public void setParameters(List<ParameterMetadata> parameters) {
+        this.parameters = parameters;
     }
 }

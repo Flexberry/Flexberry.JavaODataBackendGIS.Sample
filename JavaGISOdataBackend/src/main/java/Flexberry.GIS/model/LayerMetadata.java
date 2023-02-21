@@ -67,7 +67,7 @@ public class LayerMetadata {
     private String editor;
 
     @OneToMany(mappedBy = "layer", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
-    private List<LinkMetadata> linkmetadatas;
+    private List<LinkMetadata> linkMetadata;
 
 
     public LayerMetadata() {
@@ -194,5 +194,11 @@ public class LayerMetadata {
       this.editor = editor;
     }
 
+    public List<LinkMetadata> getLinkMetadata() {
+        return linkMetadata;
+    }
 
+    public void setLinkMetadata(List<LinkMetadata> linkMetadata) {
+        this.linkMetadata = linkMetadata;
+    }
 }
