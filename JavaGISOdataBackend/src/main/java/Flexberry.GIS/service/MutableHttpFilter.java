@@ -33,6 +33,8 @@ public class MutableHttpFilter implements javax.servlet.Filter {
         mutableRequest.replaceSubstringInBody("__PrimaryKey", "Primarykey");
         mutableRequest.replaceSubstringInBody("+eq+", " eq ");
 
+        mutableRequest.ApplyChangesForRequest();
+
         HttpServletResponse resp = (HttpServletResponse) response;
         MutableHttpResponse mutableResponse = new MutableHttpResponse(resp);
 

@@ -1,12 +1,11 @@
 package Flexberry.GIS.model;
 
+import Flexberry.GIS.utils.UUIDToStringConverter;
 import com.sap.olingo.jpa.metadata.core.edm.annotation.EdmIgnore;
 import org.eclipse.persistence.annotations.Convert;
 import org.eclipse.persistence.annotations.Converter;
-import Flexberry.GIS.utils.UUIDConverter;
 
 import javax.persistence.*;
-import java.util.UUID;
 
 /**
  * Entity implementation class for Entity: MapObjectSetting
@@ -16,10 +15,10 @@ import java.util.UUID;
 public class MapObjectSetting {
 
     @Id
-    @Converter(converterClass = UUIDConverter.class, name = "primarykey")
+    @Converter(converterClass = UUIDToStringConverter.class, name = "primarykey")
     @Convert("primarykey")
-    @Column(name = "primarykey", length = 16, unique = true, nullable = false)
-    private UUID primarykey;
+    @Column(name = "primarykey", unique = true, nullable = false)
+    private String primarykey;
 
     @Column(name = "TypeName", length = 255)
     private String typeName;
@@ -36,11 +35,23 @@ public class MapObjectSetting {
     @Column(name = "MultEditForm", length = 255)
     private String multEditForm;
 
+    @Column(name = "CreateTime")
+    private java.sql.Timestamp createTime;
+
+    @Column(name = "Creator", length = 255)
+    private String creator;
+
+    @Column(name = "EditTime")
+    private java.sql.Timestamp editTime;
+
+    @Column(name = "Editor", length = 255)
+    private String editor;
+
     @EdmIgnore
-    @Converter(converterClass = UUIDConverter.class, name = "DefaultMap")
+    @Converter(converterClass = UUIDToStringConverter.class, name = "DefaultMap")
     @Convert("DefaultMap")
-    @Column(name = "DefaultMap", length = 16, unique = true, nullable = false)
-    private UUID _defaultmapid;
+    @Column(name = "DefaultMap", unique = true, nullable = false)
+    private String _defaultmapid;
 
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     @JoinColumn(name = "DefaultMap", insertable = false, updatable = false)
@@ -51,11 +62,11 @@ public class MapObjectSetting {
         super();
     }
 
-    public void setPrimarykey(UUID primarykey) {
+    public void setPrimarykey(String primarykey) {
         this.primarykey = primarykey;
     }
 
-    public UUID getPrimarykey() {
+    public String getPrimarykey() {
         return primarykey;
     }
 
@@ -99,5 +110,47 @@ public class MapObjectSetting {
       this.multEditForm = multeditform;
     }
 
+    public java.sql.Timestamp getCreateTime() {
+        return createTime;
+    }
 
+    public void setCreateTime(java.sql.Timestamp createtime) {
+        this.createTime = createtime;
+    }
+
+    public String getCreator() {
+        return creator;
+    }
+
+    public void setCreator(String creator) {
+        this.creator = creator;
+    }
+
+    public java.sql.Timestamp getEditTime() {
+        return editTime;
+    }
+
+    public void setEditTime(java.sql.Timestamp edittime) {
+        this.editTime = edittime;
+    }
+
+    public String getEditor() {
+        return editor;
+    }
+
+    public void setEditor(String editor) {
+        this.editor = editor;
+    }
+
+    public Map getDefaultMap() {
+        return defaultMap;
+    }
+
+    public void setDefaultMap(Map defaultMap) {
+        this.defaultMap = defaultMap;
+
+        if (defaultMap != null) {
+            this._defaultmapid = defaultMap.getPrimarykey();
+        }
+    }
 }
