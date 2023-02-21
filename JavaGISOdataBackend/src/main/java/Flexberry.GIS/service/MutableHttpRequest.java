@@ -1,9 +1,13 @@
 package Flexberry.GIS.service;
 
-import org.json.JSONArray;
+import Flexberry.GIS.utils.batch.BatchRequest;
+;
+import Flexberry.GIS.utils.batch.BatchRequestPart;
+import Flexberry.GIS.utils.batch.BatchSubRequest;
 import org.json.JSONObject;
 
 import java.io.*;
+import java.text.ParseException;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -14,22 +18,51 @@ import javax.servlet.http.HttpServletRequestWrapper;
 public class MutableHttpRequest extends HttpServletRequestWrapper {
     private String body;
     private List<String> excessHeaders;
-    private Map<String,String> replacedQuerySubstrings;
-
+    private Map<String, String> replacedQuerySubstrings;
+    private Map<String, String> replacedBodySubstrings;
     private List<String> existedEntities;
+
+    private Boolean isBatchRequest = false;
+    private String batchBoundaryId = null;
+    BatchRequest batchRequest = null;
 
     public MutableHttpRequest(HttpServletRequest request) throws IOException {
         super(request);
 
         excessHeaders = new ArrayList<String>();
+        existedEntities = new ArrayList<String>();
         replacedQuerySubstrings = new HashMap<String,String>();
+        replacedBodySubstrings = new HashMap<String,String>();
 
         catchRequestBody(request);
+
+        String currentUrl = request.getRequestURL().toString();
+
+        // batch запрос.
+        if (currentUrl.endsWith("$batch")) {
+            batchBoundaryId = getBatchBoundary(request);
+
+            if (batchBoundaryId != null) {
+                try {
+                    batchRequest = new BatchRequest(currentUrl, body, batchBoundaryId);
+                } catch (ParseException e) {
+                    throw new RuntimeException(e);
+                }
+
+                isBatchRequest = true;
+            }
+        }
     }
 
     @Override
     public ServletInputStream getInputStream() throws IOException {
-        final ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(body.getBytes());
+        String thisBody = body;
+
+        if (isBatchRequest) {
+            thisBody = batchRequest.toString();
+        }
+
+        final ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(thisBody.getBytes());
         ServletInputStream servletInputStream = new ServletInputStream() {
             public int read() throws IOException {
                 return byteArrayInputStream.read();
@@ -80,19 +113,22 @@ public class MutableHttpRequest extends HttpServletRequestWrapper {
     }
 
     public void replaceSubstringInBody(String originSubstring, String finalSubstring) {
-        body = convertGISJsonValuesToString(body);
-        body = body.replace(originSubstring, finalSubstring);
+        replacedBodySubstrings.put(originSubstring, finalSubstring);
     }
 
     public void fixPrimaryKeyValuesInBody() {
+        body = fixPrimaryKeyValuesInBody(body);
+    }
+
+    public static String fixPrimaryKeyValuesInBody(String strBody) {
         JSONObject currentBodyJson;
 
-        if (body == null || body.length() == 0) return;
+        if (strBody == null || strBody.length() == 0) return strBody;
 
         try {
-            currentBodyJson = new JSONObject(this.body);
+            currentBodyJson = new JSONObject(strBody);
         } catch (Exception ignored) {
-            return;
+            return strBody;
         }
 
         for (String keyStr : currentBodyJson.keySet()) {
@@ -106,7 +142,7 @@ public class MutableHttpRequest extends HttpServletRequestWrapper {
             }
         }
 
-        body = currentBodyJson.toString();
+        return currentBodyJson.toString();
     }
 
     public void setExistingEntitiesList(List<String> entities)
@@ -172,8 +208,23 @@ public class MutableHttpRequest extends HttpServletRequestWrapper {
         }
 
         // filter PrimaryKey
-        Pattern patternFilterPk = Pattern.compile("%24filter=[^\\%]*__PrimaryKey[^\\%\\,]*\\+[0-9a-f\\-]{36}", Pattern.CASE_INSENSITIVE);
+        Pattern patternFilterPk = Pattern.compile("%24filter=[^\\%]*__PrimaryKey[^\\%\\,]*\\+[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}", Pattern.CASE_INSENSITIVE);
         Matcher matcherFilterPk = patternFilterPk.matcher(modifiedQueryString);
+
+        while(matcherFilterPk.find())
+        {
+            String foundPkFilter = matcherFilterPk.group();
+            int foundPkFilterLength = foundPkFilter.length();
+
+            String fixedPkFiler = foundPkFilter.substring(0, foundPkFilterLength - 36) +
+                    "'" + foundPkFilter.substring(foundPkFilterLength - 36, foundPkFilterLength) + "'";
+
+            modifiedQueryString = modifiedQueryString.replace(foundPkFilter, fixedPkFiler);
+        }
+
+        // PrimaryKey в прямом запросе
+        patternFilterPk = Pattern.compile("http:\\/\\/.*\\/FlexberryGISService\\/odata\\/.*\\([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}", Pattern.CASE_INSENSITIVE);
+        matcherFilterPk = patternFilterPk.matcher(modifiedQueryString);
 
         while(matcherFilterPk.find())
         {
@@ -194,7 +245,7 @@ public class MutableHttpRequest extends HttpServletRequestWrapper {
         return modifiedQueryString;
     }
 
-    private String convertGISJsonValuesToString(String body) {
+    public static String convertGISJsonValuesToString(String body) {
         if (body.equals("")) return body;
         
         // Olingo не понимает тип JSON, только строку. Поэтому нужно преобразовать значение полей с геоданными в строку.
@@ -215,5 +266,46 @@ public class MutableHttpRequest extends HttpServletRequestWrapper {
         }
 
         return convertedBody;
+    }
+
+    public static String getBatchBoundary(HttpServletRequest request) {
+        String contentType =  request.getContentType();
+        int indexBoundary = contentType.indexOf("boundary=");
+
+        if (indexBoundary >= 0) {
+            String[] arr = contentType.substring(indexBoundary).split("[=;]");
+
+            if (arr.length > 1) return arr[1];
+        }
+
+        return null;
+    }
+
+    public void ApplyChangesForRequest() {
+        if (this.isBatchRequest) {
+            for (BatchRequestPart batchRequestPart : batchRequest.parts) {
+                for (BatchSubRequest batchSubRequest : batchRequestPart.requests) {
+                    // body
+                    batchSubRequest.bodyPart = convertGISJsonValuesToString(batchSubRequest.bodyPart);
+
+                    for (Map.Entry<String, String> entry : replacedBodySubstrings.entrySet()) {
+                        batchSubRequest.bodyPart = batchSubRequest.bodyPart.replace(entry.getKey(), entry.getValue());
+                    }
+
+                    batchSubRequest.bodyPart = fixPrimaryKeyValuesInBody(batchSubRequest.bodyPart);
+
+                    // query
+                    batchSubRequest.queryPart = modifyQueryString(batchSubRequest.queryPart);
+                }
+            }
+        } else {
+            body = convertGISJsonValuesToString(body);
+
+            for (Map.Entry<String, String> entry : replacedBodySubstrings.entrySet()) {
+                body = body.replace(entry.getKey(), entry.getValue());
+            }
+
+            fixPrimaryKeyValuesInBody();
+        }
     }
 }

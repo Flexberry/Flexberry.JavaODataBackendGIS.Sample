@@ -85,7 +85,7 @@ public class MapLayer {
     @Column(name = "Parent", unique = true, nullable = false)
     private String _parentid;
 
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @ManyToOne(optional = true, fetch = FetchType.LAZY)
     @JoinColumn(name = "Parent", insertable = false, updatable = false)
     private MapLayer parent;
 
