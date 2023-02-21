@@ -55,7 +55,7 @@ public class MapLayer {
 
     @Converter(converterClass = PGgeometryConverter.class, name = "BoundingBox")
     @Convert("BoundingBox")
-    @Column(name = "BoundingBox", length = 1)
+    @Column(name = "BoundingBox", length = -1)
     private String boundingBox;
 
     @Column(name = "Public")
