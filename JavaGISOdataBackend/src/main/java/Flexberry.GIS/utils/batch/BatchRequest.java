@@ -175,6 +175,20 @@ public class BatchRequest {
         return headers;
     }
 
+    public static HashMap<String, String> removeHeader(HashMap<String, String> headers, String removeValue) {
+        String keyValue = null;
+
+        for (Map.Entry<String, String> entry : headers.entrySet()) {
+            if (entry.getKey().equalsIgnoreCase(removeValue)) {
+                keyValue = entry.getKey();
+            }
+        }
+
+        if (keyValue != null) headers.remove(keyValue);
+
+        return headers;
+    }
+
     public static ParseException getParseException(String str, Integer lineNumber, Integer position) {
         return new ParseException("Ожидается значение '" + str + "' в строке " + lineNumber.toString()
                 + " на позиции " + position.toString(), lineNumber);

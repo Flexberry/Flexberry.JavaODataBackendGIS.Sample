@@ -296,6 +296,17 @@ public class MutableHttpRequest extends HttpServletRequestWrapper {
 
                     // query
                     batchSubRequest.queryPart = modifyQueryString(batchSubRequest.queryPart);
+
+                    // headers
+                    for (String excessHeader : excessHeaders) {
+                        batchSubRequest.headers = BatchRequest.removeHeader(batchSubRequest.headers, excessHeader);
+                        batchSubRequest.queryHeaders = BatchRequest.removeHeader(batchSubRequest.queryHeaders, excessHeader);
+                    }
+                }
+
+                // headers
+                for (String excessHeader : excessHeaders) {
+                    batchRequestPart.headers = BatchRequest.removeHeader(batchRequestPart.headers, excessHeader);
                 }
             }
         } else {
