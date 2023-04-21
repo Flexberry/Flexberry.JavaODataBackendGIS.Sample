@@ -1,12 +1,11 @@
 package Flexberry.GIS.model;
 
+import Flexberry.GIS.utils.UUIDToStringConverter;
 import org.eclipse.persistence.annotations.Convert;
 import org.eclipse.persistence.annotations.Converter;
-import Flexberry.GIS.utils.UUIDConverter;
 
 import javax.persistence.*;
 import java.util.Date;
-import java.util.UUID;
 
 /**
  * Entity implementation class for Entity: IISCaseberryLoggingObjectsApplicationLog
@@ -16,12 +15,12 @@ import java.util.UUID;
 public class IISCaseberryLoggingObjectsApplicationLog {
 
     @Id
-    @Converter(converterClass = UUIDConverter.class, name = "primarykey")
+    @Converter(converterClass = UUIDToStringConverter.class, name = "primarykey")
     @Convert("primarykey")
-    @Column(name = "primarykey", length = 16, unique = true, nullable = false)
-    private UUID primarykey;
+    @Column(name = "primarykey", unique = true, nullable = false)
+    private String primarykey;
 
-    @Column(name = "Category", nullable = true)
+    @Column(name = "Category", nullable = true, length = 64)
     private String category;
 		
 	@Column(name = "EventId", nullable = true)
@@ -30,48 +29,48 @@ public class IISCaseberryLoggingObjectsApplicationLog {
 	@Column(name = "Priority", nullable = true)
     private Integer priority;
 		
-	@Column(name = "Severity", nullable = true)
+	@Column(name = "Severity", nullable = true, length = 32)
     private String severity;
 	
-	@Column(name = "Title", nullable = true)
+	@Column(name = "Title", nullable = true, length = 256)
     private String title;
 	
 	@Column(name = "Timestamp", nullable = true)
     private Date timestamp;
 	
-	@Column(name = "MachineName", nullable = true)
+	@Column(name = "MachineName", nullable = true, length = 32)
     private String machineName;
 	
-	@Column(name = "AppDomainName", nullable = true)
+	@Column(name = "AppDomainName", nullable = true, length = 512)
     private String appDomainName;
 	
-	@Column(name = "ProcessId", nullable = true)
+	@Column(name = "ProcessId", nullable = true, length = 256)
     private String processId;
 	
-	@Column(name = "ProcessName", nullable = true)
+	@Column(name = "ProcessName", nullable = true, length = 512)
     private String processName;
 	
-	@Column(name = "ThreadName", nullable = true)
+	@Column(name = "ThreadName", nullable = true, length = 512)
     private String threadName;
 		
-	@Column(name = "Win32ThreadId", nullable = true)
+	@Column(name = "Win32ThreadId", nullable = true, length = 128)
     private String win32ThreadId;
 	
-	@Column(name = "Message", nullable = true)
+	@Column(name = "Message", nullable = true, length = 2500)
     private String message;
 	
-	@Column(name = "FormattedMessage", nullable = true)
+	@Column(name = "FormattedMessage", nullable = true, length = -1)
     private String formattedMessage;
 	
 	public IISCaseberryLoggingObjectsApplicationLog() {
         super();
     }
 
-    public void setPrimarykey(UUID primarykey) {
+    public void setPrimarykey(String primarykey) {
         this.primarykey = primarykey;
     }
 
-    public UUID getPrimarykey() {
+    public String getPrimarykey() {
         return primarykey;
     }
 

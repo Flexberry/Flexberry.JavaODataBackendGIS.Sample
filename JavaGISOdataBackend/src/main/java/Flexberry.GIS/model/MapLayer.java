@@ -1,13 +1,12 @@
 package Flexberry.GIS.model;
 
 import Flexberry.GIS.utils.PGgeometryConverter;
+import Flexberry.GIS.utils.UUIDToStringConverter;
 import com.sap.olingo.jpa.metadata.core.edm.annotation.EdmIgnore;
 import org.eclipse.persistence.annotations.Convert;
 import org.eclipse.persistence.annotations.Converter;
-import Flexberry.GIS.utils.UUIDConverter;
 
 import javax.persistence.*;
-import java.util.UUID;
 
 import java.util.List;
 
@@ -19,21 +18,21 @@ import java.util.List;
 public class MapLayer {
 
     @Id
-    @Converter(converterClass = UUIDConverter.class, name = "primarykey")
+    @Converter(converterClass = UUIDToStringConverter.class, name = "primarykey")
     @Convert("primarykey")
-    @Column(name = "primarykey", length = 16, unique = true, nullable = false)
-    private UUID primarykey;
+    @Column(name = "primarykey", unique = true, nullable = false)
+    private String primarykey;
 
-    @Column(name = "Name")
+    @Column(name = "Name", length = 255)
     private String name;
 
-    @Column(name = "Description")
+    @Column(name = "Description", length = -1)
     private String description;
 
-    @Column(name = "KeyWords")
+    @Column(name = "KeyWords", length = -1)
     private String keyWords;
 
-    @Column(name = "AnyText")
+    @Column(name = "AnyText", length = -1)
     private String anyText;
 
     @Column(name = "Index")
@@ -42,77 +41,76 @@ public class MapLayer {
     @Column(name = "Visibility")
     private Boolean visibility;
 
-    @Column(name = "Type")
+    @Column(name = "Type", length = 255)
     private String type;
 
-    @Column(name = "Settings")
+    @Column(name = "Settings", length = -1)
     private String settings;
 
     @Column(name = "Scale")
     private Integer scale;
 
-    @Column(name = "CoordinateReferenceSystem")
+    @Column(name = "CoordinateReferenceSystem", length = 255)
     private String coordinateReferenceSystem;
 
     @Converter(converterClass = PGgeometryConverter.class, name = "BoundingBox")
     @Convert("BoundingBox")
-    @Column(name = "BoundingBox")
+    @Column(name = "BoundingBox", length = -1)
     private String boundingBox;
 
     @Column(name = "Public")
     private Boolean Public = false;
 
-    @Column(name = "Owner")
+    @Column(name = "Owner", length = 255)
     private String owner;
 
-    @Column(name = "SecurityKey")
+    @Column(name = "SecurityKey", length = 255)
     private String securityKey;
 
     @Column(name = "CreateTime")
     private java.sql.Timestamp createTime;
 
-    @Column(name = "Creator")
+    @Column(name = "Creator", length = 255)
     private String creator;
 
     @Column(name = "EditTime")
     private java.sql.Timestamp editTime;
 
-    @Column(name = "Editor")
+    @Column(name = "Editor", length = 255)
     private String editor;
 
     @EdmIgnore
-    @Converter(converterClass = UUIDConverter.class, name = "Parent")
+    @Converter(converterClass = UUIDToStringConverter.class, name = "Parent")
     @Convert("Parent")
-    @Column(name = "Parent", length = 16, unique = true, nullable = false)
-    private UUID _parentid;
+    @Column(name = "Parent", unique = true, nullable = false)
+    private String _parentid;
 
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @ManyToOne(optional = true, fetch = FetchType.LAZY)
     @JoinColumn(name = "Parent", insertable = false, updatable = false)
     private MapLayer parent;
 
     @EdmIgnore
-    @Converter(converterClass = UUIDConverter.class, name = "Map")
-    @Convert("Map")
-    @Column(name = "Map", length = 16, unique = true, nullable = false)
-    private UUID _mapid;
+    @Converter(converterClass = UUIDToStringConverter.class, name = "MapID")
+    @Convert("MapID")
+    @Column(name = "Map", unique = true, nullable = false)
+    private String _mapid;
 
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     @JoinColumn(name = "Map", insertable = false, updatable = false)
     private Map map;
 
     @OneToMany(mappedBy = "layer", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
-    private List<LayerLink> layerlinks;
-
+    private List<LayerLink> layerLink;
 
     public MapLayer() {
         super();
     }
 
-    public void setPrimarykey(UUID primarykey) {
+    public void setPrimarykey(String primarykey) {
         this.primarykey = primarykey;
     }
 
-    public UUID getPrimarykey() {
+    public String getPrimarykey() {
         return primarykey;
     }
 
@@ -260,5 +258,36 @@ public class MapLayer {
       this.editor = editor;
     }
 
+    public MapLayer getParent() {
+        return parent;
+    }
+
+    public void setParent(MapLayer parent) {
+        this.parent = parent;
+
+        if (parent != null) {
+            this._parentid = parent.getPrimarykey();
+        }
+    }
+
+    public Map getMap() {
+        return map;
+    }
+
+    public void setMap(Map map) {
+        this.map = map;
+
+        if (map != null) {
+            this._mapid = map.getPrimarykey();
+        }
+    }
+
+    public List<LayerLink> getLayerLink() {
+        return layerLink;
+    }
+
+    public void setLayerLink(List<LayerLink> layerLink) {
+        this.layerLink = layerLink;
+    }
 
 }

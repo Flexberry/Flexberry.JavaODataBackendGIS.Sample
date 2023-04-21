@@ -12,6 +12,7 @@
         <class>Flexberry.GIS.model.Map</class>
         <class>Flexberry.GIS.model.MapLayer</class>
         <class>Flexberry.GIS.model.FlexberryAdvLimit</class>
+        <class>Flexberry.GIS.model.FavoriteFeature</class>
         <class>Flexberry.GIS.model.NewPlatformFlexberryFlexberryUserSetting</class>
         <class>Flexberry.GIS.model.NewPlatformFlexberryServicesLock</class>
         <class>Flexberry.GIS.model.IISCaseberryLoggingObjectsApplicationLog</class>

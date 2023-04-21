@@ -1,12 +1,11 @@
 package Flexberry.GIS.model;
 
+import Flexberry.GIS.utils.UUIDToStringConverter;
 import com.sap.olingo.jpa.metadata.core.edm.annotation.EdmIgnore;
 import org.eclipse.persistence.annotations.Convert;
 import org.eclipse.persistence.annotations.Converter;
-import Flexberry.GIS.utils.UUIDConverter;
 
 import javax.persistence.*;
-import java.util.UUID;
 
 import java.util.List;
 
@@ -18,10 +17,10 @@ import java.util.List;
 public class LinkMetadata {
 
     @Id
-    @Converter(converterClass = UUIDConverter.class, name = "primarykey")
+    @Converter(converterClass = UUIDToStringConverter.class, name = "primarykey")
     @Convert("primarykey")
-    @Column(name = "primarykey", length = 16, unique = true, nullable = false)
-    private UUID primarykey;
+    @Column(name = "primarykey", unique = true, nullable = false)
+    private String primarykey;
 
     @Column(name = "AllowShow")
     private Boolean allowShow;
@@ -29,48 +28,48 @@ public class LinkMetadata {
     @Column(name = "CreateTime")
     private java.sql.Timestamp createTime;
 
-    @Column(name = "Creator")
+    @Column(name = "Creator", length = 255)
     private String creator;
 
     @Column(name = "EditTime")
     private java.sql.Timestamp editTime;
 
-    @Column(name = "Editor")
+    @Column(name = "Editor", length = 255)
     private String editor;
 
     @EdmIgnore
-    @Converter(converterClass = UUIDConverter.class, name = "MapObjectSetting")
+    @Converter(converterClass = UUIDToStringConverter.class, name = "MapObjectSetting")
     @Convert("MapObjectSetting")
-    @Column(name = "MapObjectSetting", length = 16, unique = true, nullable = false)
-    private UUID _mapobjectsettingid;
+    @Column(name = "MapObjectSetting", unique = true, nullable = false)
+    private String _mapObjectSetting;
 
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     @JoinColumn(name = "MapObjectSetting", insertable = false, updatable = false)
-    private MapObjectSetting mapobjectsetting;
+    private MapObjectSetting mapObjectSetting;
 
     @EdmIgnore
-    @Converter(converterClass = UUIDConverter.class, name = "Layer")
+    @Converter(converterClass = UUIDToStringConverter.class, name = "Layer")
     @Convert("Layer")
-    @Column(name = "Layer", length = 16, unique = true, nullable = false)
-    private UUID _layerid;
+    @Column(name = "Layer", unique = true, nullable = false)
+    private String _layerid;
 
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     @JoinColumn(name = "Layer", insertable = false, updatable = false)
     private LayerMetadata layer;
 
     @OneToMany(mappedBy = "layerLink", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
-    private List<ParameterMetadata> parametermetadatas;
+    private List<ParameterMetadata> parameters;
 
 
     public LinkMetadata() {
         super();
     }
 
-    public void setPrimarykey(UUID primarykey) {
+    public void setPrimarykey(String primarykey) {
         this.primarykey = primarykey;
     }
 
-    public UUID getPrimarykey() {
+    public String getPrimarykey() {
         return primarykey;
     }
 
@@ -114,5 +113,35 @@ public class LinkMetadata {
       this.editor = editor;
     }
 
+    public MapObjectSetting getMapObjectSetting() {
+        return mapObjectSetting;
+    }
 
+    public void setMapObjectSetting(MapObjectSetting mapObjectSetting) {
+        this.mapObjectSetting = mapObjectSetting;
+
+        if (mapObjectSetting != null) {
+            this._mapObjectSetting = mapObjectSetting.getPrimarykey();
+        }
+    }
+
+    public LayerMetadata getLayer() {
+        return layer;
+    }
+
+    public void setLayer(LayerMetadata layer) {
+        this.layer = layer;
+
+        if (layer != null) {
+            this._layerid = layer.getPrimarykey();
+        }
+    }
+
+    public List<ParameterMetadata> getParameters() {
+        return parameters;
+    }
+
+    public void setParameters(List<ParameterMetadata> parameters) {
+        this.parameters = parameters;
+    }
 }

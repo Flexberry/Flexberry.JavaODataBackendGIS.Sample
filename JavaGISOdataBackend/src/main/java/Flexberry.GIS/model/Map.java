@@ -1,12 +1,11 @@
 package Flexberry.GIS.model;
 
 import Flexberry.GIS.utils.PGgeometryConverter;
+import Flexberry.GIS.utils.UUIDToStringConverter;
 import org.eclipse.persistence.annotations.Convert;
 import org.eclipse.persistence.annotations.Converter;
-import Flexberry.GIS.utils.UUIDConverter;
 
 import javax.persistence.*;
-import java.util.UUID;
 
 import java.util.List;
 
@@ -18,33 +17,33 @@ import java.util.List;
 public class Map {
 
     @Id
-    @Converter(converterClass = UUIDConverter.class, name = "primarykey")
+    @Converter(converterClass = UUIDToStringConverter.class, name = "primarykey")
     @Convert("primarykey")
-    @Column(name = "primarykey", length = 16, unique = true, nullable = false)
-    private UUID primarykey;
+    @Column(name = "primarykey", unique = true, nullable = false)
+    private String primarykey;
 
     @Column(name = "CreateTime")
     private java.sql.Timestamp createTime;
 
-    @Column(name = "Creator")
+    @Column(name = "Creator", length = 255)
     private String creator;
 
     @Column(name = "EditTime")
     private java.sql.Timestamp editTime;
 
-    @Column(name = "Editor")
+    @Column(name = "Editor", length = 255)
     private String editor;
 
-    @Column(name = "Name")
+    @Column(name = "Name", nullable = false, length = 255)
     private String name;
 
-    @Column(name = "Description")
+    @Column(name = "Description", length = -1)
     private String description;
 
-    @Column(name = "KeyWords")
+    @Column(name = "KeyWords", length = -1)
     private String keyWords;
 
-    @Column(name = "AnyText")
+    @Column(name = "AnyText", length = -1)
     private String anyText;
 
     @Column(name = "Lat")
@@ -62,36 +61,36 @@ public class Map {
     @Column(name = "Scale")
     private Integer scale;
 
-    @Column(name = "CoordinateReferenceSystem")
+    @Column(name = "CoordinateReferenceSystem", length = 255)
     private String coordinateReferenceSystem;
 
     @Converter(converterClass = PGgeometryConverter.class, name = "BoundingBox")
     @Convert("BoundingBox")
-    @Column(name = "BoundingBox")
+    @Column(name = "BoundingBox", length = -1)
     private String boundingBox;
 
-    @Column(name = "Owner")
+    @Column(name = "Owner", length = 255)
     private String owner;
 
-    @Column(name = "Picture")
+    @Column(name = "Picture", length = 255)
     private String picture;
 
     @Column(name = "EditTimeMapLayers")
     private java.sql.Timestamp editTimeMapLayers;
 
     @OneToMany(mappedBy = "map", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
-    private List<MapLayer> maplayers;
+    private List<MapLayer> mapLayer;
 
 
     public Map() {
         super();
     }
 
-    public void setPrimarykey(UUID primarykey) {
+    public void setPrimarykey(String primarykey) {
         this.primarykey = primarykey;
     }
 
-    public UUID getPrimarykey() {
+    public String getPrimarykey() {
         return primarykey;
     }
 
@@ -239,4 +238,11 @@ public class Map {
       this.editTimeMapLayers = edittimemaplayers;
     }
 
+    public List<MapLayer> getMapLayer() {
+        return mapLayer;
+    }
+
+    public void setMapLayer(List<MapLayer> mapLayer) {
+        this.mapLayer = mapLayer;
+    }
 }

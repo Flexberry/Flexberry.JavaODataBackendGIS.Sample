@@ -1,5 +1,6 @@
 package Flexberry.GIS.model;
 
+import Flexberry.GIS.utils.UUIDToStringConverter;
 import org.eclipse.persistence.annotations.Convert;
 import org.eclipse.persistence.annotations.Converter;
 import Flexberry.GIS.utils.UUIDConverter;
@@ -16,15 +17,15 @@ import java.util.UUID;
 public class NewPlatformFlexberryFlexberryUserSetting {
 
     @Id
-    @Converter(converterClass = UUIDConverter.class, name = "primarykey")
+    @Converter(converterClass = UUIDToStringConverter.class, name = "primarykey")
     @Convert("primarykey")
-    @Column(name = "primarykey", length = 16, unique = true, nullable = false)
-    private UUID primarykey;
+    @Column(name = "primarykey", unique = true, nullable = false)
+    private String primarykey;
 
-    @Column(name = "AppName", nullable = true)
+    @Column(name = "AppName", nullable = true, length = 256)
     private String appName;
 	
-	@Column(name = "UserName", nullable = true)
+	@Column(name = "UserName", nullable = true, length = 512)
     private String userName;
 	
 	@Converter(converterClass = UUIDConverter.class, name = "UserGuid")
@@ -32,7 +33,7 @@ public class NewPlatformFlexberryFlexberryUserSetting {
 	@Column(name = "UserGuid", length = 16, unique = true, nullable = true)
     private UUID userGuid;
 	
-	@Column(name = "ModuleName", nullable = true)
+	@Column(name = "ModuleName", nullable = true, length = 1024)
     private String moduleName;
 	
 	@Converter(converterClass = UUIDConverter.class, name = "ModuleGuid")
@@ -40,7 +41,7 @@ public class NewPlatformFlexberryFlexberryUserSetting {
 	@Column(name = "ModuleGuid", length = 16, unique = true, nullable = true)
     private UUID moduleGuid;
 	
-	@Column(name = "SettName", nullable = true)
+	@Column(name = "SettName", nullable = true, length = 256)
     private String settName;
 	
 	@Converter(converterClass = UUIDConverter.class, name = "SettGuid")
@@ -51,10 +52,10 @@ public class NewPlatformFlexberryFlexberryUserSetting {
 	@Column(name = "SettLastAccessTime", nullable = true)
     private Date settLastAccessTime;
 	
-	@Column(name = "StrVal", nullable = true)
+	@Column(name = "StrVal", nullable = true, length = 256)
     private String strVal;
 	
-	@Column(name = "TxtVal", nullable = true)
+	@Column(name = "TxtVal", nullable = true, length = -1)
     private String txtVal;
 	
 	@Column(name = "IntVal", nullable = true)
@@ -78,11 +79,11 @@ public class NewPlatformFlexberryFlexberryUserSetting {
         super();
     }
 
-    public void setPrimarykey(UUID primarykey) {
+    public void setPrimarykey(String primarykey) {
         this.primarykey = primarykey;
     }
 
-    public UUID getPrimarykey() {
+    public String getPrimarykey() {
         return primarykey;
     }
 
