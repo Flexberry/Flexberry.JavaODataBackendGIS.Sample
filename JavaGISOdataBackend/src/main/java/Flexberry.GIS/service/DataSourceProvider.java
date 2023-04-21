@@ -29,4 +29,21 @@ public class DataSourceProvider {
                 DB_PASS, new String[0]);
         return ds;
     }
+
+    public static javax.sql.DataSource createDataSourceForTests() throws ServerException {
+        //final FluentConfiguration config = Flyway.configure();
+        final ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
+        final String DB_ADDR = System.getenv().getOrDefault("DB_ADDR", "localhost");
+        final String DB_PORT = System.getenv().getOrDefault("DB_PORT", "54321");
+        final String DB_NAME = System.getenv().getOrDefault("DB_NAME", "appdb");
+        final String DB_USER = System.getenv().getOrDefault("DB_USER", "postgres");
+        final String DB_PASS = System.getenv().getOrDefault("DB_PASS", "5582963");
+
+        final javax.sql.DataSource ds = new DriverDataSource(classLoader,
+                "org.postgresql.Driver",
+                String.format("jdbc:postgresql://%s:%s/%s", DB_ADDR, DB_PORT, DB_NAME),
+                DB_USER,
+                DB_PASS, new String[0]);
+        return ds;
+    }
 }

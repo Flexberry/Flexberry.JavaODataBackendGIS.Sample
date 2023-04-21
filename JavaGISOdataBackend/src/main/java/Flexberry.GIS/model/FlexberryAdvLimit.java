@@ -19,7 +19,7 @@ public class FlexberryAdvLimit {
     @Column(name = "primarykey", unique = true, nullable = false)
     private String primarykey;
 	
-	@Column(name = "User", nullable = true, length = 255)
+	@Column(name = "\"User\"", nullable = true, length = 255)
     private String user;
 
     @Column(name = "Module", nullable = true, length = 255)
